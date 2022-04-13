@@ -1,0 +1,253 @@
+=== 4/12 DB Changes ===
+
+
+TODO: meeting availability table for advisor
+
+Unresolved: how to store addresses
+
+create department table before faculty table,
+init. dept chair ID but do not add FK ref yet.
+after creating faculty table,
+add to FK ref to deptartment name:
+deferrable initially deferred (pre ; )
+after faculty table, add:
+
+ALTER TABLE department
+ADD CONSTRAINT 'fk_dept_chair'
+   foreign key ('dept chair ID')
+   references `mydb`.`Faculty` (`faculty ID`)
+   deferrable initially deferred
+   ON DELETE NO ACTION
+   ON UPDATE NO ACTION;
+
+
+-- assigned advising --
+! Delete table
+
+
+-- class --
+Removals:
+prefix
+course number
+room number
+building name
+semester
+faculty ID (the non FK one)
+
+Additions:
+FK GCL_course ID
+
+Name changes:
+class location -> location
+
+Type Change:
+class ID: int(11) -> CHAR(4)
+	- name change to CRN?
+location: VARCHAR size 45 -> 15
+FK faculty ID: int(11) -> CHAR(8)
+
+
+-- [M:M] declared major -- 
+
+Removals:
+PK major ID
+PK student ID
+declare major
+major name
+
+Additions:
+FK Majors_major name
+
+Type changes:
+FK Student ID -> int(11) -> CHAR(8)
+
+
+-- [M:M] declared minor --
+
+Removals:
+PK minor ID
+PK student ID
+declared minor date
+minor name
+
+Additions:
+FK Minors_minor name
+
+Type changes:
+Student ID -> int(11) -> CHAR(8)
+
+
+-- department --
+
+Removals:
+PK department ID
+
+Additions:
+FK dept chair ID (type: CHAR(8))
+
+Name changes:
+department name -> dept name
+
+Type changes:
+dept name: VARCHAR size 45 -> 90
+Assign dept name as PK
+
+
+-- employing --
+! Delete table
+
+
+-- enrollment --
+*Unimplemented
+
+
+-- faculty --
+
+Removals:
+salary
+
+Additions:
+create constraint to limit value of role to:
+faculty, department chair, registrar
+
+Type changes:
+faculty ID: INT -> CHAR(8)
+faculty phone: varchar(45) -> varchar(15)
+first name not null
+last name not null
+email/phone/address not null
+
+Order changes:
+faculty ID at top
+faculty email after last name
+
+Additions:
+FK department name
+
+
+-- general course listing --
+
+Removals:
+prefix
+course number
+semester
+department
+FK class ID
+
+Additions:
+course ID as PK
+credit hours (type: INT(1))
+
+
+-- location --
+! Delete table
+
+
+-- majors --
+! Create table:
+
+CREATE TABLE IF NOT EXISTS `mydb`.`Majors` (
+  `major name` VARCHAR(45) NOT NULL,
+  `department name` VARCHAR(90) NOT NULL,
+  `required classes` TEXT NOT NULL,
+  `elective classes` TEXT NULL,
+  PRIMARY KEY (`major name`),
+  INDEX `fk_Majors_dept_name_idx` (`department name` ASC),
+  CONSTRAINT `fk_Majors_dept_name`
+    FOREIGN KEY (`department name`)
+    REFERENCES `mydb`.`Department` (`dept name`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+-- meeting --
+
+Removals:
+time
+student ID (non FK)
+Faculty ID (non FK)
+
+Additions:
+time start (type: DATETIME) NOT NULL
+time end (type: DATETIME) NOT NULL
+notes (type: TEXT) NULL
+
+Type changes:
+meeting ID: int(11) -> int(8)
+Student_student ID -> int(11) -> CHAR(8)
+Faculty_faculty ID -> int(11) -> CHAR(8)
+
+
+-- minors --
+! Create table:
+
+CREATE TABLE IF NOT EXISTS `mydb`.`Minors` (
+  `minor name` VARCHAR(45) NOT NULL,
+  `department name` VARCHAR(90) NOT NULL,
+  `required classes` TEXT NOT NULL,
+  `elective classes` TEXT NULL,
+  PRIMARY KEY (`minor name`),
+  INDEX `fk_Minors_dept_name_idx` (`department name` ASC),
+  CONSTRAINT `fk_Minors_dept_name`
+    FOREIGN KEY (`department name`)
+    REFERENCES `mydb`.`Department` (`dept name`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+-- override --
+*Unimplemented
+
+
+-- sending pin --
+*Unimplemented
+
+
+-- student --
+
+Removals:
+pin number
+
+Name changes:
+address -> student address
+phone number -> student phone
+graduation year -> year graduating
+student alternative PIN -> alternate PIN
+
+Type changes:
+student ID: INT NOT NULL -> CHAR(8)
+student phone: VARCHAR(45) -> VARCHAR(15)
+year enrolled: DATE -> YEAR
+year graduating: DATE -> YEAR
+evaluation grade: VARCHAR(1) -> CHAR(1)
+first name not null
+last name not null
+year enrolled not null
+
+Order changes:
+first name above last name
+student email after last name
+student phone after student email
+student address after student phone
+
+
+-- transcript --
+! Create table:
+
+CREATE TABLE IF NOT EXISTS `mydb`.`Transcript` (
+  `Student_student ID` CHAR(8) NOT NULL,
+  `GCL_course ID` VARCHAR(8) NOT NULL,
+  `grade` DECIMAL(1,1) NOT NULL,
+  INDEX `fk_Transcript_Student_ID_idx` (`Student_student ID` ASC),
+  CONSTRAINT `fk_Transcript_Student_ID`
+    FOREIGN KEY (`Student_student ID`)
+    REFERENCES `mydb`.`Student` (`student ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  INDEX `fk_Transcript_course_ID_idx` (`GCL_course ID` ASC),
+  CONSTRAINT `fk_Transcript_course ID`
+    FOREIGN KEY (`GCL_course ID`)
+    REFERENCES `mydb`.`General Course Listing` (`course ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+

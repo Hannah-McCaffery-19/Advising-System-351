@@ -89,13 +89,14 @@ a:hover {color: #EBF1F8;}
 .main {
 	display:inline-block;
 	width: 100%;
+	height: auto;
 	margin: 0 auto 0 auto;
 }
 .sidenav {
 	background-color: #003466;
 	color: #FFFFFF;
 	width: 240px;
-	height: 600px;
+	height: 100%;
 	margin-top: 0;
 	margin-bottom: 0;
 	float: left;
@@ -111,6 +112,26 @@ a:hover {color: #EBF1F8;}
 	font-size: 1.1em;
 }
 
+.index_sidenav {
+	background-color: #003466;
+	color: #FFFFFF;
+	width: 240px;
+	min-height: 600px;
+	margin-top: 0;
+	margin-bottom: 0;
+	float: left;
+}
+
+.index_sidenav h3 {
+	padding-left: 20px;
+	font-size: 1.3em;
+}
+
+.index_sidenav p {
+	padding-left: 20px;
+	font-size: 1.1em;
+}
+
 .navline {
 	margin: 1em 1em;
 }
@@ -119,7 +140,6 @@ a:hover {color: #EBF1F8;}
 	padding-left: 35px;
 	padding-right: 35px;
 	width:750px;
-	min-height: 400px;
 	float: right;
 }
 

@@ -1,0 +1,126 @@
+== Committing Changes to GitHub with Git Bash ==
+
+
+-- Download Git Bash --
+
+Windows:
+	Download latest Windows release from:
+	https://gitforwindows.org/
+	
+	Proceed with installation and open the
+	Git Bash terminal when finished
+
+Mac:
+	Go to macOS download page at:
+	https://git-scm.com/
+
+	Follow instructions to download Homebrew
+	in the MacOS terminal if not already installed
+	
+	in MacOS terminal, execute:
+	brew install git
+
+
+
+-- GitHub Setup --
+
+Go to your Settings > Developer settings > Personal access tokens
+
+Click Generate new token, name it something
+
+Set the expiration to 30 days at least (more is fine)
+
+In the scopes/permissions, check 'repo'
+
+Click Generate token
+
+** This is your password when signing in through Git Bash **
+** Please don't lose it lol **
+
+
+
+-- Initial Setup in Git Bash --
+
+1. Configure your user settings by entering:
+
+git config --global user.name "My-GitHub-Name" <- replace with your github username
+
+git config --global user.email "myemail@gmail.com" <- email you signed up to github with
+
+2. Navigate to the directory (folder) with your project files
+	- can be done quickly with cd 'directory address copied
+	from folder's address bar (use quotes if spaces in name)
+	EX:
+	cd 'C:\xampp\htdocs\Advising System CPSC 351'
+
+	- if there is an error, use / to return to your root and
+	navigate manually by stepping through each directory
+	EX:
+	cd /
+	cd C
+	cd xampp
+	cd htdocs
+	cd 'Advising System CPSC 351'
+
+3. One time setup of your own branch of the repository
+
+git init
+
+git status (no push history, so these files are all "new" to git bash)
+
+git add 'filename' (for each new file)
+
+git status (confirm that all file names are now green instead of red)
+
+git commit -am 'brief message describing changes' (see note below)
+
+git remote add origin https://github.com/Hannah-McCaffery-19/Advising-System-351.git
+
+git switch -c 'my-branch' <- make this your first name! no quotes
+
+git branch -a (check to see you are in your new branch)
+
+$ git push –set-upstream origin my-branch <- replace with your name
+
+git push -u origin my-branch <- once again replace with your name
+
+-sign in with GitHub username and the Personal Access Token you created
+
+done!
+
+
+
+-- Pushing changes to GitHub once set up --
+
+1. Navigate to your project directory using cd
+
+2. git status (review changes since last push)
+	-if new files were created, use git add 'filename' as needed
+
+3. git commit -am 'brief message describing changes'
+
+4. git push -u origin my-branch (replace my-branch with your branch name)
+
+done!
+
+
+
+-- Useful Git Bash commands to know--
+pwd	prints out the file path of the folder you are viewing (current directory)
+
+ls	-lists all files in the directory
+
+cd	-'change directory' the main way to navigate through files
+
+git status	-view files modified since last push
+
+git commit -am 'message here' 	-commits all changes made to existing files in
+				the directory since last push, plus a comment
+				I recommend incrementing with a version number
+				EX: '1.6 modified login sequence'
+				NOTE: does not commit newly created files,
+				add them with git add 'filename' first
+
+git checkout 'branch-name	switch the branch you are pulling/pushing-
+				helpful for accessing each other's branches
+

@@ -1,0 +1,143 @@
+/*
+== Color Ref ==
+cnu logo: #004B8D
+cnu edu site: #003466
+*/
+
+body {
+	background-color: #FBFBFB;
+	font-family: Arial, Helvetica, Sans-serif;
+	font-weight: normal;
+	color: #000000;
+	font-size: 12px;
+	margin: 0 0 0 0;
+	padding: 0px;
+}
+
+.body_box {
+	background-color: #FFFFFF;
+	border-left: 1px solid #757575;
+	border-right: 1px solid #757575;
+	margin: 0 auto 0 auto;
+	width: 1060px;
+}
+
+a:link, a:visited, a:active {
+	font-family: Arial, Helvetica, Sans-serif;
+	color: #23619e;
+	text-decoration: none;
+	font-weight: normal;
+}
+
+.hdr_table {
+	background-color: #003466;
+	
+	width: 100%;
+	height: 180px;
+}
+
+.hdr_logo {
+	width:240px;
+}
+
+.cnu_name {
+	width: 100%;
+}
+
+.cnu_name img {
+	margin: auto;
+	display: block;
+	width: 228px; 
+	height: 72px;	
+}
+
+.hdr_title {
+	width: 550px;
+	color: #FFFFFF;
+}
+
+a:link {color: #FFFFFF;}
+a:visited {color: #FFFFFF;}
+a:hover {color: #EBF1F8;}
+
+.hdr_title h1 {
+	margin-left: 6.5%;
+	font-size:3em;
+	font-weight: 500;
+}
+.hdr_title h2 {
+	margin-left: 6.5%;
+}
+.hdr_title p {
+	margin-left: 6.5%;
+}
+
+
+.hdr_login {
+	color: #FFFFFF;
+}
+
+.hdr_login h2 {
+	text-align: right;
+	margin-right: 150px;
+}
+
+.login_form input {
+	margin-right: 30px;
+	margin-top: 5px;
+}
+.main {
+	display:inline-block;
+	width: 100%;
+	margin: 0 auto 0 auto;
+}
+.sidenav {
+	background-color: #003466;
+	color: #FFFFFF;
+	width: 240px;
+	height: 600px;
+	margin-top: 0;
+	margin-bottom: 0;
+	float: left;
+}
+
+.sidenav h3 {
+	padding-left: 20px;
+	font-size: 1.3em;
+}
+
+.sidenav p {
+	padding-left: 20px;
+	font-size: 1.1em;
+}
+
+.navline {
+	margin: 1em 1em;
+}
+
+.content {
+	padding-left: 35px;
+	padding-right: 35px;
+	width:750px;
+	min-height: 400px;
+	float: right;
+}
+
+.page_name {
+	text-align: center;
+	font-size: 2.5em;
+}
+
+.footer {
+	padding-top:1px;
+	padding-bottom: 10px;
+	display: block;
+	text-align: center;
+	width: 100%;
+	height: 50px;
+	background-color: #C2E1F4;
+}
+
+.footer a {
+	color: #000000;
+}

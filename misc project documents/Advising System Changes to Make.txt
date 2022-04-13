@@ -2,8 +2,7 @@
 
 
 TODO: meeting availability table for advisor
-
-Unresolved: how to store addresses
+      evaluation table to store student evals
 
 create department table before faculty table,
 init. dept chair ID but do not add FK ref yet.
@@ -13,8 +12,8 @@ deferrable initially deferred (pre ; )
 after faculty table, add:
 
 ALTER TABLE department
-ADD CONSTRAINT 'fk_dept_chair'
-   foreign key ('dept chair ID')
+ADD CONSTRAINT `fk_dept_chair`
+   foreign key (`dept chair ID`)
    references `mydb`.`Faculty` (`faculty ID`)
    deferrable initially deferred
    ON DELETE NO ACTION
@@ -22,7 +21,7 @@ ADD CONSTRAINT 'fk_dept_chair'
 
 
 -- assigned advising --
-! Delete table
+X Delete table
 
 
 -- class --
@@ -104,22 +103,25 @@ Assign dept name as PK
 -- faculty --
 
 Removals:
-salary
+X salary
 
 Additions:
+X password VARCHAR(45) NOT NULL
 create constraint to limit value of role to:
 faculty, department chair, registrar
 
 Type changes:
-faculty ID: INT -> CHAR(8)
-faculty phone: varchar(45) -> varchar(15)
-first name not null
-last name not null
-email/phone/address not null
+X faculty ID: INT -> CHAR(8)
+X faculty phone: varchar(45) -> varchar(15)
+X role: VARCHAR size: 20
+X first name not null
+X last name not null
+X faculty email not null
+X role not null default Faculty
 
 Order changes:
-faculty ID at top
-faculty email after last name
+X faculty ID at top
+X faculty email after last name
 
 Additions:
 FK department name
@@ -206,46 +208,57 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Minors` (
 -- student --
 
 Removals:
-pin number
+X pin number (redundant w alt ID)
+X evaluation grade (getting its own table)
+
+Additions:
+X password VARCHAR(45) NOT NULL
 
 Name changes:
-address -> student address
-phone number -> student phone
-graduation year -> year graduating
-student alternative PIN -> alternate PIN
+X address -> student address
+X phone number -> student phone
+X graduation year -> year graduating
+X student alternative PIN -> alternate PIN
+X Faculty_faculty ID -> advisor ID
 
 Type changes:
-student ID: INT NOT NULL -> CHAR(8)
-student phone: VARCHAR(45) -> VARCHAR(15)
-year enrolled: DATE -> YEAR
-year graduating: DATE -> YEAR
-evaluation grade: VARCHAR(1) -> CHAR(1)
-first name not null
-last name not null
-year enrolled not null
+X student ID: INT -> CHAR(8)
+X advisor ID: INT -> CHAR(8)
+X advisor ID as FK ref faculty ID @ Faculty
+X student phone: VARCHAR size: 45 -> 15
+X student email: VARCHAR size: 45 -> 60
+X student email: VARCHAR size: 45 -> 80
+X year enrolled: DATE -> YEAR
+X year graduating: DATE -> YEAR
+X first name not null
+X last name not null
+X student email not null
+X year enrolled not null
+X year enrolled not null
+X accumulated credits not null default 0
 
 Order changes:
-first name above last name
-student email after last name
-student phone after student email
-student address after student phone
+X first name above last name
+X student email after last name
+X student phone after student email
+X student address after student phone
 
 
--- transcript --
-! Create table:
+-- Records --
+X Create table:
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Transcript` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Records` (
   `Student_student ID` CHAR(8) NOT NULL,
   `GCL_course ID` VARCHAR(8) NOT NULL,
   `grade` DECIMAL(1,1) NOT NULL,
-  INDEX `fk_Transcript_Student_ID_idx` (`Student_student ID` ASC),
-  CONSTRAINT `fk_Transcript_Student_ID`
+  INDEX `fk_Records_Student_ID_idx` (`Student_student ID` ASC),
+  CONSTRAINT `fk_Records_Student_ID`
     FOREIGN KEY (`Student_student ID`)
     REFERENCES `mydb`.`Student` (`student ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  INDEX `fk_Transcript_course_ID_idx` (`GCL_course ID` ASC),
-  CONSTRAINT `fk_Transcript_course ID`
+  INDEX `fk_Records_course_ID_idx` (`GCL_course ID` ASC),
+  CONSTRAINT `fk_Records_course ID`
     FOREIGN KEY (`GCL_course ID`)
     REFERENCES `mydb`.`General Course Listing` (`course ID`)
     ON DELETE NO ACTION

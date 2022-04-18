@@ -1,0 +1,56 @@
+==== TEST INSERT DATA ====
+
+TO USE: navigate to the relevant table in phpMyAdmin, click the SQL tab at the top, clear any suggested code, paste and Go (one insert command at a time!)
+
+--- Faculty ---
+
+INSERT INTO `faculty`(`facultyID`, `firstName`, `lastName`, `password`, `facultyEmail`, `faculty phone`, `faculty address`, `role`) VALUES ('00912116','Michael','Lapke','DatabaseDev3000','michael.lapke@cnu.edu',NULL,NULL,'Faculty')
+
+INSERT INTO `faculty`(`facultyID`, `firstName`, `lastName`, `password`, `facultyEmail`, `faculty phone`, `faculty address`, `role`) VALUES ('00918954','Anton','Riedl','PCSErocks','riedl@cnu.edu',NULL,NULL,'Chair')
+
+INSERT INTO `faculty`(`facultyID`, `firstName`, `lastName`, `password`, `facultyEmail`, `faculty phone`, `faculty address`, `role`) VALUES ('00982178','Kevin','Hughes','ILoveEmails123','kmhughes@cnu.edu','7575947160',NULL,'Registrar')
+
+
+--- Student ---
+
+INSERT INTO `student`(`studentID`, `firstName`, `lastName`, `password`, `studentEmail`, `studentPhone`, `studentAddress`, `yearEnrolled`, `yearGraduating`, `alternatePIN`, `accumulatedCredits`, `advisorID`) VALUES ('00973437','Hannah','McCaffery','Change.19','hannah.mccaffery.19@cnu.edu','8043895708',NULL,'2019','2023',NULL,'90','00912116')
+
+
+--- General Course Listing
+
+INSERT INTO `general course listing`(`courseID`, `className`, `creditHours`, `areaOfLLC`, `pre-requisite`, `co-requisite`, `restrictions`, `courseDesc`) VALUES ('CPSC150','Intro to Programming','3','LLFR',NULL,NULL,NULL,'This course is an introduction to problem solving and programming. Topics include using primitive and object types, defining Boolean and arithmetic expressions, using selection and iterative statements, defining and using methods, defining classes, creating objects and manipulating arrays. Emphasis is placed on designing, coding and testing programs using the above topics. Satisfies the logical reasoning foundation requirement.')
+
+INSERT INTO `general course listing`(`courseID`, `className`, `creditHours`, `areaOfLLC`, `pre-requisite`, `co-requisite`, `restrictions`, `courseDesc`) VALUES ('CPSC150L','Intro to Programming Lab','1',NULL,NULL,'CPSC 150 with a minimum grade of D-',NULL,'Laboratory course supports the concepts in CPSC 150 lecture with hands-on programming activities and language specific implementation. Laboratory exercises stress sound design principles, programming style, documentation, and debugging techniques. Lab fees apply each term.')
+
+INSERT INTO `general course listing` (`courseID`, `className`, `creditHours`, `areaOfLLC`, `pre-requisite`, `co-requisite`, `restrictions`, `courseDesc`) VALUES ('HIST112', 'The Modern World', '3', 'AIGM', NULL, NULL, NULL, 'A survey of world history centering on institutions, values, and cultural forms from the mid-16th century to the present.')
+
+INSERT INTO `general course listing` (`courseID`, `className`, `creditHours`, `areaOfLLC`, `pre-requisite`, `co-requisite`, `restrictions`, `courseDesc`) VALUES ('MATH140', 'Calculus and Analytic Geometry', '4', 'LLFM', 'MATH 130 with a minimum grade of C- OR MATH 132 with a minimum grade of C-', NULL, NULL, '	An introduction to the calculus of elementary functions, continuity, derivatives, methods of differentiation, the Mean Value Theorem, curve sketching, applications of the derivative, the definite integral, the Fundamental Theorems of Calculus, indefinite integrals, and log and exponential functions. The software package Mathematica will be used.\r\n\r\nPrerequisite: MATH 130 with a grade of C- or higher, or an acceptable score on the Calculus Readiness Assessment. More information on the Calculus Readiness Exam can be found here: https://my.cnu.edu/math/placement/');
+
+INSERT INTO `general course listing` (`courseID`, `className`, `creditHours`, `areaOfLLC`, `pre-requisite`, `co-requisite`, `restrictions`, `courseDesc`) VALUES ('PHYS151', 'College Physics I', '3', 'AINW', NULL, NULL, NULL, 'A presentation of the major concepts of physics, using algebra and trigonometry. For science students (but not for engineering, physics, or mathematics students). Topics covered include mechanics, thermodynamics, waves, electromagnetism, optics, and modern physics.');
+
+INSERT INTO `general course listing` (`courseID`, `className`, `creditHours`, `areaOfLLC`, `pre-requisite`, `co-requisite`, `restrictions`, `courseDesc`) VALUES ('PHYS151L', 'College Physics I Laboratory', '1', 'AINW', NULL, 'PHYS 151 with a minimum grade of D-', NULL, 'Physics laboratory activities to accompany the lecture part of the course. The laboratories introduce fundamental physical principles, rudimentary data analysis, and computer-aided control and data acquisition. Lab fees apply each term.');
+
+INSERT INTO `general course listing` (`courseID`, `className`, `creditHours`, `areaOfLLC`, `pre-requisite`, `co-requisite`, `restrictions`, `courseDesc`) VALUES ('ACCT200', 'Accounting Concepts', '3', NULL, NULL, NULL, 'Class Restrictions: Not For Freshman class standing.\r\nProgram Restrictions: Not For Busn Admin: Accounting-BSBA, Busn Admin: Finance-BSBA, Busn Admin: Management-BSBA, Busn Admin: Marketing-BSBA, HNRS: Accounting-BSBA, HNRS:Finance-BSBA, HNRS:Marketing-BSBA, HNRS:Mgmt-BSBA', 'This course is designed for non-business majors and those desiring a Minor in Business Administration. It examines accounting concepts from the perspective of financial statement users, rather than statement preparers. Topics include: introduction to accounting, balance sheet, and statement of cash flows analysis, and the use of financial data to make decisions. This course does NOT replace ACCT 201 for BSBA students.')
+
+INSERT INTO `general course listing` (`courseID`, `className`, `creditHours`, `areaOfLLC`, `pre-requisite`, `co-requisite`, `restrictions`, `courseDesc`) VALUES ('CPEN371', 'WI: Computer Ethics', '2', 'WI', 'ULLC 223 with a minimum grade of C- OR ENGL 223 with a minimum grade of C-', NULL, 'Major Restrictions: For Applied Physics, Computer Engineering, Computer Science, Electrical Engineering, Information Science, Information Systems', 'This course covers contemporary ethical issues in science and engineering. A framework for professional activity is developed, which involves considerations and decisions of social impact. Current examples will be studied, discussed, and reported: IEEE and ACM codes of ethics, software and hardware property law, privacy, social implications of computers, responsibility and liabilities, and computer crime. Partially satisfies the writing intensive requirement.')
+
+INSERT INTO `general course listing` (`courseID`, `className`, `creditHours`, `areaOfLLC`, `pre-requisite`, `co-requisite`, `restrictions`, `courseDesc`) VALUES ('FNAR128', 'Introduction to Digital Media', '3', 'AICE', NULL, NULL, NULL, 'This course is designed to introduce students to the principles and techniques of digital media and their specific application to an artistic process. During the course of the semester students will complete exercises, projects and participate in critiques, in order to develop a working knowledge of computer media as a tool for artistic expression and experimentation. While students will learn software techniques, the emphasis of the class will be on applying digital technologies to the development of the student\'s artistic practice. Students will also be introduced to New Media history and theory. The student must purchase all personal and expendable art material.')
+
+INSERT INTO `general course listing` (`courseID`, `className`, `creditHours`, `areaOfLLC`, `pre-requisite`, `co-requisite`, `restrictions`, `courseDesc`) VALUES ('ENGL123', 'First-Year Writing Seminar', '3', 'LLFW', NULL, NULL, NULL, 'This course introduces students to the conventions of reading and writing appropriate for liberal arts learning, in particular the ability to analyze and produce sophisticated arguments and other genres of writing such as reports, evaluations, textual analyses, proposals, profiles, and other academic genres in relationship to issues in the arts, humanities, social sciences, professional studies, business, economics, and sciences and technology. Beginning with an examination of the principles of critical thinking and how texts and forms are the result of specific situations and conventions, students will evaluate prose texts, conduct research, and craft polished writings of their own using multiple sources of evidence.')
+
+INSERT INTO `general course listing` (`courseID`, `className`, `creditHours`, `areaOfLLC`, `pre-requisite`, `co-requisite`, `restrictions`, `courseDesc`) VALUES ('ENGL223', 'Second-Year Writing Seminar', '3', 'LLFW', 'ENGL 123 with a minimum grade of C-', NULL, 'Class Restrictions: Not For Freshman class standing.', 'Course is topic-led by professor and will vary based on their selected materials.')
+
+
+--- Records ---
+
+INSERT INTO `records` (`recordID`, `Student_student ID`, `GCL_course ID`, `grade`) VALUES (NULL, '00973437', 'CPSC150', 'B+')
+
+INSERT INTO `records` (`recordID`, `Student_student ID`, `GCL_course ID`, `grade`) VALUES (NULL, '00973437', 'CPSC150L', 'A')
+
+INSERT INTO `records` (`recordID`, `Student_student ID`, `GCL_course ID`, `grade`) VALUES (NULL, '00973437', 'HIST112', 'B+');
+
+INSERT INTO `records` (`recordID`, `Student_student ID`, `GCL_course ID`, `grade`) VALUES (NULL, '00973437', 'MATH140', 'B-');
+
+INSERT INTO `records` (`recordID`, `Student_student ID`, `GCL_course ID`, `grade`) VALUES (NULL, '00973437', 'PHYS151', 'C');
+
+INSERT INTO `records` (`recordID`, `Student_student ID`, `GCL_course ID`, `grade`) VALUES (NULL, '00973437', 'PHYS151L', 'A+');

@@ -1,3 +1,7 @@
+<?php
+session_start();
+
+echo '
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +10,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 
 <body>
 <div class="body_box">
@@ -17,18 +22,19 @@
 			</div>
 		</td>
 		<td class="hdr_title">
-			<a href="home_student.html"><h1>Advising System</h1></a>
-			<h2>Student Portal</h2>
+			<a href="home_faculty.html"><h1>Advising System</h1></a>
+			<h2>Faculty Portal</h2>
 			<p>Christopher Newport University</p>
 		</td>
 		<td class="hdr_login">
-			<h2>TODO: replace with session info</h2>
-			<form action="auth.php" method="post" class="login_form">
-				<input type="text" name="student_ID" placeholder="CNU ID" id="student_ID" required>
-				<br>
-				<input type="password" name="password" placeholder="Password" id="password" required>
-				<br>
-				<input type="submit" value="Login">
+			<h2>Welcome,</h2>
+			<p>';
+			echo $_SESSION['firstname'];
+			echo ' ';
+			echo $_SESSION['lastname'];
+			echo '</p>
+			<form id="logout" action="logout.php" method="post" class="logout_form">
+				<input type="submit" value="Log Out">
 			</form>
 		</td>
 	</tr>
@@ -38,28 +44,27 @@
 
 <div class="sidenav">
 	<br>
-	<a href="home_student.html"><h3>Home</h3></a>
+	<a href="home_faculty.html"><h3>Home</h3></a>
 	<img class="navline" src="images/divider.png">
-	<a href="home_student.html"><h3>Information</h3></a>
-	<a href="home_student.html"><p>My Profile</p></a>
-	<a href="home_student.html"><p>My Advisor</p></a>
-	<a href="home_student.html"><p>Requirements</p></a>
-	<a href="home_student.html"><p>List of Courses</p></a>
+	<a href="home_faculty.html"><h3>Information</h3></a>
+	<a href="home_faculty.html"><p>My Profile</p></a>
+	<a href="home_faculty.html"><p>My Advisees</p></a>
+	<a href="home_faculty.html"><p>List of Courses</p></a>
 	<img class="navline" src="images/divider.png">
-	<a href="home_student.html"><h3>Meeting</h3></a>
-	<a href="home_student.html"><p>Schedule Meeting</p></a>
-	<a href="home_student.html"><p>View Meetings</p></a>
+	<a href="home_faculty.html"><h3>Meeting</h3></a>
+	<a href="home_faculty.html"><p>Schedule Meeting</p></a>
+	<a href="home_faculty.html"><p>View Meetings</p></a>
 	<img class="navline" src="images/divider.png">
-	<a href="home_student.html"><h3>Evaluation</h3></a>
-	<a href="home_student.html"><p>Generate Evaluation</p></a>
-	<a href="home_student.html"><p>View Evaluations</p></a>
+	<a href="home_faculty.html"><h3>Evaluation</h3></a>
+	<a href="home_faculty.html"><p>Generate Evaluation</p></a>
+	<a href="home_faculty.html"><p>View Evaluations</p></a>
 	<img class="navline" src="images/divider.png">
-	<a href="home_student.html"><h3>Contact</h3></a>
+	<a href="home_faculty.html"><h3>Contact</h3></a>
 	<br><br>
 </div>
 
 <div class="content">
-	<h1 class="page_name">Student Advising</h1>
+	<h1 class="page_name">Faculty Advising</h1>
 	<h1>Lorem Ipsum</h1>
 	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 	
@@ -81,3 +86,5 @@
 
 </div>
 </body>
+';
+?>

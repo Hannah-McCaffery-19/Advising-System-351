@@ -7,46 +7,113 @@ $DATABASE_PASS = '';
 $DATABASE_NAME = 'mydb';
 
 //Connecting to mydb
-$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+$connect = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 
 //Connection error throw
 if (mysqli_connect_errno()) {
 	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
 
-//Student ID and Password not entered throw
-if (!isset($_POST['student_ID'], $_POST['password'])) {
-	exit('Please enter your CNU ID and password.');
+//Username or password not set throw
+if (!isset($_POST['username']) or !isset($_POST['password'])){
+	echo 'CNU ID or Password were not set.';
 }
 
-// Prepare SQL - uncertain if this is the proper way to do this, ask lapke
-if ($stmt = $con->prepare('SELECT password FROM student WHERE student_ID = ?')) {
-	// Bind student student ID to string
-	$stmt->bind_param('s', $_POST['student_ID']);
-	$stmt->execute();
-	// Store the result, check database
-	$stmt->store_result();
+//Create variables from login form data
+$username = trim($_POST['username']);
+$password = trim($_POST['password']);
+$usertype = $_POST['usertype'];
+
+//Debug echoes
+echo ("Username entered: $username");
+echo "<br>";
+echo ("Password entered: $password");
+echo "<br>";
+
+//Student login
+if ($usertype == 'Student') {
+	echo ("User type: Student");
+	echo "<br>";
+	$query = "SELECT * FROM student WHERE studentID = '$username' AND password = '$password'";
+	$result = mysqli_query($connect, $query);
+	$row = mysqli_fetch_assoc($result);
 	
+	//Debug echoes
+	echo ("Query completed. Result:");
+	echo "<br>";
+	echo ($row);
+	echo "<br>";
 	
-	if ($stmt->num_rows > 0) {
-	$stmt->bind_result($password);
-	$stmt->fetch();
-	// Account exists, verify password
-	if ($_POST['password'] === $password) {
-		// Verification success, create user session
-		session_regenerate_id();
-		$_SESSION['user_id'] = $_POST['student_ID'];
-		echo 'Welcome, student ' . $_SESSION['user_id'];
-	} else {
-		// Incorrect password
-		echo 'Incorrect School ID and/or password!';
+	if (is_null($row)) {
+		echo "An error was encountered while attempting student login.";
 	}
-} else {
-	// Incorrect student_ID
-	echo 'Incorrect School ID and/or password!';
+	// Successful student login
+	else {
+		echo "You are logged in as a student!";
+		$_SESSION['usertype'] = $usertype;
+		$_SESSION['username'] = $row['facultyID'];
+		$_SESSION['firstname'] = $row['firstName'];
+		$_SESSION['lastname'] = $row['lastName'];
+		$_SESSION['email'] = $row['studentEmail'];
+
+		header("Location: home_student.php");
+	}
+}
+
+// Faculty login
+elseif ($usertype == 'Faculty') {
+	echo ("User type: Advisor");
+	echo "<br>";
+	$query = "SELECT * FROM faculty WHERE facultyID = '$username' AND password = '$password'";
+	$result = mysqli_query($connect, $query);
+	$row = mysqli_fetch_assoc($result);
+	
+	//Debug echoes
+	echo ("Query completed. Result:");
+	echo "<br>";
+	echo ($row);
+	echo "<br>";
+	
+	if (is_null($row)) {
+		echo "An error was encountered while attempting advisor login.";
+	}
+	
+	//Successful faculty login
+	else {
+		$_SESSION['username'] = $row['facultyID'];
+		$_SESSION['firstname'] = $row['firstName'];
+		$_SESSION['lastname'] = $row['lastName'];
+		$_SESSION['email'] = $row['facultyEmail'];
+		
+		// Registrar login check
+		if ($row['role'] == 'Registrar') {
+			echo "You are logged in as a registrar!";
+			$usertype = 'Registrar';
+			$_SESSION['usertype'] = $usertype;
+			header("Location: home_registrar.php");
+		}
+		
+		// Dept. Chair not planned to be implemented, functions same as 
+		//advisor level faculty in the system currently
+		elseif ($row['role'] == 'Chair') {
+			echo "You are logged in as a department chair!";
+			$_SESSION['usertype'] = $usertype;
+			header("Location: home_faculty.php");
+		}
+		
+		// Faculty login
+		else {
+			echo "You are logged in as an advisor!";
+			$_SESSION['usertype'] = $usertype;
+			header("Location: home_faculty.php");
+		}
+	}
+}
+
+//This shouldn't be able to happen but just in case, user type throw
+else {
+	echo 'Unidentifiable user type.';
 }
 
 
-	$stmt->close();
-}
 ?>

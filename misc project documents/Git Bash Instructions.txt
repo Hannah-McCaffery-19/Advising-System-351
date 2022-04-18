@@ -47,9 +47,10 @@ git config --global user.name "My-GitHub-Name" <- replace with your github usern
 
 git config --global user.email "myemail@gmail.com" <- email you signed up to github with
 
-2. Navigate to the directory (folder) with your project files
+
+2. Navigate to the directory (folder) where you want the project saved
 	- can be done quickly with cd 'directory address copied
-	from folder's address bar (use quotes if spaces in name)
+	from folder's address bar' (use quotes if spaces in name)
 	EX:
 	cd 'C:\xampp\htdocs\Advising System CPSC 351'
 
@@ -62,13 +63,20 @@ git config --global user.email "myemail@gmail.com" <- email you signed up to git
 	cd htdocs
 	cd 'Advising System CPSC 351'
 
-3. One time setup of your own branch of the repository
+3. Clone the main repo on github using:
+$ git clone https://github.com/Hannah-McCaffery-19/Advising-System-351.git
+
+Add whatever project components you have been working on into the project folder.
+	
+   
+
+4. One time setup of your own branch of the repository
 
 git init
 
-git status (no push history, so these files are all "new" to git bash)
+git status (new and modified files will be labeled and display in red)
 
-git add 'filename' (for each new file)
+git add 'filename' (for each NEW file, not modified files)
 
 git status (confirm that all file names are now green instead of red)
 

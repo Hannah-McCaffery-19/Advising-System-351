@@ -139,6 +139,15 @@ FK class ID
 Additions:
 course ID as PK
 credit hours (type: INT(1))
+areaOfLLC (type: VARCHAR(10) NULL
+
+Name changes:
+course description -> courseDesc
+
+Type changes:
+pre-requisite: VARCHAR -> TEXT
+co-requisite: VARCHAR -> TEXT
+restrictions: VARCHAR -> TEXT
 
 
 -- location --
@@ -213,6 +222,7 @@ X evaluation grade (getting its own table)
 
 Additions:
 X password VARCHAR(45) NOT NULL
+classStanding VARCHAR(10) NOT NULL DEFAULT Freshman
 
 Name changes:
 X address -> student address

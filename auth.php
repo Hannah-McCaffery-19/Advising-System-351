@@ -51,10 +51,11 @@ if ($usertype == 'Student') {
 	else {
 		echo "You are logged in as a student!";
 		$_SESSION['usertype'] = $usertype;
-		$_SESSION['username'] = $row['facultyID'];
+		$_SESSION['username'] = $row['studentID'];
 		$_SESSION['firstname'] = $row['firstName'];
 		$_SESSION['lastname'] = $row['lastName'];
 		$_SESSION['email'] = $row['studentEmail'];
+		$_SESSION['advisor'] = $row['advisorID'];
 
 		header("Location: home_student.php");
 	}

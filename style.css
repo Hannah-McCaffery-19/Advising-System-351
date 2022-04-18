@@ -29,6 +29,7 @@ a:hover {
 	text-decoration: underline;
 }
 
+/* ==== GLOBAL CLASSES ==== */
 .body_box {
 	background-color: #FFFFFF;
 	border-left: 1px solid #757575;
@@ -113,7 +114,7 @@ a:hover {
 }
 
 .main {
-	display:inline-block;
+	display: flex;
 	width: 100%;
 	height: auto;
 	margin: 0 auto 0 auto;
@@ -123,10 +124,9 @@ a:hover {
 	background-color: #003466;
 	color: #FFFFFF;
 	width: 240px;
-	height: 100%;
+	height: auto;
 	margin-top: 0;
 	margin-bottom: 0;
-	float: left;
 }
 
 .sidenav h3 {
@@ -144,9 +144,9 @@ a:hover {
 	color: #FFFFFF;
 	width: 240px;
 	min-height: 600px;
+	height: auto;
 	margin-top: 0;
 	margin-bottom: 0;
-	float: left;
 }
 
 .index_sidenav h3 {
@@ -164,10 +164,16 @@ a:hover {
 }
 
 .content {
+	flex-grow:4;
 	padding-left: 35px;
 	padding-right: 35px;
 	width:750px;
-	float: right;
+
+}
+
+.content a {
+	color: #000000;
+	text-decoration: none;
 }
 
 .page_name {
@@ -187,4 +193,47 @@ a:hover {
 
 .footer a {
 	color: #000000;
+}
+
+/* ==== INFORMATION SUBSYSTEM STYLES ==== */
+
+.info_table {
+	border-collapse: collapse;
+	border: 3px solid #000000;
+}
+
+.info_table th {
+	text-align: left;
+	padding-left: 5px;
+	padding-right: 10px;
+	border-right: 3px solid #000000;
+	border-top: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+}
+
+.info_table td {
+	text-align: left;
+	padding-left: 5px;
+	padding-right: 5px;
+	border-top: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+}
+
+.credit_table {
+	margin: 0;
+	border-collapse: collapse;
+    border: 3px solid #000000;
+}
+
+.credit_table th {
+	
+	text-align: center;
+	padding: 0 5px 0 5px;
+	border: 3px solid #000000;
+}
+
+.credit_table td {
+	text-align: center;
+	padding: 0 5px 0 5px;
+	border: 1px solid #000000;
 }

@@ -43,14 +43,14 @@ INSERT INTO `general course listing` (`courseID`, `className`, `creditHours`, `a
 
 --- Records ---
 
-INSERT INTO `records` (`recordID`, `Student_student ID`, `GCL_course ID`, `grade`) VALUES (NULL, '00973437', 'CPSC150', 'B+')
+INSERT INTO `records` (`recordID`, `Student_student ID`, `GCL_course ID`, `grade`, `termTaken`, `yearTaken`) VALUES (NULL, '00973437', 'CPSC150', 'B+', 'Fall', '2019')
 
-INSERT INTO `records` (`recordID`, `Student_student ID`, `GCL_course ID`, `grade`) VALUES (NULL, '00973437', 'CPSC150L', 'A')
+INSERT INTO `records` (`recordID`, `Student_student ID`, `GCL_course ID`, `grade`, `termTaken`, `yearTaken`) VALUES (NULL, '00973437', 'CPSC150L', 'A', 'Fall', '2019')
 
-INSERT INTO `records` (`recordID`, `Student_student ID`, `GCL_course ID`, `grade`) VALUES (NULL, '00973437', 'HIST112', 'B+');
+INSERT INTO `records` (`recordID`, `Student_student ID`, `GCL_course ID`, `grade`, `termTaken`, `yearTaken`) VALUES (NULL, '00973437', 'HIST112', 'B+', 'Fall', '2019');
 
-INSERT INTO `records` (`recordID`, `Student_student ID`, `GCL_course ID`, `grade`) VALUES (NULL, '00973437', 'MATH140', 'B-');
+INSERT INTO `records` (`recordID`, `Student_student ID`, `GCL_course ID`, `grade`, `termTaken`, `yearTaken`) VALUES (NULL, '00973437', 'MATH140', 'B-', 'Fall', '2019');
 
-INSERT INTO `records` (`recordID`, `Student_student ID`, `GCL_course ID`, `grade`) VALUES (NULL, '00973437', 'PHYS151', 'C');
+INSERT INTO `records` (`recordID`, `Student_student ID`, `GCL_course ID`, `grade`, `termTaken`, `yearTaken`) VALUES (NULL, '00973437', 'PHYS151', 'C', 'Fall', '2019');
 
-INSERT INTO `records` (`recordID`, `Student_student ID`, `GCL_course ID`, `grade`) VALUES (NULL, '00973437', 'PHYS151L', 'A+');
+INSERT INTO `records` (`recordID`, `Student_student ID`, `GCL_course ID`, `grade`, `termTaken`, `yearTaken`) VALUES (NULL, '00973437', 'PHYS151L', 'A+', 'Fall', '2019');

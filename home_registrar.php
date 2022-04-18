@@ -1,3 +1,7 @@
+<?php
+session_start();
+
+echo '
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,13 +26,14 @@
 			<p>Christopher Newport University</p>
 		</td>
 		<td class="hdr_login">
-			<h2>TODO: replace with session info</h2>
-			<form action="auth.php" method="post" class="login_form">
-				<input type="text" name="student_ID" placeholder="CNU ID" id="student_ID" required>
-				<br>
-				<input type="password" name="password" placeholder="Password" id="password" required>
-				<br>
-				<input type="submit" value="Login">
+			<h2>Welcome,</h2>
+			<p>';
+			echo $_SESSION['firstname'];
+			echo ' ';
+			echo $_SESSION['lastname'];
+			echo '</p>
+			<form id="logout" action="logout.php" method="post" class="logout_form">
+				<input type="submit" value="Log Out">
 			</form>
 		</td>
 	</tr>
@@ -79,3 +84,5 @@
 
 </div>
 </body>
+';
+?>

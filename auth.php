@@ -34,7 +34,7 @@ echo "<br>";
 if ($usertype == 'Student') {
 	echo ("User type: Student");
 	echo "<br>";
-	$query = "SELECT * FROM student WHERE 'student ID'='$username' AND 'password'='$password'";
+	$query = "SELECT * FROM student WHERE studentID = '$username' AND password = '$password'";
 	$result = mysqli_query($connect, $query);
 	$row = mysqli_fetch_assoc($result);
 	
@@ -46,18 +46,25 @@ if ($usertype == 'Student') {
 	
 	if (is_null($row)) {
 		echo "An error was encountered while attempting student login.";
-	} 
+	}
+	// Successful student login
 	else {
 		echo "You are logged in as a student!";
-		//reimplement session stuff once login works
+		$_SESSION['usertype'] = $usertype;
+		$_SESSION['username'] = $row['facultyID'];
+		$_SESSION['firstname'] = $row['firstName'];
+		$_SESSION['lastname'] = $row['lastName'];
+		$_SESSION['email'] = $row['studentEmail'];
+
+		header("Location: home_student.php");
 	}
 }
 
 // Faculty login
-if ($usertype == 'Faculty') {
+elseif ($usertype == 'Faculty') {
 	echo ("User type: Advisor");
 	echo "<br>";
-	$query = "SELECT * FROM faculty WHERE 'faculty ID'='$username' AND 'password'='$password'";
+	$query = "SELECT * FROM faculty WHERE facultyID = '$username' AND password = '$password'";
 	$result = mysqli_query($connect, $query);
 	$row = mysqli_fetch_assoc($result);
 	
@@ -69,13 +76,44 @@ if ($usertype == 'Faculty') {
 	
 	if (is_null($row)) {
 		echo "An error was encountered while attempting advisor login.";
-	} 
+	}
+	
+	//Successful faculty login
 	else {
-		echo "You are logged in as an advisor!";
-		//reimplement session stuff once login works
+		$_SESSION['username'] = $row['facultyID'];
+		$_SESSION['firstname'] = $row['firstName'];
+		$_SESSION['lastname'] = $row['lastName'];
+		$_SESSION['email'] = $row['facultyEmail'];
+		
+		// Registrar login check
+		if ($row['role'] == 'Registrar') {
+			echo "You are logged in as a registrar!";
+			$usertype = 'Registrar';
+			$_SESSION['usertype'] = $usertype;
+			header("Location: home_registrar.php");
+		}
+		
+		// Dept. Chair not planned to be implemented, functions same as 
+		//advisor level faculty in the system currently
+		elseif ($row['role'] == 'Chair') {
+			echo "You are logged in as a department chair!";
+			$_SESSION['usertype'] = $usertype;
+			header("Location: home_faculty.php");
+		}
+		
+		// Faculty login
+		else {
+			echo "You are logged in as an advisor!";
+			$_SESSION['usertype'] = $usertype;
+			header("Location: home_faculty.php");
+		}
 	}
 }
 
+//This shouldn't be able to happen but just in case, user type throw
+else {
+	echo 'Unidentifiable user type.';
+}
 
 
 ?>

@@ -119,7 +119,7 @@ echo '
     <th width="50px"><p>GPA</p></th>
     </tr>';
 	
-	$query2 = "SELECT * FROM records WHERE studentID_FK = '$username'";
+	$query2 = "SELECT * FROM records WHERE studentID_fk_rec = '$username'";
 	mysqli_multi_query($connect, $query2);
 	$courses = array();
 	$gpa = array();

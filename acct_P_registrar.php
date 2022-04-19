@@ -63,15 +63,18 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Information Portal</h1>
+	<h1 class="page_name">Student Accounts Portal</h1>
 	<h1>Overview</h1>
-	<p>Your personal profile and the upcoming term course schedule can be viewed here. See below for specific page functions.</p>
+	<p>Manual additions, alterations, and deletions of student account information can be done here. See below for specific page functions.</p>
 	<br>
-	<h2>My Profile</h2>
-	<p>View your faculty profile.</p>
+	<h2>Create Student Accounts</h2>
+	<p>Generate a new student account for the system.</p>
 	<br>
-	<h2>List of Courses</h2>
-	<p>View the list of courses available in the upcoming registration period.</p>
+	<h2>View Accounts</h2>
+	<p>View an existing student account, and alter or delete as needed.</p>
+	<br>
+	<h2>Generate Alternate PINS</h2>
+	<p>Generate a 6-digit PIN for all students and send them to advisors accordingly.</p>
 </div>
 
 </div>

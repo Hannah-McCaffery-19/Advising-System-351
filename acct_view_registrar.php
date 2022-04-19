@@ -63,15 +63,10 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Information Portal</h1>
-	<h1>Overview</h1>
-	<p>Your personal profile and the upcoming term course schedule can be viewed here. See below for specific page functions.</p>
+	<h1 class="page_name">View Student Accounts</h1>
+	<h2>View Accounts</h2>
+	<p>TODO: table of student data, edit and delete button at end of each row. Edit brings up form just like create account, but alters instead of adds to table</p>
 	<br>
-	<h2>My Profile</h2>
-	<p>View your faculty profile.</p>
-	<br>
-	<h2>List of Courses</h2>
-	<p>View the list of courses available in the upcoming registration period.</p>
 </div>
 
 </div>

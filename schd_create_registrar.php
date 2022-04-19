@@ -63,15 +63,10 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Information Portal</h1>
-	<h1>Overview</h1>
-	<p>Your personal profile and the upcoming term course schedule can be viewed here. See below for specific page functions.</p>
+	<h1 class="page_name">Create Class</h1>
+	<h2>Generate a New Class</h2>
+	<p>TODO: Form to create new class data, submit and add to class table</p>
 	<br>
-	<h2>My Profile</h2>
-	<p>View your faculty profile.</p>
-	<br>
-	<h2>List of Courses</h2>
-	<p>View the list of courses available in the upcoming registration period.</p>
 </div>
 
 </div>

@@ -47,17 +47,18 @@ echo '
 	<img class="navline" src="images/divider.png">
 	<a href="info_P_registrar.php"><h3>Information</h3></a>
 	<a href="info_profile_registrar.php"><p>My Profile</p></a>
-	<a href="home_registrar.php"><p>List of Courses</p></a>
+	<a href="info_courses_registrar.php"><p>List of Classes</p></a>
 	<img class="navline" src="images/divider.png">
-	<a href="home_registrar.php"><h3>Student Accounts</h3></a>
-	<a href="home_registrar.php"><p>Create Student Accounts</p></a>
-	<a href="home_registrar.php"><p>Generate Alternate PINs</p></a>
+	<a href="acct_P_registrar.php"><h3>Student Accounts</h3></a>
+	<a href="acct_create_registrar.php"><p>Create Student Accounts</p></a>
+	<a href="acct_view_registrar.php"><p>View Accounts</p></a>
+	<a href="acct_pins_registrar.php"><p>Generate Alternate PINs</p></a>
 	<img class="navline" src="images/divider.png">
-	<a href="home_registrar.php"><h3>Evaluation</h3></a>
-	<a href="home_registrar.php"><p>Create Courses</p></a>
-	<a href="home_registrar.php"><p>Edit Course Information</p></a>
+	<a href="schd_P_registrar.php"><h3>Schedule of Classes</h3></a>
+	<a href="schd_create_registrar.php"><p>Create Class</p></a>
+	<a href="schd_edit_registrar.php"><p>Edit Class Information</p></a>
 	<img class="navline" src="images/divider.png">
-	<a href="home_registrar.php"><h3>Contact</h3></a>
+	<a href="contact_registrar.php"><h3>Contact</h3></a>
 	<br><br>
 </div>
 

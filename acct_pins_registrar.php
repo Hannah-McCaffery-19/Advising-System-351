@@ -63,15 +63,10 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Information Portal</h1>
-	<h1>Overview</h1>
-	<p>Your personal profile and the upcoming term course schedule can be viewed here. See below for specific page functions.</p>
+	<h1 class="page_name">Generate Alternate PINs</h1>
+	<h2>Create & Send PINs</h2>
+	<p>TODO: for each advisor, create PIN for each advisee, send to advisor</p>
 	<br>
-	<h2>My Profile</h2>
-	<p>View your faculty profile.</p>
-	<br>
-	<h2>List of Courses</h2>
-	<p>View the list of courses available in the upcoming registration period.</p>
 </div>
 
 </div>

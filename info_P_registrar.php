@@ -62,7 +62,7 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Registrar - Home</h1>
+	<h1 class="page_name">Information Portal</h1>
 	<h1>Overview</h1>
 	<p>Your personal profile and the upcoming term course schedule can be viewed here. See below for specific page functions.</p>
 	<br>

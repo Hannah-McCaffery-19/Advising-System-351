@@ -111,9 +111,9 @@ elseif ($usertype == 'Faculty') {
 	}
 }
 
-//This shouldn't be able to happen but just in case, user type throw
+//Unsuccessful login, return to home page
 else {
-	echo 'Unidentifiable user type.';
+	header("Location: index.html");
 }
 
 

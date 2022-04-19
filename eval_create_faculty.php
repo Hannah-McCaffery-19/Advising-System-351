@@ -22,7 +22,7 @@ echo '
 			</div>
 		</td>
 		<td class="hdr_title">
-			<a href="home_faculty.html"><h1>Advising System</h1></a>
+			<a href="home_faculty.php"><h1>Advising System</h1></a>
 			<h2>Faculty Portal</h2>
 			<p>Christopher Newport University</p>
 		</td>
@@ -64,9 +64,9 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Contact</h1>
-	<h2>Email Form</h2>
-	<p>TODO: create form to email selected recipient</p>
+	<h1 class="page_name">Generate Evaluation</h1>
+	<h2>Create A New Evaluation</h2>
+	<p>TODO: Select advisee, confirmation button that will query relevant tables to create evaluation. NOTE: a lot of this querying is already done in the student info profile</p>
 	<br>
 </div>
 

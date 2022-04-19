@@ -22,7 +22,7 @@ echo '
 			</div>
 		</td>
 		<td class="hdr_title">
-			<a href="home_faculty.html"><h1>Advising System</h1></a>
+			<a href="home_faculty.php"><h1>Advising System</h1></a>
 			<h2>Faculty Portal</h2>
 			<p>Christopher Newport University</p>
 		</td>
@@ -64,9 +64,15 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Contact</h1>
-	<h2>Email Form</h2>
-	<p>TODO: create form to email selected recipient</p>
+	<h1 class="page_name">Meeting Portal</h1>
+	<h1>Overview</h1>
+	<p>Your advisees are required to meet with you to review their tentative class selection in order to obtain their Alternate PIN for registration, unless their evaluation grade is high enough to exempt them. Meetings with your advisees can be created, altered, or deleted as needed. See below for specific page functions.</p>
+	<br>
+	<h2>Schedule Meeting</h2>
+	<p>Select a compatible time and location to create a meeting with an advisee.</p>
+	<br>
+	<h2>View Meetings</h2>
+	<p>View created meetings, and update or delete them as needed.</p>
 	<br>
 </div>
 

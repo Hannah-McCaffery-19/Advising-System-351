@@ -22,7 +22,7 @@ echo '
 			</div>
 		</td>
 		<td class="hdr_title">
-			<a href="home_faculty.html"><h1>Advising System</h1></a>
+			<a href="home_faculty.php"><h1>Advising System</h1></a>
 			<h2>Faculty Portal</h2>
 			<p>Christopher Newport University</p>
 		</td>
@@ -64,9 +64,12 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Contact</h1>
-	<h2>Email Form</h2>
-	<p>TODO: create form to email selected recipient</p>
+	<h1 class="page_name">Schedule A Meeting</h1>
+	<h2>Schedule Meeting</h2>
+	<p>TODO: form that will submit meeting data to the meeting table</p>
+	<br>
+	<h2>Advisor Availability</h2>
+	<p>TODO: query availability table, should be copy/paste from advisor info</p>
 	<br>
 </div>
 

@@ -48,23 +48,23 @@ echo '
 	<img class="navline" src="images/divider.png">
 	<a href="info_P_faculty.php"><h3>Information</h3></a>
 	<a href="info_profile_faculty.php"><p>My Profile</p></a>
-	<a href="home_faculty.php"><p>My Advisees</p></a>
-	<a href="home_faculty.php"><p>List of Courses</p></a>
+	<a href="info_advisees_faculty.php"><p>My Advisees</p></a>
+	<a href="info_courses_faculty.php"><p>List of Classes</p></a>
 	<img class="navline" src="images/divider.png">
-	<a href="home_faculty.php"><h3>Meeting</h3></a>
-	<a href="home_faculty.php"><p>Schedule Meeting</p></a>
-	<a href="home_faculty.php"><p>View Meetings</p></a>
+	<a href="meet_P_faculty.php"><h3>Meeting</h3></a>
+	<a href="meet_sched_faculty.php"><p>Schedule Meeting</p></a>
+	<a href="meet_view_faculty.php"><p>View Meetings</p></a>
 	<img class="navline" src="images/divider.png">
-	<a href="home_faculty.php"><h3>Evaluation</h3></a>
-	<a href="home_faculty.php"><p>Generate Evaluation</p></a>
-	<a href="home_faculty.php"><p>View Evaluations</p></a>
+	<a href="eval_P_faculty.php"><h3>Evaluation</h3></a>
+	<a href="eval_create_faculty.php"><p>Generate Evaluation</p></a>
+	<a href="eval_view_faculty.php"><p>View Evaluations</p></a>
 	<img class="navline" src="images/divider.png">
-	<a href="home_faculty.php"><h3>Contact</h3></a>
+	<a href="contact_faculty.php"><h3>Contact</h3></a>
 	<br><br>
 </div>
 
 <div class="content">
-	<h1 class="page_name">Faculty Advising</h1>
+	<h1 class="page_name">Information Portal</h1>
 	<h1>Overview</h1>
 	<p>Your personal profile and advisee information can be viewed here, as well as information relevant to the advising and enrollment process. See below for specific page functions.</p>
 	<br>

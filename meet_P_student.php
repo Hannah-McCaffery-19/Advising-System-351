@@ -69,7 +69,7 @@ echo '
 	<p>Meeting with your advisor is required in order to obtain your Alternate PIN for registration, unless your evaluation grade is high enough to deem you exempt. Meetings with your advisor can be created, altered, or deleted as needed. See below for specific page functions.</p>
 	<br>
 	<h2>Schedule Meeting</h2>
-	<p>Select a compatible time and location to create a meeting with your advisor</p>
+	<p>Select a compatible time and location to create a meeting with your advisor.</p>
 	<br>
 	<h2>View Meetings</h2>
 	<p>View created meetings, and update or delete them as needed.</p>

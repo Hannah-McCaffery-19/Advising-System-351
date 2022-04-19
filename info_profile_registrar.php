@@ -17,7 +17,6 @@ echo '
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
 <div class="body_box">
 <table class="hdr_table" cellpadding="0" cellspacing="0" >
@@ -45,9 +44,7 @@ echo '
 		</td>
 	</tr>
 </table>
-
 <div class="main">
-
 <div class="sidenav">
 	<br>
 	<a href="home_registrar.php"><h3>Home</h3></a>
@@ -68,7 +65,6 @@ echo '
 	<a href="contact_registrar.php"><h3>Contact</h3></a>
 	<br><br>
 </div>
-
 <div class="content">
 	<h1 class="page_name">My Profile</h1>
 	<h2>Personal Information</h2>
@@ -101,111 +97,13 @@ echo '
 		<td><p>'; echo $faculty['office']; echo '</p></td>
 	</tr>
 	</table>
-	<br><br>';
-	
-	$facultyID = $_SESSION['username'];
-	
-	echo '
-	<h2>My Availability</h2>
-	<table class="info_table">
-	<tr>
-		<th><p>Monday:</p></th>
-		<td><p>';
-		echo '&emsp;';
-		$query = "SELECT * FROM availability WHERE facultyID_fk_avail = '$facultyID' AND day = 'Monday'";
-		mysqli_multi_query($connect, $query);
-		do {
-			if ($result = mysqli_store_result($connect)) {
-				while ($available = mysqli_fetch_row($result)) {				
-					echo substr($available[2], 0, -3); echo '-'; echo substr($available[3], 0, -3); echo '&emsp;';		
-				}
-			}
-		} 
-		while (mysqli_next_result($connect));
-
-		echo '</p></td>
-	</tr>
-	<tr>
-		<th><p>Tuesday:</p></th>
-		<td><p>';
-		echo '&emsp;';
-		$query = "SELECT * FROM availability WHERE facultyID_fk_avail = '$facultyID' AND day = 'Tuesday'";
-		mysqli_multi_query($connect, $query);
-		do {
-			if ($result = mysqli_store_result($connect)) {
-				while ($available = mysqli_fetch_row($result)) {				
-					echo substr($available[2], 0, -3); echo '-'; echo substr($available[3], 0, -3); echo '&emsp;';		
-				}
-			}
-		} 
-		while (mysqli_next_result($connect));
-
-		echo '</p></td>
-	</tr>
-	<tr>
-		<th><p>Wednesday:</p></th>
-		<td><p>';
-		echo '&emsp;';
-		$query = "SELECT * FROM availability WHERE facultyID_fk_avail = '$facultyID' AND day = 'Wednesday'";
-		mysqli_multi_query($connect, $query);
-		do {
-			if ($result = mysqli_store_result($connect)) {
-				while ($available = mysqli_fetch_row($result)) {				
-					echo substr($available[2], 0, -3); echo '-'; echo substr($available[3], 0, -3); echo '&emsp;';
-				}
-			}
-		} 
-		while (mysqli_next_result($connect));
-
-		echo '</p></td>
-	</tr>
-	<tr>
-		<th><p>Thursday:</p></th>
-		<td><p>';
-		echo '&emsp;';
-		$query = "SELECT * FROM availability WHERE facultyID_fk_avail = '$facultyID' AND day = 'Thursday'";
-		mysqli_multi_query($connect, $query);
-		do {
-			if ($result = mysqli_store_result($connect)) {
-				while ($available = mysqli_fetch_row($result)) {				
-					echo substr($available[2], 0, -3); echo '-'; echo substr($available[3], 0, -3); echo '&emsp;';
-				}
-			}
-		} 
-		while (mysqli_next_result($connect));
-
-		echo '</p></td>
-	</tr>
-	<tr>
-		<th><p>Friday:</p></th>
-		<td><p>';
-		echo '&emsp;';
-		$query = "SELECT * FROM availability WHERE facultyID_fk_avail = '$facultyID' AND day = 'Friday'";
-		mysqli_multi_query($connect, $query);
-		do {
-			if ($result = mysqli_store_result($connect)) {
-				while ($available = mysqli_fetch_row($result)) {				
-					echo substr($available[2], 0, -3); echo '-'; echo substr($available[3], 0, -3); echo '&emsp;';
-				}
-			}
-		} 
-		while (mysqli_next_result($connect));
-
-		echo '</p></td>
-	</tr>
-	</table>
-	<br><br><br>
+	<br><br>
 </div>
-
 </div>
 <div class="footer">
 	<p>&copy; Copyright Christopher Newport University 2022</p>
 	<a href="mailto:register@cnu.edu">Questions? Contact the Office of the Registrar at register@cnu.edu</a>
-
 </div>
-
-
-
 </div>
 </body>
 ';

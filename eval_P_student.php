@@ -64,15 +64,16 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Student Advising</h1>
-	<h1>Lorem Ipsum</h1>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	
-	<h2>Lorem Ipsum</h2>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	
-	<h3>Lorem Ipsum</h3>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	<h1 class="page_name">Evaluation Portal</h1>
+	<h1>Overview</h1>
+	<p>In order to gauge how on track you are to graduate, an evaluation can be performed which will weigh GPA, courses taken vs still needed, and intended graduation year. You will receive a letter grade result for the evaluation ranging from A-D, and a high grade can exempt you from needing to meet with your advisor to get your Alternate PIN.</p>
+	<br>
+	<h2>Generate Evaluation</h2>
+	<p>Create a new evaluation, which will be logged and stored. An evaluation must be done in the current term to qualify for meeting exemption.</p>
+	<br>
+	<h2>View Evaluations</h2>
+	<p>View all generated evaluations for your account, including those done by faculty.</p>
+	<br>
 </div>
 
 </div>

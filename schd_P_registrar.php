@@ -21,7 +21,7 @@ echo '
 			</div>
 		</td>
 		<td class="hdr_title">
-			<a href="home_registrar.html"><h1>Advising System</h1></a>
+			<a href="home_registrar.php"><h1>Advising System</h1></a>
 			<h2>Registrar Portal</h2>
 			<p>Christopher Newport University</p>
 		</td>
@@ -63,15 +63,16 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Registrar - Home</h1>
-	<h1>Lorem Ipsum</h1>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	
-	<h2>Lorem Ipsum</h2>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	
-	<h3>Lorem Ipsum</h3>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	<h1 class="page_name">Schedule of Classes Portal</h1>
+	<h1>Overview</h1>
+	<p>Manual additions, alterations, and deletions of term class information can be done here. See below for specific page functions.</p>
+	<br>
+	<h2>Create Class</h2>
+	<p>Generate a new class for the schedule of classes.</p>
+	<br>
+	<h2>Edit Class Information</h2>
+	<p>View an existing class to alter or delete as needed.</p>
+	<br>
 </div>
 
 </div>

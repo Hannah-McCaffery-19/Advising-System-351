@@ -21,7 +21,7 @@ echo '
 			</div>
 		</td>
 		<td class="hdr_title">
-			<a href="home_registrar.html"><h1>Advising System</h1></a>
+			<a href="home_registrar.php"><h1>Advising System</h1></a>
 			<h2>Registrar Portal</h2>
 			<p>Christopher Newport University</p>
 		</td>
@@ -63,15 +63,15 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Registrar - Home</h1>
-	<h1>Lorem Ipsum</h1>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	
-	<h2>Lorem Ipsum</h2>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	
-	<h3>Lorem Ipsum</h3>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	<h1 class="page_name">Information Portal</h1>
+	<h1>Overview</h1>
+	<p>Your personal profile and the upcoming term course schedule can be viewed here. See below for specific page functions.</p>
+	<br>
+	<h2>My Profile</h2>
+	<p>View your faculty profile.</p>
+	<br>
+	<h2>List of Courses</h2>
+	<p>View the list of courses available in the upcoming registration period.</p>
 </div>
 
 </div>

@@ -64,15 +64,21 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Student Advising</h1>
-	<h1>Lorem Ipsum</h1>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	
-	<h2>Lorem Ipsum</h2>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	
-	<h3>Lorem Ipsum</h3>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	<h1 class="page_name">Information Portal</h1>
+	<h1>Overview</h1>
+	<p>Your personal profile and records can be viewed here, as well as information relevant to the advising and enrollment process. See below for specific page functions.</p>
+	<br>
+	<h2>My Profile</h2>
+	<p>View your student information and enrollment history.</p>
+	<br>
+	<h2>My Advisor</h2>
+	<p>View the name, department, and contact details of your assigned advisor.</p>
+	<br>
+	<h2>Requirements</h2>
+	<p>View the courses required to fulfill all of your graduation requirements, including LLC electives, majors, and minors.</p>
+	<br>
+	<h2>List of Courses</h2>
+	<p>View the list of courses available in the upcoming registration period.</p>
 </div>
 
 </div>

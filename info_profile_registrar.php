@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+$DATABASE_HOST = 'localhost';
+$DATABASE_USER = 'root';
+$DATABASE_PASS = '';
+$DATABASE_NAME = 'mydb';
+
+$connect = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+
 echo '
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +28,7 @@ echo '
 			</div>
 		</td>
 		<td class="hdr_title">
-			<a href="home_registrar.html"><h1>Advising System</h1></a>
+			<a href="home_registrar.php"><h1>Advising System</h1></a>
 			<h2>Registrar Portal</h2>
 			<p>Christopher Newport University</p>
 		</td>
@@ -63,15 +70,38 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Registrar - Home</h1>
-	<h1>Lorem Ipsum</h1>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	<h1 class="page_name">My Profile</h1>
+	<h2>Personal Information</h2>
+	<table class="info_table">
+	<tr>
+		<th><p>Name:</p></th>
+		<td><p>'; echo $_SESSION['firstname']; echo' '; echo $_SESSION['lastname']; echo '</p></td>
+	</tr>
+	<tr>
+		<th><p>CNU ID:</p></th>
+		<td><p>'; echo $_SESSION['username']; echo '</p></td>
+	</tr>
+	<tr>
+		<th><p>Email:</p></th>
+		<td><p>'; echo $_SESSION['email']; echo '</p></td>
+	</tr>';
 	
-	<h2>Lorem Ipsum</h2>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	$username = $_SESSION['username'];
+	$query1 = "SELECT * FROM faculty WHERE facultyID = '$username'";
+	$result1 = mysqli_query($connect, $query1);
+	$faculty = mysqli_fetch_assoc($result1);
 	
-	<h3>Lorem Ipsum</h3>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	echo '
+	<tr>
+		<th><p>Phone:</p></th>
+		<td><p>'; echo $faculty['facultyPhone']; echo '</p></td>
+	</tr>
+	<tr>
+		<th><p>Office:</p></th>
+		<td><p>'; echo $faculty['office']; echo '</p></td>
+	</tr>
+	</table>
+	<br><br>
 </div>
 
 </div>

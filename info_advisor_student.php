@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+$DATABASE_HOST = 'localhost';
+$DATABASE_USER = 'root';
+$DATABASE_PASS = '';
+$DATABASE_NAME = 'mydb';
+
+$connect = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+
 echo '
 <!DOCTYPE html>
 <html lang="en">
@@ -64,15 +71,40 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Student Advising</h1>
-	<h1>Lorem Ipsum</h1>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	<h1 class="page_name">Advisor Profile</h1>
+	<h2>Advisor Information</h2>';
 	
-	<h2>Lorem Ipsum</h2>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	$advisorID = $_SESSION['advisor'];
+	$query1 = "SELECT * FROM faculty WHERE facultyID = '$advisorID'";
+	$result1 = mysqli_query($connect, $query1);
+	$advisor = mysqli_fetch_assoc($result1);
 	
-	<h3>Lorem Ipsum</h3>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	echo '
+	<table class="info_table">
+	<tr>
+		<th><p>Name:</p></th>
+		<td><p>'; echo $advisor['firstName']; echo' '; echo $advisor['lastName']; echo '</p></td>
+	</tr>
+	<tr>
+		<th><p>Email:</p></th>
+		<td><p>'; echo $advisor['facultyEmail']; echo '</p></td>
+	</tr>
+	<tr>
+		<th><p>Phone:</p></th>
+		<td><p>'; echo $advisor['facultyPhone']; echo '</p></td>
+	</tr>
+	<tr>
+		<th><p>Office:</p></th>
+		<td><p>'; echo $advisor['office']; echo '</p></td>
+	</tr>
+	<tr>
+		<th><p>Department:</p></th>
+		<td><p>'; echo $advisor['department_fk_dept']; echo '</p></td>
+	</tr>
+	</table>
+	<br><br>
+	<h2>Advisor Availability</h2>
+	<p>TODO: query availability from advisor availability page</p>
 </div>
 
 </div>

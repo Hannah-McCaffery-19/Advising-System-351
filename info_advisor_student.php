@@ -102,9 +102,31 @@ echo '
 		<td><p>'; echo $advisor['department_fk_dept']; echo '</p></td>
 	</tr>
 	</table>
-	<br><br>
+	<br><br>';
+	
+	$advisorID = $_SESSION['advisor'];
+	
+	echo '
 	<h2>Advisor Availability</h2>
-	<p>TODO: query availability from advisor availability page</p>
+	<table class="info_table">
+	<tr>
+		<th><p>Monday:</p></th>
+		<td><p>';
+		$query = "SELECT * FROM availability WHERE facultyID_fk_avail = '$advisorID' AND day = 'Monday'";
+		mysqli_multi_query($connect, $query);
+		do {
+			if ($result = mysqli_store_result($connect)) {
+				while ($available = mysqli_fetch_row($result)) {				
+					echo $available[2]; echo '-'; echo $available[3]; echo ', ';		
+				}
+			}
+		} 
+		while (mysqli_next_result($connect));
+
+		echo '</p></td>
+	</tr>
+	</table>
+	
 </div>
 
 </div>

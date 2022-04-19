@@ -18,3 +18,7 @@ INSERT INTO `availability` (`facultyID_fk_avail`, `day`, `availabilityStart`, `a
 ('00912116', 'Thursday', '12:30', '13:30'),
 ('00912116', 'Thursday', '16:00', '16:30'),
 ('00912116', 'Friday', '12:00', '12:30');
+
+
+--- Meeting ---
+ALTER TABLE `meeting` ADD `date` DATE NOT NULL AFTER `location`;

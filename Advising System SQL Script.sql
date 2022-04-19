@@ -359,7 +359,17 @@ VALUES ('Communication', NULL), ('Economics', NULL),
   `alternatePIN`, `advisorID`) 
   VALUES ('00973437','Hannah','McCaffery','Change.19',
   'hannah.mccaffery.19@cnu.edu','8043895708',NULL,
-  'Junior','2019','2023',NULL,'00912116');
+  'Junior','2019','2023',NULL,'00912116'),
+  ('00982800', 'Maddy', 'Jenkins', 'yuria3', 
+  'madelyn.jenkins.19@cnu.edu', '5712238067', NULL, 
+  'Junior', '2019', '2023', NULL, '00912116'), 
+  ('00974556', 'Katie', 'Clements', 'KKdisco500', 
+  'katelyn.clements.20@cnu.edu', '5409038040', NULL, 
+  'Sophomore', '2020', '2024', NULL, '00912116'),
+  ('00976378', 'Caitlyn', 'Berryhill', 'M0t0rb1ke', 
+  'caitlyn.berryhill.21@cnu.edu', '4343389888', NULL, 
+  'Freshman', '2021', '2025', NULL, '00912116');
+
   
   
   

@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Faculty` (
   `password` VARCHAR(45) NOT NULL,
   `facultyEmail` VARCHAR(60) NOT NULL,
   `facultyPhone` VARCHAR(15) NULL,
-  `facultyAddress` VARCHAR(80) NULL,
+  `office` VARCHAR(20) NULL,
   `role` ENUM('Faculty','Chair','Registrar') NOT NULL DEFAULT 'Faculty',
   `department_fk_dept` VARCHAR(90) NULL,
   PRIMARY KEY (`facultyID`),
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Faculty` (
     REFERENCES `mydb`.`Department` (`deptName`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
-  
+
 
 
 
@@ -316,7 +316,79 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Declared_Major` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   PRIMARY KEY (`studentID_fk_declmaj`, `majorName_fk_declmaj`));
+  
+  
 
+INSERT INTO `department` (`deptName`, `deptChairID_fk_fac`) 
+VALUES ('Communication', NULL), ('Economics', NULL), 
+('Education/Teacher Preparation', NULL), ('English', NULL), 
+('Fine Art and Art History', NULL), ('History', NULL), 
+('Leadership and American Studies', NULL), 
+('Luter School of Business', NULL), ('Mathematics', NULL), 
+('Military Science', NULL), 
+('Modern and Classical Languages and Literatures', NULL), 
+('Molecular Biology and Chemistry', NULL), ('Music', NULL), 
+('Neuroscience', NULL), ('Organismal and Environmental Biology', NULL), 
+('Philosophy and Religion', NULL), ('Political Science', NULL), 
+('Physics, Computer Science and Engineering', NULL), 
+('Psychology', NULL), ('Sociology, Social Work and Anthropology', NULL), 
+('Theater and Dance', NULL);
+
+
+
+  INSERT INTO `faculty`
+  (`facultyID`, `firstName`, `lastName`, `password`, 
+  `facultyEmail`, `facultyPhone`, `office`, 
+  `role`, `department_fk_dept`)
+  VALUES ('00912116','Michael','Lapke','DatabaseDev3000',
+  'michael.lapke@cnu.edu','7575948921','Luter 331','Faculty',
+  'Physics, Computer Science and Engineering'),
+  ('00918954','Anton','Riedl','PCSErocks',
+  'riedl@cnu.edu','7575947829','Luter 313A','Chair',
+  'Physics, Computer Science and Engineering'),
+  ('00982178','Kevin','Hughes','ILoveEmails123',
+  'kmhughes@cnu.edu','7575947160','DSU 3148','Registrar',NULL);
+  
+  
+  
+  INSERT INTO `student`
+  (`studentID`, `firstName`, `lastName`, `password`, 
+  `studentEmail`, `studentPhone`, `studentAddress`, 
+  `classStanding`, `yearEnrolled`, `yearGraduating`, 
+  `alternatePIN`, `advisorID`) 
+  VALUES ('00973437','Hannah','McCaffery','Change.19',
+  'hannah.mccaffery.19@cnu.edu','8043895708',NULL,
+  'Junior','2019','2023',NULL,'00912116');
+  
+  
+  
+  INSERT INTO `general_course_listing`
+  (`courseID`, `className`, `creditHours`, `areaOfLLC`, 
+  `pre-requisite`, `co-requisite`, `restrictions`, `courseDesc`) 
+  VALUES ('CPSC150','Intro to Programming','3','LLFR',NULL,NULL,NULL,
+  'This course is an introduction to problem solving and programming. Topics include using primitive and object types, defining Boolean and arithmetic expressions, using selection and iterative statements, defining and using methods, defining classes, creating objects and manipulating arrays. Emphasis is placed on designing, coding and testing programs using the above topics. Satisfies the logical reasoning foundation requirement.'),
+  ('CPSC150L','Intro to Programming Lab','1',NULL,NULL,'CPSC 150 with a minimum grade of D-',NULL,
+  'Laboratory course supports the concepts in CPSC 150 lecture with hands-on programming activities and language specific implementation. Laboratory exercises stress sound design principles, programming style, documentation, and debugging techniques. Lab fees apply each term.'),
+  ('HIST112', 'The Modern World', '3', 'AIGM', NULL, NULL, NULL, 
+  'A survey of world history centering on institutions, values, and cultural forms from the mid-16th century to the present.'),
+  ('MATH140', 'Calculus and Analytic Geometry', '4', 'LLFM', 'MATH 130 with a minimum grade of C- OR MATH 132 with a minimum grade of C-', NULL, NULL, 
+  'An introduction to the calculus of elementary functions, continuity, derivatives, methods of differentiation, the Mean Value Theorem, curve sketching, applications of the derivative, the definite integral, the Fundamental Theorems of Calculus, indefinite integrals, and log and exponential functions. The software package Mathematica will be used.\r\n\r\nPrerequisite: MATH 130 with a grade of C- or higher, or an acceptable score on the Calculus Readiness Assessment. More information on the Calculus Readiness Exam can be found here: https://my.cnu.edu/math/placement/'),
+  ('PHYS151', 'College Physics I', '3', 'AINW', NULL, NULL, NULL, 
+  'A presentation of the major concepts of physics, using algebra and trigonometry. For science students (but not for engineering, physics, or mathematics students). Topics covered include mechanics, thermodynamics, waves, electromagnetism, optics, and modern physics.'),
+  ('PHYS151L', 'College Physics I Laboratory', '1', 'AINW', NULL, 'PHYS 151 with a minimum grade of D-', NULL, 
+  'Physics laboratory activities to accompany the lecture part of the course. The laboratories introduce fundamental physical principles, rudimentary data analysis, and computer-aided control and data acquisition. Lab fees apply each term.');
+
+
+
+INSERT INTO `records`
+(`recordID`, `studentID_fk_rec`, `courseID_fk_rec`, 
+`grade`, `termTaken`, `yearTaken`) 
+VALUES (NULL,'00973437','CPSC150','B+','Fall','2019'),
+(NULL, '00973437', 'CPSC150L', 'A', 'Fall', '2019'),
+(NULL, '00973437', 'HIST112', 'B+', 'Fall', '2019'),
+(NULL, '00973437', 'MATH140', 'B-', 'Fall', '2019'),
+(NULL, '00973437', 'PHYS151', 'C', 'Fall', '2019'),
+(NULL, '00973437', 'PHYS151L', 'A+', 'Fall', '2019');
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

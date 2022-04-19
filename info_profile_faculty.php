@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+$DATABASE_HOST = 'localhost';
+$DATABASE_USER = 'root';
+$DATABASE_PASS = '';
+$DATABASE_NAME = 'mydb';
+
+$connect = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+
 echo '
 <!DOCTYPE html>
 <html lang="en">
@@ -64,18 +71,44 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Faculty Advising</h1>
-	<h1>Overview</h1>
-	<p>Your personal profile and advisee information can be viewed here, as well as information relevant to the advising and enrollment process. See below for specific page functions.</p>
-	<br>
-	<h2>My Profile</h2>
-	<p>View your faculty profile.</p>
-	<br>
-	<h2>My Advisees</h2>
-	<p>View the names and relevant information of the students assigned to you as advisees.</p>
-	<br>
-	<h2>List of Courses</h2>
-	<p>View the list of courses available in the upcoming registration period.</p>
+	<h1 class="page_name">My Profile</h1>
+	<h2>Personal Information</h2>
+	<table class="info_table">
+	<tr>
+		<th><p>Name:</p></th>
+		<td><p>'; echo $_SESSION['firstname']; echo' '; echo $_SESSION['lastname']; echo '</p></td>
+	</tr>
+	<tr>
+		<th><p>CNU ID:</p></th>
+		<td><p>'; echo $_SESSION['username']; echo '</p></td>
+	</tr>
+		<tr>
+		<th><p>Email:</p></th>
+		<td><p>'; echo $_SESSION['email']; echo '</p></td>
+	</tr>';
+	
+	$username = $_SESSION['username'];
+	$query1 = "SELECT * FROM faculty WHERE facultyID = '$username'";
+	$result1 = mysqli_query($connect, $query1);
+	$faculty = mysqli_fetch_assoc($result1);
+	
+	echo '
+	</tr>
+		<tr>
+		<th><p>Phone:</p></th>
+		<td><p>'; echo $faculty['facultyPhone']; echo '</p></td>
+	</tr>
+	<tr>
+		<th><p>Office:</p></th>
+		<td><p>'; echo $faculty['office']; echo '</p></td>
+	</tr>
+	</tr>
+		<tr>
+		<th><p>Department:</p></th>
+		<td><p>'; echo $faculty['department_fk_dept']; echo '</p></td>
+	</tr>
+	</table>
+	<br><br>
 </div>
 
 </div>

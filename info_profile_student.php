@@ -95,6 +95,11 @@ echo '
 	echo '
 	</tr>
 		<tr>
+		<th><p>Phone:</p></th>
+		<td><p>'; echo $student['studentPhone']; echo '</p></td>
+	</tr>
+	</tr>
+		<tr>
 		<th><p>Class Standing:</p></th>
 		<td><p>'; echo $student['classStanding']; echo '</p></td>
 	</tr>

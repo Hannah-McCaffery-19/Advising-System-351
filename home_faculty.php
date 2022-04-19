@@ -47,7 +47,7 @@ echo '
 	<a href="home_faculty.php"><h3>Home</h3></a>
 	<img class="navline" src="images/divider.png">
 	<a href="info_P_faculty.php"><h3>Information</h3></a>
-	<a href="home_faculty.php"><p>My Profile</p></a>
+	<a href="info_profile_faculty.php"><p>My Profile</p></a>
 	<a href="home_faculty.php"><p>My Advisees</p></a>
 	<a href="home_faculty.php"><p>List of Courses</p></a>
 	<img class="navline" src="images/divider.png">

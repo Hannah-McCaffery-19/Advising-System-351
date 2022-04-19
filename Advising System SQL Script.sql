@@ -192,6 +192,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Meeting` (
   `studentID_fk_meet` CHAR(8) NOT NULL,
   `facultyID_fk_meet` CHAR(8) NOT NULL,
   `location` VARCHAR(45) NOT NULL,
+  `date` DATE NOT NULL,
   `timeStart` DATETIME NOT NULL,
   `timeEnd` DATETIME NOT NULL,
   `notes` TEXT NULL,
@@ -389,6 +390,21 @@ VALUES (NULL,'00973437','CPSC150','B+','Fall','2019'),
 (NULL, '00973437', 'MATH140', 'B-', 'Fall', '2019'),
 (NULL, '00973437', 'PHYS151', 'C', 'Fall', '2019'),
 (NULL, '00973437', 'PHYS151L', 'A+', 'Fall', '2019');
+
+
+
+INSERT INTO `availability` (`facultyID_fk_avail`, `day`, `availabilityStart`, `availabilityEnd`) VALUES 
+('00912116', 'Monday', '12:00', '12:30'),
+('00912116', 'Monday', '14:00', '15:00'),
+('00912116', 'Tuesday', '11:00', '12:00'),
+('00912116', 'Tuesday', '12:30', '13:30'),
+('00912116', 'Tuesday', '16:00', '16:30'),
+('00912116', 'Wednesday', '12:00', '12:30'),
+('00912116', 'Wednesday', '14:00', '15:00'),
+('00912116', 'Thursday', '11:00', '12:00'),
+('00912116', 'Thursday', '12:30', '13:30'),
+('00912116', 'Thursday', '16:00', '16:30'),
+('00912116', 'Friday', '12:00', '12:30');
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

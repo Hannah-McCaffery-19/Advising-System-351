@@ -17,7 +17,6 @@ echo '
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
 <div class="body_box">
 <table class="hdr_table" cellpadding="0" cellspacing="0" >
@@ -45,9 +44,7 @@ echo '
 		</td>
 	</tr>
 </table>
-
 <div class="main">
-
 <div class="sidenav">
 	<br>
 	<a href="home_registrar.php"><h3>Home</h3></a>
@@ -68,7 +65,6 @@ echo '
 	<a href="contact_registrar.php"><h3>Contact</h3></a>
 	<br><br>
 </div>
-
 <div class="content">
 	<h1 class="page_name">My Profile</h1>
 	<h2>Personal Information</h2>
@@ -103,16 +99,11 @@ echo '
 	</table>
 	<br><br>
 </div>
-
 </div>
 <div class="footer">
 	<p>&copy; Copyright Christopher Newport University 2022</p>
 	<a href="mailto:register@cnu.edu">Questions? Contact the Office of the Registrar at register@cnu.edu</a>
-
 </div>
-
-
-
 </div>
 </body>
 ';

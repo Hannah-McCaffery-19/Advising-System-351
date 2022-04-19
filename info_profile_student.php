@@ -204,7 +204,7 @@ echo '
 	}
 	
 	$cumulGPA = (array_sum($gpa))/$count;
-	$cumulGPA = number_format($cumulGPA, 2, '.', '');
+	$cumulGPA = number_format($cumulGPA, 1, '.', '');
 	
 	echo '
 	</table>

@@ -4,16 +4,16 @@ TO USE: navigate to the relevant table in phpMyAdmin, click the SQL tab at the t
 
 --- Faculty ---
 
-INSERT INTO `faculty`(`facultyID`, `firstName`, `lastName`, `password`, `facultyEmail`, `faculty phone`, `faculty address`, `role`) VALUES ('00912116','Michael','Lapke','DatabaseDev3000','michael.lapke@cnu.edu',NULL,NULL,'Faculty')
+INSERT INTO `faculty`(`facultyID`, `firstName`, `lastName`, `password`, `facultyEmail`, `faculty phone`, `faculty address`, `office`, `role`, `deptartment`) VALUES ('00912116','Michael','Lapke','DatabaseDev3000','michael.lapke@cnu.edu',NULL,NULL,NULL,'Faculty',NULL)
 
-INSERT INTO `faculty`(`facultyID`, `firstName`, `lastName`, `password`, `facultyEmail`, `faculty phone`, `faculty address`, `role`) VALUES ('00918954','Anton','Riedl','PCSErocks','riedl@cnu.edu',NULL,NULL,'Chair')
+INSERT INTO `faculty`(`facultyID`, `firstName`, `lastName`, `password`, `facultyEmail`, `faculty phone`, `faculty address`, `office`, `role`, `deptartment`) VALUES ('00918954','Anton','Riedl','PCSErocks','riedl@cnu.edu',NULL,NULL,NULL,'Chair',NULL)
 
-INSERT INTO `faculty`(`facultyID`, `firstName`, `lastName`, `password`, `facultyEmail`, `faculty phone`, `faculty address`, `role`) VALUES ('00982178','Kevin','Hughes','ILoveEmails123','kmhughes@cnu.edu','7575947160',NULL,'Registrar')
+INSERT INTO `faculty`(`facultyID`, `firstName`, `lastName`, `password`, `facultyEmail`, `faculty phone`, `faculty address`, `office`, `role`, `deptartment`) VALUES ('00982178','Kevin','Hughes','ILoveEmails123','kmhughes@cnu.edu','7575947160',NULL,NULL,'Registrar',NULL)
 
 
 --- Student ---
 
-INSERT INTO `student`(`studentID`, `firstName`, `lastName`, `password`, `studentEmail`, `studentPhone`, `studentAddress`, `yearEnrolled`, `yearGraduating`, `alternatePIN`, `accumulatedCredits`, `advisorID`) VALUES ('00973437','Hannah','McCaffery','Change.19','hannah.mccaffery.19@cnu.edu','8043895708',NULL,'2019','2023',NULL,'90','00912116')
+INSERT INTO `student`(`studentID`, `firstName`, `lastName`, `password`, `studentEmail`, `studentPhone`, `studentAddress`, `classStanding`, `yearEnrolled`, `yearGraduating`, `alternatePIN`, `advisorID`) VALUES ('00973437','Hannah','McCaffery','Change.19','hannah.mccaffery.19@cnu.edu','8043895708',NULL,'Junior','2019','2023',NULL,'90','00912116')
 
 
 --- General Course Listing

@@ -7,9 +7,6 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
--- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
 
 -- -----------------------------------------------------
 -- Schema mydb
@@ -17,78 +14,145 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
 USE `mydb` ;
 
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Department`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Department` (
+  `deptName` VARCHAR(90) NOT NULL,
+  `deptChairID_fk_fac` CHAR(8) NULL,
+  PRIMARY KEY (`deptName`));
+
+
+
 -- -----------------------------------------------------
 -- Table `mydb`.`Faculty`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Faculty` (
-  `first name` VARCHAR(45) NOT NULL,
-  `last name` VARCHAR(45) NOT NULL,
-  `faculty phone` VARCHAR(45) NOT NULL,
-  `faculty email` VARCHAR(45) NOT NULL,
-  `salary` VARCHAR(45) NULL,
-  `faculty address` VARCHAR(70) NULL,
-  `role` VARCHAR(45) NULL,
-  `faculty ID` INT NOT NULL,
-  PRIMARY KEY (`faculty ID`));
+  `facultyID` CHAR(8) NOT NULL,
+  `firstName` VARCHAR(45) NOT NULL,
+  `lastName` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `facultyEmail` VARCHAR(60) NOT NULL,
+  `facultyPhone` VARCHAR(15) NULL,
+  `facultyAddress` VARCHAR(80) NULL,
+  `role` ENUM('Faculty','Chair','Registrar') NOT NULL DEFAULT 'Faculty',
+  `department_fk_dept` VARCHAR(90) NULL,
+  PRIMARY KEY (`facultyID`),
+  INDEX `fk_Department_Faculty1_idx` (`department_fk_dept` ASC),
+  CONSTRAINT `fk_Department_Faculty1`
+    FOREIGN KEY (`department_fk_dept`)
+    REFERENCES `mydb`.`Department` (`deptName`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+  
+
+
+
+ALTER TABLE `mydb`.`Department`
+  ADD CONSTRAINT `fk_Faculty_Department1`
+	FOREIGN KEY (`deptChairID_fk_fac`)
+    REFERENCES `mydb`.`Faculty` (`facultyID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION;
+
+
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Availability`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Availability` (
+  `facultyID_fk_avail` CHAR(8) NOT NULL,
+  `day` ENUM('Monday','Tuesday','Wednesday','Thursday','Friday') NOT NULL,
+  `availabilityStart` TIME NOT NULL,
+  `availabilityEnd` TIME NOT NULL,
+  INDEX `fk_Availability_Faculty1_idx` (`facultyID_fk_avail` ASC),
+  CONSTRAINT `fk_Availability_Faculty1`
+    FOREIGN KEY (`facultyID_fk_avail`)
+    REFERENCES `mydb`.`Faculty` (`facultyID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+  
+  
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`General_Course_Listing`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`General_Course_Listing` (
+  `courseID` VARCHAR(8) NOT NULL,
+  `className` VARCHAR(60) NOT NULL,
+  `creditHours` INT(1) NOT NULL DEFAULT '0',
+  `areaOfLLC` VARCHAR(10) NULL,
+  `pre-requisite` TEXT NULL,
+  `co-requisite` TEXT NULL,
+  `restrictions` TEXT NULL,
+  `courseDesc` TEXT NULL,
+  PRIMARY KEY (`courseID`));
+
+
 
 
 -- -----------------------------------------------------
 -- Table `mydb`.`Class`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Class` (
-  `class ID` INT NOT NULL,
-  `class location` VARCHAR(45) NULL,
-  `semester` VARCHAR(45) NULL,
-  `Room Number` INT NULL,
-  `Building Name` VARCHAR(45) NULL,
-  `faculty ID` VARCHAR(45) NULL,
-  `prefix` VARCHAR(45) NULL,
-  `course number` INT NOT NULL,
-  `Faculty_faculty ID` INT NOT NULL,
-  PRIMARY KEY (`class ID`),
-  INDEX `fk_Class_Faculty1_idx` (`Faculty_faculty ID` ASC),
+  `classCRN` CHAR(4) NOT NULL,
+  `courseID_fk_GCL` VARCHAR(8) NOT NULL,
+  `facultyID_fk_class` CHAR(8) NULL,
+  `section` VARCHAR(4) NULL,
+  `term` ENUM('Fall','Spring','May','Summer') NOT NULL DEFAULT 'Fall',
+  `year` YEAR(4) NOT NULL DEFAULT 2019,
+  `location` VARCHAR(15) NULL,
+  PRIMARY KEY (`classCRN`),
+  INDEX `fk_Class_GCL1_idx` (`courseID_fk_GCL` ASC),
+  INDEX `fk_Class_Faculty1_idx` (`facultyID_fk_class` ASC),
+  CONSTRAINT `fk_Class_GCL1`
+    FOREIGN KEY (`courseID_fk_GCL`)
+    REFERENCES `mydb`.`General_Course_Listing` (`courseID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT `fk_Class_Faculty1`
-    FOREIGN KEY (`Faculty_faculty ID`)
-    REFERENCES `mydb`.`Faculty` (`faculty ID`)
+    FOREIGN KEY (`facultyID_fk_class`)
+    REFERENCES `mydb`.`Faculty` (`facultyID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
 
+
+
 -- -----------------------------------------------------
--- Table `mydb`.`Location`
+-- Table `mydb`.`Majors`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Location` (
-  `Room Number` INT NOT NULL,
-  `Building Name` INT NOT NULL,
-  `Class_class ID` INT NOT NULL,
-  PRIMARY KEY (`Room Number`, `Building Name`),
-  INDEX `fk_Location_Class1_idx` (`Class_class ID` ASC),
-  CONSTRAINT `fk_Location_Class1`
-    FOREIGN KEY (`Class_class ID`)
-    REFERENCES `mydb`.`Class` (`class ID`)
+CREATE TABLE IF NOT EXISTS `mydb`.`Majors` (
+  `majorName` VARCHAR(45) NOT NULL,
+  `deptName_fk_maj` VARCHAR(90) NOT NULL,
+  `requiredClasses` TEXT NOT NULL,
+  `electiveClasses` TEXT NULL,
+  PRIMARY KEY (`majorName`),
+  INDEX `fk_Majors_Department1_idx` (`deptName_fk_maj` ASC),
+  CONSTRAINT `fk_Majors_Department1`
+    FOREIGN KEY (`deptName_fk_maj`)
+    REFERENCES `mydb`.`Department` (`deptName`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
 
+
 -- -----------------------------------------------------
--- Table `mydb`.`General Course Listing`
+-- Table `mydb`.`Minors`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`General Course Listing` (
-  `prefix` INT NOT NULL,
-  `course number` INT NOT NULL,
-  `course description` TEXT(500) NULL,
-  `pre-requisite` VARCHAR(45) NULL,
-  `co-requisite` VARCHAR(45) NULL,
-  `restrictions` VARCHAR(45) NULL,
-  `semester` VARCHAR(45) NULL,
-  `department` VARCHAR(45) NULL,
-  `class name` VARCHAR(60) NULL,
-  `Class_class ID` INT NOT NULL,
-  PRIMARY KEY (`prefix`, `course number`),
-  INDEX `fk_General Course Listing_Class1_idx` (`Class_class ID` ASC),
-  CONSTRAINT `fk_General Course Listing_Class1`
-    FOREIGN KEY (`Class_class ID`)
-    REFERENCES `mydb`.`Class` (`class ID`)
+CREATE TABLE IF NOT EXISTS `mydb`.`Minors` (
+  `minorName` VARCHAR(45) NOT NULL,
+  `deptName_fk_min` VARCHAR(90) NOT NULL,
+  `requiredClasses` TEXT NOT NULL,
+  `electiveClasses` TEXT NULL,
+  PRIMARY KEY (`minorName`),
+  INDEX `fk_Minors_Department1_idx` (`deptName_fk_min` ASC),
+  CONSTRAINT `fk_Minors_Department1`
+    FOREIGN KEY (`deptName_fk_min`)
+    REFERENCES `mydb`.`Department` (`deptName`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
@@ -97,217 +161,162 @@ CREATE TABLE IF NOT EXISTS `mydb`.`General Course Listing` (
 -- Table `mydb`.`Student`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Student` (
-  `student ID` INT NOT NULL,
-  `last name` VARCHAR(45) NULL,
-  `first name` VARCHAR(45) NULL,
-  `address` VARCHAR(45) NULL,
-  `phone number` VARCHAR(45) NULL,
-  `student email` VARCHAR(45) NULL,
-  `year enrolled` DATE NULL,
-  `graduation year` DATE NULL,
-  `student alternative PIN` VARCHAR(45) NULL,
-  `evaluation grade` VARCHAR(1) NULL,
-  `accumulated credits` INT NULL,
-  `pin number` VARCHAR(10) NULL,
-  `Faculty_faculty ID` INT NOT NULL,
-  PRIMARY KEY (`student ID`),
-  INDEX `fk_Student_Faculty_idx` (`Faculty_faculty ID` ASC),
-  CONSTRAINT `fk_Student_Faculty`
-    FOREIGN KEY (`Faculty_faculty ID`)
-    REFERENCES `mydb`.`Faculty` (`faculty ID`)
+  `studentID` CHAR(8) NOT NULL,
+  `firstName` VARCHAR(45) NOT NULL,
+  `lastName` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `studentEmail` VARCHAR(60) NOT NULL,
+  `studentPhone` VARCHAR(15) NULL,
+  `studentAddress` VARCHAR(80) NULL,
+  `classStanding` ENUM('Freshman','Sophomore','Junior','Senior') NOT NULL DEFAULT 'Freshman',
+  `yearEnrolled` YEAR(4) NOT NULL,
+  `yearGraduating` YEAR(4) NOT NULL,
+  `alternatePIN` CHAR(6) NULL,
+  `advisorID` CHAR(8) NOT NULL,
+  PRIMARY KEY (`studentID`),
+  INDEX `fk_Student_Faculty1_idx` (`advisorID` ASC),
+  CONSTRAINT `fk_Student_Faculty1`
+    FOREIGN KEY (`advisorID`)
+    REFERENCES `mydb`.`Faculty` (`facultyID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
-
-
+    
+    
+    
+    
 -- -----------------------------------------------------
--- Table `mydb`.`enrollment`
+-- Table `mydb`.`Meeting`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`enrollment` (
-  `class ID` INT NOT NULL,
-  `student ID` INT NOT NULL,
-  `enrollment date` DATE NULL,
-  `Class_class ID` INT NOT NULL,
-  `Student_student ID` INT NOT NULL,
-  PRIMARY KEY (`class ID`, `student ID`),
-  INDEX `fk_enrollment_Class1_idx` (`Class_class ID` ASC),
-  INDEX `fk_enrollment_Student1_idx` (`Student_student ID` ASC),
-  CONSTRAINT `fk_enrollment_Class1`
-    FOREIGN KEY (`Class_class ID`)
-    REFERENCES `mydb`.`Class` (`class ID`)
+CREATE TABLE IF NOT EXISTS `mydb`.`Meeting` (
+  `meetingID` CHAR(6) NOT NULL,
+  `studentID_fk_meet` CHAR(8) NOT NULL,
+  `facultyID_fk_meet` CHAR(8) NOT NULL,
+  `location` VARCHAR(45) NOT NULL,
+  `timeStart` DATETIME NOT NULL,
+  `timeEnd` DATETIME NOT NULL,
+  `notes` TEXT NULL,
+  PRIMARY KEY (`meetingID`),
+  INDEX `fk_Meeting_Student1_idx` (`studentID_fk_meet` ASC),
+  INDEX `fk_Meeting_Faculty1_idx` (`facultyID_fk_meet` ASC),
+  CONSTRAINT `fk_Meeting_Student1`
+    FOREIGN KEY (`studentID_fk_meet`)
+    REFERENCES `mydb`.`Student` (`studentID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_enrollment_Student1`
-    FOREIGN KEY (`Student_student ID`)
-    REFERENCES `mydb`.`Student` (`student ID`)
+  CONSTRAINT `fk_Meeting_Faculty1`
+    FOREIGN KEY (`facultyID_fk_meet`)
+    REFERENCES `mydb`.`Faculty` (`facultyID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Sending_PIN`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Sending_PIN` (
+  `facultyID` CHAR(8) NOT NULL,
+  `studentID` CHAR(8) NOT NULL,
+  `status` ENUM('Sent','Not Sent') NOT NULL DEFAULT 'Not Sent');
+
+
+    
+-- -----------------------------------------------------
+-- Table `mydb`.`Records`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Records` (
+  `recordID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `studentID_fk_rec` CHAR(8) NOT NULL,
+  `courseID_fk_rec` VARCHAR(8) NOT NULL,
+  `grade` VARCHAR(2) NOT NULL,
+  `termTaken` ENUM('Fall','Spring','May','Summer') NOT NULL,
+  `yearTaken` YEAR(4) NOT NULL,
+  PRIMARY KEY (`recordID`),
+  INDEX `fk_Records_StudentID1_idx` (`studentID_fk_rec` ASC),
+  CONSTRAINT `fk_Records_StudentID1`
+    FOREIGN KEY (`studentID_fk_rec`)
+    REFERENCES `mydb`.`Student` (`studentID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  INDEX `fk_Records_courseID1_idx` (`courseID_fk_rec` ASC),
+  CONSTRAINT `fk_Records_courseID1`
+    FOREIGN KEY (`courseID_fk_rec`)
+    REFERENCES `mydb`.`General_Course_Listing` (`courseID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Evaluations`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Evaluations` (
+  `evalID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `studentID_fk_eval` CHAR(8) NOT NULL,
+  `evalGrade` ENUM('A','B','C','D') NOT NULL,
+  `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `generatedBy` ENUM('Student','Faculty','Registrar') NOT NULL,
+  PRIMARY KEY (`evalID`),
+  INDEX `fk_Evaluations_StudentID1_idx` (`studentID_fk_eval` ASC),
+  CONSTRAINT `fk_Evaluations_StudentID1`
+    FOREIGN KEY (`studentID_fk_eval`)
+    REFERENCES `mydb`.`Student` (`studentID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
 
 
 -- -----------------------------------------------------
 -- Table `mydb`.`Override`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Override` (
-  `Override ID` INT NOT NULL,
-  `override status` VARCHAR(45) NULL,
-  `override time` VARCHAR(45) NULL,
-  `student ID` INT NULL,
-  `faculty ID` INT NULL,
-  `Student_student ID` INT NOT NULL,
-  `Faculty_faculty ID` INT NOT NULL,
-  PRIMARY KEY (`Override ID`),
-  INDEX `fk_Override_Student1_idx` (`Student_student ID` ASC),
-  INDEX `fk_Override_Faculty1_idx` (`Faculty_faculty ID` ASC),
-  CONSTRAINT `fk_Override_Student1`
-    FOREIGN KEY (`Student_student ID`)
-    REFERENCES `mydb`.`Student` (`student ID`)
+  `overrideID` INT NOT NULL,
+  `overrideStatus` VARCHAR(45) NULL,
+  `overrideTime` VARCHAR(45) NULL,
+  `studentID` CHAR(8) NOT NULL,
+  PRIMARY KEY (`overrideID`));
+  
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Declared_Minor`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Declared_Minor` (
+  `studentID_fk_declmin` CHAR(8) NOT NULL,
+  `minorName_fk_declmin` VARCHAR(45) NOT NULL,
+  CONSTRAINT `fk_Declared_Minor_Student1`
+    FOREIGN KEY (`studentID_fk_declmin`)
+    REFERENCES `mydb`.`Student` (`studentID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Override_Faculty1`
-    FOREIGN KEY (`Faculty_faculty ID`)
-    REFERENCES `mydb`.`Faculty` (`faculty ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
--- -----------------------------------------------------
--- Table `mydb`.`Declared Minor`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Declared Minor` (
-  `minor ID` INT NOT NULL,
-  `student ID` INT NOT NULL,
-  `Declared Minor Date` DATE NULL,
-  `minor name` VARCHAR(45) NULL,
-  `Student_student ID` INT NOT NULL,
-  PRIMARY KEY (`minor ID`, `student ID`),
-  INDEX `fk_Declared Minor_Student1_idx` (`Student_student ID` ASC),
-  CONSTRAINT `fk_Declared Minor_Student1`
-    FOREIGN KEY (`Student_student ID`)
-    REFERENCES `mydb`.`Student` (`student ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
--- -----------------------------------------------------
--- Table `mydb`.`Declared Major`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Declared Major` (
-  `major ID` INT NOT NULL,
-  `studentID` INT NOT NULL,
-  `declare major` DATE NULL,
-  `major name` VARCHAR(45) NULL,
-  `Student_student ID` INT NOT NULL,
-  PRIMARY KEY (`major ID`, `studentID`),
-  INDEX `fk_Declared Major_Student1_idx` (`Student_student ID` ASC),
-  CONSTRAINT `fk_Declared Major_Student1`
-    FOREIGN KEY (`Student_student ID`)
-    REFERENCES `mydb`.`Student` (`student ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
--- -----------------------------------------------------
--- Table `mydb`.`Meeting`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Meeting` (
-  `meeting ID` INT NOT NULL,
-  `location` VARCHAR(45) NULL,
-  `time` DATE NULL,
-  `student ID` INT NULL,
-  `faculty ID` INT NULL,
-  `Student_student ID` INT NOT NULL,
-  `Faculty_faculty ID` INT NOT NULL,
-  PRIMARY KEY (`meeting ID`),
-  INDEX `fk_Meeting_Student1_idx` (`Student_student ID` ASC),
-  INDEX `fk_Meeting_Faculty1_idx` (`Faculty_faculty ID` ASC),
-  CONSTRAINT `fk_Meeting_Student1`
-    FOREIGN KEY (`Student_student ID`)
-    REFERENCES `mydb`.`Student` (`student ID`)
+  CONSTRAINT `fk_Declared_Minor_Minors1`
+    FOREIGN KEY (`minorName_fk_declmin`)
+    REFERENCES `mydb`.`Minors` (`minorName`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Meeting_Faculty1`
-    FOREIGN KEY (`Faculty_faculty ID`)
-    REFERENCES `mydb`.`Faculty` (`faculty ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+  PRIMARY KEY (`studentID_fk_declmin`, `minorName_fk_declmin`));
+
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Sending PIN`
+-- Table `mydb`.`Declared_Major`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Sending PIN` (
-  `faculty ID` INT NOT NULL,
-  `student ID` INT NOT NULL,
-  `status` VARCHAR(45) NULL,
-  `Faculty_faculty ID` INT NOT NULL,
-  `Student_student ID` INT NOT NULL,
-  PRIMARY KEY (`faculty ID`, `student ID`),
-  INDEX `fk_Sending PIN_Faculty1_idx` (`Faculty_faculty ID` ASC),
-  INDEX `fk_Sending PIN_Student1_idx` (`Student_student ID` ASC),
-  CONSTRAINT `fk_Sending PIN_Faculty1`
-    FOREIGN KEY (`Faculty_faculty ID`)
-    REFERENCES `mydb`.`Faculty` (`faculty ID`)
+CREATE TABLE IF NOT EXISTS `mydb`.`Declared_Major` (
+  `studentID_fk_declmaj` CHAR(8) NOT NULL,
+  `majorName_fk_declmaj` VARCHAR(45) NOT NULL,
+  CONSTRAINT `fk_Declared_Major_Student1`
+    FOREIGN KEY (`studentID_fk_declmaj`)
+    REFERENCES `mydb`.`Student` (`studentID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Sending PIN_Student1`
-    FOREIGN KEY (`Student_student ID`)
-    REFERENCES `mydb`.`Student` (`student ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
--- -----------------------------------------------------
--- Table `mydb`.`Assigned Advising`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Assigned Advising` (
-  `student ID` INT NOT NULL,
-  `faculty ID` INT NOT NULL,
-  `Faculty_faculty ID` INT NOT NULL,
-  `Student_student ID` INT NOT NULL,
-  PRIMARY KEY (`student ID`, `faculty ID`),
-  INDEX `fk_Assigned Advising_Faculty1_idx` (`Faculty_faculty ID` ASC),
-  INDEX `fk_Assigned Advising_Student1_idx` (`Student_student ID` ASC),
-  CONSTRAINT `fk_Assigned Advising_Faculty1`
-    FOREIGN KEY (`Faculty_faculty ID`)
-    REFERENCES `mydb`.`Faculty` (`faculty ID`)
+  CONSTRAINT `fk_Declared_Major_Majors1`
+    FOREIGN KEY (`majorName_fk_declmaj`)
+    REFERENCES `mydb`.`Majors` (`majorName`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Assigned Advising_Student1`
-    FOREIGN KEY (`Student_student ID`)
-    REFERENCES `mydb`.`Student` (`student ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+  PRIMARY KEY (`studentID_fk_declmaj`, `majorName_fk_declmaj`));
 
-
--- -----------------------------------------------------
--- Table `mydb`.`Department`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Department` (
-  `department ID` INT NOT NULL,
-  `department name` VARCHAR(45) NULL,
-  PRIMARY KEY (`department ID`));
-
-
--- -----------------------------------------------------
--- Table `mydb`.`Employing`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Employing` (
-  `department ID` INT NOT NULL,
-  `faculty ID` INT NOT NULL,
-  `Department_department ID` INT NOT NULL,
-  `Faculty_faculty ID` INT NOT NULL,
-  PRIMARY KEY (`department ID`, `faculty ID`),
-  INDEX `fk_Employing_Department1_idx` (`Department_department ID` ASC),
-  INDEX `fk_Employing_Faculty1_idx` (`Faculty_faculty ID` ASC),
-  CONSTRAINT `fk_Employing_Department1`
-    FOREIGN KEY (`Department_department ID`)
-    REFERENCES `mydb`.`Department` (`department ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Employing_Faculty1`
-    FOREIGN KEY (`Faculty_faculty ID`)
-    REFERENCES `mydb`.`Faculty` (`faculty ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

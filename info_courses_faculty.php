@@ -22,7 +22,7 @@ echo '
 			</div>
 		</td>
 		<td class="hdr_title">
-			<a href="home_faculty.html"><h1>Advising System</h1></a>
+			<a href="home_faculty.php"><h1>Advising System</h1></a>
 			<h2>Faculty Portal</h2>
 			<p>Christopher Newport University</p>
 		</td>
@@ -48,8 +48,8 @@ echo '
 	<img class="navline" src="images/divider.png">
 	<a href="info_P_faculty.php"><h3>Information</h3></a>
 	<a href="info_profile_faculty.php"><p>My Profile</p></a>
-	<a href="info_advisees_faculty.php"><p>My Advisees</p></a>
-	<a href="info_course_list.php"><p>List of Classes</p></a>
+	<a href="home_faculty.php"><p>My Advisees</p></a>
+	<a href="home_faculty.php"><p>List of Courses</p></a>
 	<img class="navline" src="images/divider.png">
 	<a href="home_faculty.php"><h3>Meeting</h3></a>
 	<a href="home_faculty.php"><p>Schedule Meeting</p></a>
@@ -64,15 +64,10 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Faculty Advising</h1>
-	<h1>Lorem Ipsum</h1>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	
-	<h2>Lorem Ipsum</h2>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	
-	<h3>Lorem Ipsum</h3>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	<h1 class="page_name">List of Classes</h1>
+	<h2>Selection of Classes in the Upcoming Term</h2>
+	<p>TODO: query class table and spit it out in a formatted table</p>
+	<br>
 </div>
 
 </div>

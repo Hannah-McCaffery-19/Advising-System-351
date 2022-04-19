@@ -64,21 +64,16 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Information Portal</h1>
+	<h1 class="page_name">Meeting Portal</h1>
 	<h1>Overview</h1>
-	<p>Your personal profile and records can be viewed here, as well as information relevant to the advising and enrollment process. See below for specific page functions.</p>
+	<p>Meeting with your advisor is required in order to obtain your Alternate PIN for registration, unless your evaluation grade is high enough to deem you exempt. Meetings with your advisor can be created, altered, or deleted as needed. See below for specific page functions.</p>
 	<br>
-	<h2>My Profile</h2>
-	<p>View your student information and enrollment history.</p>
+	<h2>Schedule Meeting</h2>
+	<p>Select a compatible time and location to create a meeting with your advisor</p>
 	<br>
-	<h2>My Advisor</h2>
-	<p>View the name, department, and contact details of your assigned advisor.</p>
+	<h2>View Meetings</h2>
+	<p>View created meetings, and update or delete them as needed.</p>
 	<br>
-	<h2>Requirements</h2>
-	<p>View the courses required to fulfill all of your graduation requirements, including LLC electives, majors, and minors.</p>
-	<br>
-	<h2>List of Courses</h2>
-	<p>View the list of courses available in the upcoming registration period.</p>
 </div>
 
 </div>

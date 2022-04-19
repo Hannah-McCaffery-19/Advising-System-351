@@ -55,18 +55,18 @@ echo '
 	<a href="info_P_student.php"><h3>Information</h3></a>
 	<a href="info_profile_student.php"><p>My Profile</p></a>
 	<a href="info_advisor_student.php"><p>My Advisor</p></a>
-	<a href="home_student.php"><p>Requirements</p></a>
-	<a href="home_student.php"><p>List of Courses</p></a>
+	<a href="info_required_student.php"><p>Requirements</p></a>
+	<a href="info_courses_student.php"><p>List of Classes</p></a>
 	<img class="navline" src="images/divider.png">
-	<a href="home_student.php"><h3>Meeting</h3></a>
-	<a href="home_student.php"><p>Schedule Meeting</p></a>
-	<a href="home_student.php"><p>View Meetings</p></a>
+	<a href="meet_P_student.php"><h3>Meeting</h3></a>
+	<a href="meet_sched_student.php"><p>Schedule Meeting</p></a>
+	<a href="meet_view_student.php"><p>View Meetings</p></a>
 	<img class="navline" src="images/divider.png">
-	<a href="home_student.php"><h3>Evaluation</h3></a>
-	<a href="home_student.php"><p>Generate Evaluation</p></a>
-	<a href="home_student.php"><p>View Evaluations</p></a>
+	<a href="eval_P_student.php"><h3>Evaluation</h3></a>
+	<a href="eval_create_student.php"><p>Generate Evaluation</p></a>
+	<a href="eval_view_student.php"><p>View Evaluations</p></a>
 	<img class="navline" src="images/divider.png">
-	<a href="home_student.php"><h3>Contact</h3></a>
+	<a href="contact_student.php"><h3>Contact</h3></a>
 	<br><br>
 </div>
 

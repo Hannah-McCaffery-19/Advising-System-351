@@ -64,21 +64,10 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Information Portal</h1>
-	<h1>Overview</h1>
-	<p>Your personal profile and records can be viewed here, as well as information relevant to the advising and enrollment process. See below for specific page functions.</p>
+	<h1 class="page_name">View Meetings</h1>
+	<h2>Created Meetings</h2>
+	<p>TODO: query meeting, format each result in table with an edit and delete button</p>
 	<br>
-	<h2>My Profile</h2>
-	<p>View your student information and enrollment history.</p>
-	<br>
-	<h2>My Advisor</h2>
-	<p>View the name, department, and contact details of your assigned advisor.</p>
-	<br>
-	<h2>Requirements</h2>
-	<p>View the courses required to fulfill all of your graduation requirements, including LLC electives, majors, and minors.</p>
-	<br>
-	<h2>List of Courses</h2>
-	<p>View the list of courses available in the upcoming registration period.</p>
 </div>
 
 </div>

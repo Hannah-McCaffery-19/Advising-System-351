@@ -64,21 +64,16 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Information Portal</h1>
+	<h1 class="page_name">Evaluation Portal</h1>
 	<h1>Overview</h1>
-	<p>Your personal profile and records can be viewed here, as well as information relevant to the advising and enrollment process. See below for specific page functions.</p>
+	<p>In order to gauge how on track you are to graduate, an evaluation can be performed which will weigh GPA, courses taken vs still needed, and intended graduation year. You will receive a letter grade result for the evaluation ranging from A-D, and a high grade can exempt you from needing to meet with your advisor to get your Alternate PIN.</p>
 	<br>
-	<h2>My Profile</h2>
-	<p>View your student information and enrollment history.</p>
+	<h2>Generate Evaluation</h2>
+	<p>Create a new evaluation, which will be logged and stored. An evaluation must be done in the current term to qualify for meeting exemption.</p>
 	<br>
-	<h2>My Advisor</h2>
-	<p>View the name, department, and contact details of your assigned advisor.</p>
+	<h2>View Evaluations</h2>
+	<p>View all generated evaluations for your account, including those done by faculty.</p>
 	<br>
-	<h2>Requirements</h2>
-	<p>View the courses required to fulfill all of your graduation requirements, including LLC electives, majors, and minors.</p>
-	<br>
-	<h2>List of Courses</h2>
-	<p>View the list of courses available in the upcoming registration period.</p>
 </div>
 
 </div>

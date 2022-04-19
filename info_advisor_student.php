@@ -18,7 +18,6 @@ echo '
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-
 <body>
 <div class="body_box">
 <table class="hdr_table" cellpadding="0" cellspacing="0" >
@@ -29,8 +28,8 @@ echo '
 			</div>
 		</td>
 		<td class="hdr_title">
-			<a href="home_faculty.php"><h1>Advising System</h1></a>
-			<h2>Faculty Portal</h2>
+			<a href="home_student.php"><h1>Advising System</h1></a>
+			<h2>Student Portal</h2>
 			<p>Christopher Newport University</p>
 		</td>
 		<td class="hdr_login">
@@ -51,59 +50,56 @@ echo '
 
 <div class="sidenav">
 	<br>
-	<a href="home_faculty.php"><h3>Home</h3></a>
+	<a href="home_student.php"><h3>Home</h3></a>
 	<img class="navline" src="images/divider.png">
-	<a href="info_P_faculty.php"><h3>Information</h3></a>
-	<a href="info_profile_faculty.php"><p>My Profile</p></a>
-	<a href="home_faculty.php"><p>My Advisees</p></a>
-	<a href="home_faculty.php"><p>List of Courses</p></a>
+	<a href="info_P_student.php"><h3>Information</h3></a>
+	<a href="info_profile_student.php"><p>My Profile</p></a>
+	<a href="info_advisor_student.php"><p>My Advisor</p></a>
+	<a href="home_student.php"><p>Requirements</p></a>
+	<a href="home_student.php"><p>List of Courses</p></a>
 	<img class="navline" src="images/divider.png">
-	<a href="home_faculty.php"><h3>Meeting</h3></a>
-	<a href="home_faculty.php"><p>Schedule Meeting</p></a>
-	<a href="home_faculty.php"><p>View Meetings</p></a>
+	<a href="home_student.php"><h3>Meeting</h3></a>
+	<a href="home_student.php"><p>Schedule Meeting</p></a>
+	<a href="home_student.php"><p>View Meetings</p></a>
 	<img class="navline" src="images/divider.png">
-	<a href="home_faculty.php"><h3>Evaluation</h3></a>
-	<a href="home_faculty.php"><p>Generate Evaluation</p></a>
-	<a href="home_faculty.php"><p>View Evaluations</p></a>
+	<a href="home_student.php"><h3>Evaluation</h3></a>
+	<a href="home_student.php"><p>Generate Evaluation</p></a>
+	<a href="home_student.php"><p>View Evaluations</p></a>
 	<img class="navline" src="images/divider.png">
-	<a href="home_faculty.php"><h3>Contact</h3></a>
+	<a href="home_student.php"><h3>Contact</h3></a>
 	<br><br>
 </div>
 
 <div class="content">
-	<h1 class="page_name">My Profile</h1>
-	<h2>Personal Information</h2>
+	<h1 class="page_name">Advisor Profile</h1>
+	<h2>Advisor Information</h2>';
+	
+	$advisorID = $_SESSION['advisor'];
+	$query1 = "SELECT * FROM faculty WHERE facultyID = '$advisorID'";
+	$result1 = mysqli_query($connect, $query1);
+	$advisor = mysqli_fetch_assoc($result1);
+	
+	echo '
 	<table class="info_table">
 	<tr>
 		<th><p>Name:</p></th>
-		<td><p>'; echo $_SESSION['firstname']; echo' '; echo $_SESSION['lastname']; echo '</p></td>
-	</tr>
-	<tr>
-		<th><p>CNU ID:</p></th>
-		<td><p>'; echo $_SESSION['username']; echo '</p></td>
+		<td><p>'; echo $advisor['firstName']; echo' '; echo $advisor['lastName']; echo '</p></td>
 	</tr>
 	<tr>
 		<th><p>Email:</p></th>
-		<td><p>'; echo $_SESSION['email']; echo '</p></td>
-	</tr>';
-	
-	$username = $_SESSION['username'];
-	$query1 = "SELECT * FROM faculty WHERE facultyID = '$username'";
-	$result1 = mysqli_query($connect, $query1);
-	$faculty = mysqli_fetch_assoc($result1);
-	
-	echo '
+		<td><p>'; echo $advisor['facultyEmail']; echo '</p></td>
+	</tr>
 	<tr>
 		<th><p>Phone:</p></th>
-		<td><p>'; echo $faculty['facultyPhone']; echo '</p></td>
+		<td><p>'; echo $advisor['facultyPhone']; echo '</p></td>
 	</tr>
 	<tr>
 		<th><p>Office:</p></th>
-		<td><p>'; echo $faculty['office']; echo '</p></td>
+		<td><p>'; echo $advisor['office']; echo '</p></td>
 	</tr>
 	<tr>
 		<th><p>Department:</p></th>
-		<td><p>'; echo $faculty['department_fk_dept']; echo '</p></td>
+		<td><p>'; echo $advisor['department_fk_dept']; echo '</p></td>
 	</tr>
 	</table>
 	<br><br>

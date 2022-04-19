@@ -80,7 +80,7 @@ echo '
 		<th><p>CNU ID:</p></th>
 		<td><p>'; echo $_SESSION['username']; echo '</p></td>
 	</tr>
-		<tr>
+	<tr>
 		<th><p>Email:</p></th>
 		<td><p>'; echo $_SESSION['email']; echo '</p></td>
 	</tr>';
@@ -91,8 +91,7 @@ echo '
 	$faculty = mysqli_fetch_assoc($result1);
 	
 	echo '
-	</tr>
-		<tr>
+	<tr>
 		<th><p>Phone:</p></th>
 		<td><p>'; echo $faculty['facultyPhone']; echo '</p></td>
 	</tr>

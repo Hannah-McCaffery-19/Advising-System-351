@@ -54,7 +54,7 @@ echo '
 	<img class="navline" src="images/divider.png">
 	<a href="info_P_student.php"><h3>Information</h3></a>
 	<a href="info_profile_student.php"><p>My Profile</p></a>
-	<a href="home_student.php"><p>My Advisor</p></a>
+	<a href="info_advisor_student.php"><p>My Advisor</p></a>
 	<a href="home_student.php"><p>Requirements</p></a>
 	<a href="home_student.php"><p>List of Courses</p></a>
 	<img class="navline" src="images/divider.png">
@@ -82,7 +82,7 @@ echo '
 		<th><p>CNU ID:</p></th>
 		<td><p>'; echo $_SESSION['username']; echo '</p></td>
 	</tr>
-		<tr>
+	<tr>
 		<th><p>Email:</p></th>
 		<td><p>'; echo $_SESSION['email']; echo '</p></td>
 	</tr>';
@@ -93,23 +93,19 @@ echo '
 	$student = mysqli_fetch_assoc($result1);
 	
 	echo '
-	</tr>
-		<tr>
+	<tr>
 		<th><p>Phone:</p></th>
 		<td><p>'; echo $student['studentPhone']; echo '</p></td>
 	</tr>
-	</tr>
-		<tr>
+	<tr>
 		<th><p>Class Standing:</p></th>
 		<td><p>'; echo $student['classStanding']; echo '</p></td>
 	</tr>
-	</tr>
-		<tr>
+	<tr>
 		<th><p>Year Enrolled:</p></th>
 		<td><p>'; echo $student['yearEnrolled']; echo '</p></td>
 	</tr>
-	</tr>
-		<tr>
+	<tr>
 		<th><p>Year Graduating:</p></th>
 		<td><p>'; echo $student['yearGraduating']; echo '</p></td>
 	</tr>

@@ -1,6 +1,6 @@
 <?php
-session_start();
 
+session_start();
 echo '
 <!DOCTYPE html>
 <html lang="en">
@@ -66,13 +66,61 @@ echo '
 <div class="content">
 	<h1 class="page_name">Required Courses</h1>
 	<h2>Liberal Learning Curriculum</h2>
-	<p>TODO: list the LLC fields plus credits needed</p>
+	<p>'; 
+if (($open = fopen("LLCClasses.csv", "r")) !== FALSE) {
+  
+    while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {        
+	echo '<br><h3>';
+	echo $data[0];
+	echo '</h3><br>';
+	
+	  for($j=1; $j<sizeof($data); $j++){
+		  if($j%10 == 0){
+			  echo '<br>';
+		  }
+		  echo $data[$j];
+		  echo '  ';
+	  }
+    }
+  
+    fclose($open);
+  }
+	echo'</p>
 	<br>
-	<h2>Major</h2>
-	<p>TODO: query declared majors for course list</p>
+	<h2>Major</h2> 
+	<form action="info_required_student_major_form.php" method="POST">';
+	echo '
+	<select id="Major" name="Major">
+    <option value="_"></option>';
+	if (($open = fopen("MajorReqs.csv", "r")) !== FALSE) {
+  
+    while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {        
+		echo "<option value= ". $data[0].">".$data[0]."</option>"; 
+	}
+	
+    fclose($open);
+  }
+  echo '</select>
+  <input type="submit">
+  </form>
 	<br>
 	<h2>Minor</h2>
-	<p>TODO: query declared minors for course list</p>
+	<form action="info_required_student_major_form.php" method="POST">';
+	echo '
+	<select id="Minor" name="Minor">
+    <option value="_"></option>';
+	if (($open = fopen("MinorReqs.csv", "r")) !== FALSE) {
+  
+    while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {        
+		echo "<option value= ". $data[0].">".$data[0]."</option>"; 
+	}
+	
+    fclose($open);
+  }
+  echo '</select>
+  <input type="submit">
+  </form>';
+  echo '
 	<br>
 </div>
 

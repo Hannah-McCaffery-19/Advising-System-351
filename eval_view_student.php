@@ -66,7 +66,20 @@ echo '
 <div class="content">
 	<h1 class="page_name">View Evaluations</h1>
 	<h2>Created Evaluations</h2>
-	<p>TODO: query evaluations, format each result in table</p>
+	<table class="eval_table">
+	<tr>
+		<td><h3>Evaluation Name</h3></td>
+		<td><h3>Date Created</h3></td>
+	</tr>
+	<tr>
+		<td><a href="view_first_evaluation.html">First Evaluation</a></td>
+		<td>4/17/22</td>
+	</tr>	
+	<tr>
+		<td><a href="view_secconf_evaluation.html">CompSci+InfoSci+minorInLeadership</a></td>
+		<td>4/19/22</td>
+	</tr>	
+	</table>
 	<br>
 </div>
 

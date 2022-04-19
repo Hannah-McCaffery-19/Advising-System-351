@@ -1,0 +1,20 @@
+=== Insert Commands to Create Test Data SQL Script 3.0 ===
+
+TO USE: in phpMyAdmin, select the appropriate table from the side nav,
+go to 'SQL' tab at the top, clear suggested code, paste, and hit Go
+
+
+--- Availability ---
+
+INSERT INTO `availability` (`facultyID_fk_avail`, `day`, `availabilityStart`, `availabilityEnd`) VALUES 
+('00912116', 'Monday', '12:00', '12:30'),
+('00912116', 'Monday', '14:00', '15:00'),
+('00912116', 'Tuesday', '11:00', '12:00'),
+('00912116', 'Tuesday', '12:30', '13:30'),
+('00912116', 'Tuesday', '16:00', '16:30'),
+('00912116', 'Wednesday', '12:00', '12:30'),
+('00912116', 'Wednesday', '14:00', '15:00'),
+('00912116', 'Thursday', '11:00', '12:00'),
+('00912116', 'Thursday', '12:30', '13:30'),
+('00912116', 'Thursday', '16:00', '16:30'),
+('00912116', 'Friday', '12:00', '12:30');

@@ -1,0 +1,83 @@
+=== Create Meeting (as a student) ===
+
+--- PHP Setup ---
+
+<?php
+session_start();
+
+$DATABASE_HOST = 'localhost';
+$DATABASE_USER = 'root';
+$DATABASE_PASS = '';
+$DATABASE_NAME = 'mydb';
+
+$connect = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+
+echo '
+
+--- ^ paste at the top of the file ---
+
+You will need entries in the Availability table, so here is some test data:
+
+--- Availability Data ---
+
+INSERT INTO `availability` (`facultyID_fk_avail`, `day`, `availabilityStart`, `availabilityEnd`) VALUES 
+('00912116', 'Monday', '12:00', '12:30'),
+('00912116', 'Monday', '14:00', '15:00'),
+('00912116', 'Tuesday', '11:00', '12:00'),
+('00912116', 'Tuesday', '12:30', '13:30'),
+('00912116', 'Tuesday', '16:00', '16:30'),
+('00912116', 'Wednesday', '12:00', '12:30'),
+('00912116', 'Wednesday', '14:00', '15:00'),
+('00912116', 'Thursday', '11:00', '12:00'),
+('00912116', 'Thursday', '12:30', '13:30'),
+('00912116', 'Thursday', '16:00', '16:30'),
+('00912116', 'Friday', '12:00', '12:30');
+
+--- ^ TO USE --- 
+in phpMyAdmin, select the Availability table from the side nav,
+go to 'SQL' tab at the top, clear suggested code, paste, and hit Go
+
+
+A student is only able to create a meeting with their own advisor,
+and their advisor's ID is stored as a session variable upon logging in
+($_SESSION['advisor']) so there only needs to be an initial query for each
+day of the week that pulls from the Availability table with advisor as the key.
+This is done to display the advisor's availability to the student.
+
+--- PHP Needed for sure ---
+
+$advisorID = $_SESSION['advisor'];
+$query = "SELECT * FROM availability WHERE facultyID_fk_avail = '$advisorID' AND day = 'Monday'";
+mysqli_multi_query($connect, $query);
+
+do {
+	if ($result = mysqli_store_result($connect)) {
+		while ($available = mysqli_fetch_row($result)) {
+			
+			**YOUR CODE HERE**
+		
+		}
+	}
+} 
+while (mysqli_next_result($connect));
+
+--- ^ repeat for EACH day of the week (mon-fri) ---
+
+The inner while loop will pull up the advisor's availability on that selected
+day, one entry at a time. The start time can be accessed with $available[2]
+and the end time likewise is $available[3]. For an example of how to format
+output from a repeated query, look at what I did in info_profile_student.php.
+
+All that is left to do is to create a form using HTML (see the login form in
+index.html for an example) where the student selects a location (should be
+office or online), a start time plus a meeting duration (10, 15, 20, or 30 minutes)
+create a short bit of php to do the math from those two to calculate the
+end time, and include a text box for the student to add notes. Use php to
+generate a random ID for the meetingID (rand(100000, 999999);).
+studentID_fk_meet should be passed as the session username ($_SESSION['username'];)
+facultyID_fk_meet should be passed as the session advisor ($_SESSION['advisor'];)
+Refer to the Meeting table to make sure everything is properly named and set.
+This form should submit the data to the Meeting table and append it as a new row.
+
+
+

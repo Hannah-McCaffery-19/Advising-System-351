@@ -112,12 +112,81 @@ echo '
 	<tr>
 		<th><p>Monday:</p></th>
 		<td><p>';
+		echo '&emsp;';
 		$query = "SELECT * FROM availability WHERE facultyID_fk_avail = '$advisorID' AND day = 'Monday'";
 		mysqli_multi_query($connect, $query);
 		do {
 			if ($result = mysqli_store_result($connect)) {
 				while ($available = mysqli_fetch_row($result)) {				
-					echo $available[2]; echo '-'; echo $available[3]; echo ', ';		
+					echo substr($available[2], 0, -3); echo '-'; echo substr($available[3], 0, -3); echo '&emsp;';		
+				}
+			}
+		} 
+		while (mysqli_next_result($connect));
+
+		echo '</p></td>
+	</tr>
+	<tr>
+		<th><p>Tuesday:</p></th>
+		<td><p>';
+		echo '&emsp;';
+		$query = "SELECT * FROM availability WHERE facultyID_fk_avail = '$advisorID' AND day = 'Tuesday'";
+		mysqli_multi_query($connect, $query);
+		do {
+			if ($result = mysqli_store_result($connect)) {
+				while ($available = mysqli_fetch_row($result)) {				
+					echo substr($available[2], 0, -3); echo '-'; echo substr($available[3], 0, -3); echo '&emsp;';		
+				}
+			}
+		} 
+		while (mysqli_next_result($connect));
+
+		echo '</p></td>
+	</tr>
+	<tr>
+		<th><p>Wednesday:</p></th>
+		<td><p>';
+		echo '&emsp;';
+		$query = "SELECT * FROM availability WHERE facultyID_fk_avail = '$advisorID' AND day = 'Wednesday'";
+		mysqli_multi_query($connect, $query);
+		do {
+			if ($result = mysqli_store_result($connect)) {
+				while ($available = mysqli_fetch_row($result)) {				
+					echo substr($available[2], 0, -3); echo '-'; echo substr($available[3], 0, -3); echo '&emsp;';
+				}
+			}
+		} 
+		while (mysqli_next_result($connect));
+
+		echo '</p></td>
+	</tr>
+	<tr>
+		<th><p>Thursday:</p></th>
+		<td><p>';
+		echo '&emsp;';
+		$query = "SELECT * FROM availability WHERE facultyID_fk_avail = '$advisorID' AND day = 'Thursday'";
+		mysqli_multi_query($connect, $query);
+		do {
+			if ($result = mysqli_store_result($connect)) {
+				while ($available = mysqli_fetch_row($result)) {				
+					echo substr($available[2], 0, -3); echo '-'; echo substr($available[3], 0, -3); echo '&emsp;';
+				}
+			}
+		} 
+		while (mysqli_next_result($connect));
+
+		echo '</p></td>
+	</tr>
+	<tr>
+		<th><p>Friday:</p></th>
+		<td><p>';
+		echo '&emsp;';
+		$query = "SELECT * FROM availability WHERE facultyID_fk_avail = '$advisorID' AND day = 'Friday'";
+		mysqli_multi_query($connect, $query);
+		do {
+			if ($result = mysqli_store_result($connect)) {
+				while ($available = mysqli_fetch_row($result)) {				
+					echo substr($available[2], 0, -3); echo '-'; echo substr($available[3], 0, -3); echo '&emsp;';
 				}
 			}
 		} 
@@ -126,7 +195,7 @@ echo '
 		echo '</p></td>
 	</tr>
 	</table>
-	
+	<br><br><br>
 </div>
 
 </div>

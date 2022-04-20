@@ -418,6 +418,35 @@ INSERT INTO `availability` (`facultyID_fk_avail`, `day`, `availabilityStart`, `a
 ('00912116', 'Friday', '12:00', '12:30');
 
 
+
+INSERT INTO `majors` (`majorName`, `deptName_fk_maj`, 
+`requiredClasses`, `electiveClasses`) VALUES 
+('Information Science', 'Physics, Computer Science and Engineering', 
+'CPSC150 CPSC150L CPSC250 CPSC250L MATH125 ACCT200 ECON201 ECON202 BUSN303 PSYC202 CPSC445W CPSC215 CPSC216 CPSC335 CPSC350 CPSC351 CPSC440 CPEN371W', 'MATH135 MATH140 MATH148 MATH235 MATH260 CPSC336 CPSC428 CPSC429 CPSC255 CPSC280 CPSC480 BUSN305 CPSC336 CPSC441');
+
+
+
+INSERT INTO `minors` (`minorName`, `deptName_fk_min`, 
+`requiredClasses`, `electiveClasses`) VALUES 
+('Graphic Design', 'Fine Art and Art History', 
+'FNAR118 FNAR128 FNAR334 FNAR335 FNAR336', NULL), 
+('Computer Science', 'Physics, Computer Science and Engineering', 
+'CPSC150 CPSC150L CPSC250 CPSC250L', NULL);
+
+
+
+INSERT INTO `declared_major` (`studentID_fk_declmaj`, 
+`majorName_fk_declmaj`) VALUES 
+('00973437', 'Information Science');
+
+
+
+INSERT INTO `declared_minor` (`studentID_fk_declmin`, `minorName_fk_declmin`) 
+VALUES ('00973437', 'Graphic Design'), 
+('00973437', 'Computer Science');
+
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

@@ -165,14 +165,13 @@ echo '
 		
 		$query3 = "SELECT * FROM declared_major WHERE studentID_fk_declmaj = '$adviseeID'";
 		mysqli_multi_query($connect, $query3);
-		
-		$count = 0;
+		$count1 = 0;
 		
 		do {
 			if ($result3 = mysqli_store_result($connect)) {
 				while ($major = mysqli_fetch_row($result3)) {
-					$count ++;
-					echo '<tr><th><p>Major '; echo $count; echo':</p></th>';
+					$count1 ++;
+					echo '<tr><th><p>Major '; echo $count1; echo':</p></th>';
 					echo '<td><p>';
 					if (is_null($major[1])) {
 						echo 'Not declared';
@@ -187,11 +186,101 @@ echo '
 		while (mysqli_next_result($connect));
 		
 		
+		$query4 = "SELECT * FROM declared_minor WHERE studentID_fk_declmin = '$adviseeID'";
+		mysqli_multi_query($connect, $query4);
+		$count2 = 0;
+		
+		do {
+			if ($result4 = mysqli_store_result($connect)) {
+				while ($minor = mysqli_fetch_row($result4)) {
+					$count2 ++;
+					echo '<tr><th><p>Minor '; echo $count2; echo':</p></th>';
+					echo '<td><p>';
+					if (is_null($minor[1])) {
+						echo 'Not declared';
+					}
+					else {
+						echo $minor[1];
+					}
+					echo '</p></td></tr>';
+				}
+			}
+		}
+		while (mysqli_next_result($connect));
+		
+		
+		$query5 = "SELECT * FROM records WHERE studentID_fk_rec = '$adviseeID'";
+		mysqli_multi_query($connect, $query5);
+		$courses = array();
+		$gpa = array();
+		
+		do {
+			if ($result5 = mysqli_store_result($connect)) {
+				while ($record = mysqli_fetch_row($result5)) {
+					array_push($courses, $record[2]);
+					if ($record[3] == 'A+')
+						array_push($gpa, 4.0);
+					elseif ($record[3] == 'A')
+						array_push($gpa, 3.7);
+					elseif ($record[3] == 'A-')
+						array_push($gpa, 3.5);
+					elseif ($record[3] == 'B+')
+						array_push($gpa, 3.3);
+					elseif ($record[3] == 'B')
+						array_push($gpa, 3.0);
+					elseif ($record[3] == 'B-')
+						array_push($gpa, 2.7);
+					elseif ($record[3] == 'C+')
+						array_push($gpa, 2.3);
+					elseif ($record[3] == 'C')
+						array_push($gpa, 2.0);
+					elseif ($record[3] == 'C-')
+						array_push($gpa, 1.7);
+					elseif ($record[3] == 'D+')
+						array_push($gpa, 1.3);
+					elseif ($record[3] == 'D')
+						array_push($gpa, 1.0);
+					elseif ($record[3] == 'D-')
+						array_push($gpa, 0.7);
+					elseif ($record[3] == 'F')
+						array_push($gpa, 0.0);
+				}
+			}
+		}
+		while (mysqli_next_result($connect));
+
+		
+		$creditTotal = 0;
+		$count3 = 0;
+		
+		for ($i = 0; $i < count($courses); $i++) {
+			$course = $courses[$i];
+			$query6 = "SELECT SUM(creditHours) AS creditSum FROM general_course_listing WHERE courseID = '$course'";
+			$result6 = mysqli_query($connect, $query6);
+			$credit = mysqli_fetch_assoc($result6);
+			$creditTotal += $credit['creditSum'];
+			$count3 ++;
+		}
+		
+		if ($count3 != 0) {
+			$cumulGPA = (array_sum($gpa))/$count3;
+			$cumulGPA = number_format($cumulGPA, 1, '.', '');
+		}
+		else {
+			$cumulGPA = 0.0;
+		}
+		
 		echo '
+		<tr>
+			<th><p>Credits Earned:</p></th>
+			<td><p>'; echo $creditTotal; echo '</p></td>
+		</tr>
+		<tr>
+			<th><p>Cumulative GPA:</p></th>
+			<td><p>'; echo $cumulGPA; echo '</p></td>
+		</tr>
 		</table>';
 	}
-	
-
 	
 echo '	
 <br><br>

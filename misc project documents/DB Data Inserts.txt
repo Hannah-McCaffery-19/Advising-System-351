@@ -29,10 +29,23 @@ INSERT INTO `student`
 INSERT INTO `majors` (`majorName`, `deptName_fk_maj`, 
 `requiredClasses`, `electiveClasses`) VALUES 
 ('Information Science', 'Physics, Computer Science and Engineering', 
-'CPSC150 CPSC150L CPSC250 CPSC250L MATH125 ACCT200 ECON201 ECON202 BUSN303 PSYC202 CPSC445W CPSC215 CPSC216 CPSC335 CPSC350 CPSC351 CPSC440 CPEN371W', 'MATH135 MATH140 MATH148 MATH235 MATH260 CPSC336 CPSC428 CPSC429 CPSC255 CPSC280 CPSC480 BUSN305 CPSC336 CPSC441')
+'CPSC150 CPSC150L CPSC250 CPSC250L MATH125 ACCT200 ECON201 ECON202 BUSN303 PSYC202 CPSC445W CPSC215 CPSC216 CPSC335 CPSC350 CPSC351 CPSC440 CPEN371W', 'MATH135 MATH140 MATH148 MATH235 MATH260 CPSC336 CPSC428 CPSC429 CPSC255 CPSC280 CPSC480 BUSN305 CPSC336 CPSC441');
 
 --- Declared_Major ---
 
 INSERT INTO `declared_major` (`studentID_fk_declmaj`, 
 `majorName_fk_declmaj`) VALUES 
-('00973437', 'Information Science')
+('00973437', 'Information Science');
+
+--- Minors ---
+INSERT INTO `minors` (`minorName`, `deptName_fk_min`, 
+`requiredClasses`, `electiveClasses`) VALUES 
+('Graphic Design', 'Fine Art and Art History', 
+'FNAR118 FNAR128 FNAR334 FNAR335 FNAR336', NULL), 
+('Computer Science', 'Physics, Computer Science and Engineering', 
+'CPSC150 CPSC150L CPSC250 CPSC250L', NULL);
+
+--- Declared_Minor ---
+INSERT INTO `declared_minor` (`studentID_fk_declmin`, `minorName_fk_declmin`) 
+VALUES ('00973437', 'Graphic Design'), 
+('00973437', 'Computer Science');

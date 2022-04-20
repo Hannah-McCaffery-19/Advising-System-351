@@ -161,8 +161,33 @@ echo '
 		<tr>
 			<th><p>Year Graduating:</p></th>
 			<td><p>'; echo $student['yearGraduating']; echo '</p></td>
-		</tr>
+		</tr>';
 		
+		$query3 = "SELECT * FROM declared_major WHERE studentID_fk_declmaj = '$adviseeID'";
+		mysqli_multi_query($connect, $query3);
+		
+		$count = 0;
+		
+		do {
+			if ($result3 = mysqli_store_result($connect)) {
+				while ($major = mysqli_fetch_row($result3)) {
+					$count ++;
+					echo '<tr><th><p>Major '; echo $count; echo':</p></th>';
+					echo '<td><p>';
+					if (is_null($major[1])) {
+						echo 'Not declared';
+					}
+					else {
+						echo $major[1];
+					}
+					echo '</p></td></tr>';
+				}
+			}
+		}
+		while (mysqli_next_result($connect));
+		
+		
+		echo '
 		</table>';
 	}
 	

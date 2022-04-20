@@ -23,3 +23,16 @@ INSERT INTO `student`
   ('00976378', 'Caitlyn', 'Berryhill', 'M0t0rb1ke', 
   'caitlyn.berryhill.21@cnu.edu', '4343389888', NULL, 
   'Freshman', '2021', '2025', NULL, '00912116');
+
+--- Majors ---
+
+INSERT INTO `majors` (`majorName`, `deptName_fk_maj`, 
+`requiredClasses`, `electiveClasses`) VALUES 
+('Information Science', 'Physics, Computer Science and Engineering', 
+'CPSC150 CPSC150L CPSC250 CPSC250L MATH125 ACCT200 ECON201 ECON202 BUSN303 PSYC202 CPSC445W CPSC215 CPSC216 CPSC335 CPSC350 CPSC351 CPSC440 CPEN371W', 'MATH135 MATH140 MATH148 MATH235 MATH260 CPSC336 CPSC428 CPSC429 CPSC255 CPSC280 CPSC480 BUSN305 CPSC336 CPSC441')
+
+--- Declared_Major ---
+
+INSERT INTO `declared_major` (`studentID_fk_declmaj`, 
+`majorName_fk_declmaj`) VALUES 
+('00973437', 'Information Science')

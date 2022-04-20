@@ -8,6 +8,7 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 
+
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
@@ -359,7 +360,17 @@ VALUES ('Communication', NULL), ('Economics', NULL),
   `alternatePIN`, `advisorID`) 
   VALUES ('00973437','Hannah','McCaffery','Change.19',
   'hannah.mccaffery.19@cnu.edu','8043895708',NULL,
-  'Junior','2019','2023',NULL,'00912116');
+  'Junior','2019','2023',NULL,'00912116'),
+  ('00982800', 'Maddy', 'Jenkins', 'yuria3', 
+  'madelyn.jenkins.19@cnu.edu', '5712238067', NULL, 
+  'Junior', '2019', '2023', NULL, '00912116'), 
+  ('00974556', 'Katie', 'Clements', 'KKdisco500', 
+  'katelyn.clements.20@cnu.edu', '5409038040', NULL, 
+  'Sophomore', '2020', '2024', NULL, '00912116'),
+  ('00976378', 'Caitlyn', 'Berryhill', 'M0t0rb1ke', 
+  'caitlyn.berryhill.21@cnu.edu', '4343389888', NULL, 
+  'Freshman', '2021', '2025', NULL, '00912116');
+
   
   
   
@@ -405,6 +416,35 @@ INSERT INTO `availability` (`facultyID_fk_avail`, `day`, `availabilityStart`, `a
 ('00912116', 'Thursday', '12:30', '13:30'),
 ('00912116', 'Thursday', '16:00', '16:30'),
 ('00912116', 'Friday', '12:00', '12:30');
+
+
+
+INSERT INTO `majors` (`majorName`, `deptName_fk_maj`, 
+`requiredClasses`, `electiveClasses`) VALUES 
+('Information Science', 'Physics, Computer Science and Engineering', 
+'CPSC150 CPSC150L CPSC250 CPSC250L MATH125 ACCT200 ECON201 ECON202 BUSN303 PSYC202 CPSC445W CPSC215 CPSC216 CPSC335 CPSC350 CPSC351 CPSC440 CPEN371W', 'MATH135 MATH140 MATH148 MATH235 MATH260 CPSC336 CPSC428 CPSC429 CPSC255 CPSC280 CPSC480 BUSN305 CPSC336 CPSC441');
+
+
+
+INSERT INTO `minors` (`minorName`, `deptName_fk_min`, 
+`requiredClasses`, `electiveClasses`) VALUES 
+('Graphic Design', 'Fine Art and Art History', 
+'FNAR118 FNAR128 FNAR334 FNAR335 FNAR336', NULL), 
+('Computer Science', 'Physics, Computer Science and Engineering', 
+'CPSC150 CPSC150L CPSC250 CPSC250L', NULL);
+
+
+
+INSERT INTO `declared_major` (`studentID_fk_declmaj`, 
+`majorName_fk_declmaj`) VALUES 
+('00973437', 'Information Science');
+
+
+
+INSERT INTO `declared_minor` (`studentID_fk_declmin`, `minorName_fk_declmin`) 
+VALUES ('00973437', 'Graphic Design'), 
+('00973437', 'Computer Science');
+
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

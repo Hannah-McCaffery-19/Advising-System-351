@@ -103,8 +103,7 @@ echo '
 	</tr>
 	</table>
 	<br><br>';
-	
-	$advisorID = $_SESSION['advisor'];
+
 	
 	echo '
 	<h2>Advisor Availability</h2>

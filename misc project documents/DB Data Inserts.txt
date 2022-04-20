@@ -1,0 +1,51 @@
+=== Insert Commands to Create Test Data SQL Script 3.0 ===
+
+TO USE: in phpMyAdmin, select the appropriate table from the side nav,
+go to 'SQL' tab at the top, clear suggested code, paste, and hit Go
+
+
+--- Student ---
+
+INSERT INTO `student`
+  (`studentID`, `firstName`, `lastName`, `password`, 
+  `studentEmail`, `studentPhone`, `studentAddress`, 
+  `classStanding`, `yearEnrolled`, `yearGraduating`, 
+  `alternatePIN`, `advisorID`) 
+  VALUES ('00973437','Hannah','McCaffery','Change.19',
+  'hannah.mccaffery.19@cnu.edu','8043895708',NULL,
+  'Junior','2019','2023',NULL,'00912116'),
+  ('00982800', 'Maddy', 'Jenkins', 'yuria3', 
+  'madelyn.jenkins.19@cnu.edu', '5712238067', NULL, 
+  'Junior', '2019', '2023', NULL, '00912116'), 
+  ('00974556', 'Katie', 'Clements', 'KKdisco500', 
+  'katelyn.clements.20@cnu.edu', '5409038040', NULL, 
+  'Sophomore', '2020', '2024', NULL, '00912116'),
+  ('00976378', 'Caitlyn', 'Berryhill', 'M0t0rb1ke', 
+  'caitlyn.berryhill.21@cnu.edu', '4343389888', NULL, 
+  'Freshman', '2021', '2025', NULL, '00912116');
+
+--- Majors ---
+
+INSERT INTO `majors` (`majorName`, `deptName_fk_maj`, 
+`requiredClasses`, `electiveClasses`) VALUES 
+('Information Science', 'Physics, Computer Science and Engineering', 
+'CPSC150 CPSC150L CPSC250 CPSC250L MATH125 ACCT200 ECON201 ECON202 BUSN303 PSYC202 CPSC445W CPSC215 CPSC216 CPSC335 CPSC350 CPSC351 CPSC440 CPEN371W', 'MATH135 MATH140 MATH148 MATH235 MATH260 CPSC336 CPSC428 CPSC429 CPSC255 CPSC280 CPSC480 BUSN305 CPSC336 CPSC441');
+
+--- Declared_Major ---
+
+INSERT INTO `declared_major` (`studentID_fk_declmaj`, 
+`majorName_fk_declmaj`) VALUES 
+('00973437', 'Information Science');
+
+--- Minors ---
+INSERT INTO `minors` (`minorName`, `deptName_fk_min`, 
+`requiredClasses`, `electiveClasses`) VALUES 
+('Graphic Design', 'Fine Art and Art History', 
+'FNAR118 FNAR128 FNAR334 FNAR335 FNAR336', NULL), 
+('Computer Science', 'Physics, Computer Science and Engineering', 
+'CPSC150 CPSC150L CPSC250 CPSC250L', NULL);
+
+--- Declared_Minor ---
+INSERT INTO `declared_minor` (`studentID_fk_declmin`, `minorName_fk_declmin`) 
+VALUES ('00973437', 'Graphic Design'), 
+('00973437', 'Computer Science');

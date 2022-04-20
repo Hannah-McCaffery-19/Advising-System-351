@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+$DATABASE_HOST = 'localhost';
+$DATABASE_USER = 'root';
+$DATABASE_PASS = '';
+$DATABASE_NAME = 'mydb';
+
+$connect = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+
 echo '
 <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +73,39 @@ echo '
 <div class="content">
 	<h1 class="page_name">Advisee Information</h1>
 	<h2>List of Advisees</h2>
-	<p>TODO: table of all students assigned to faculty member</p>
+	<table class="credit_table">
+	<tr>
+    <th width="180px"><p>Name</p></th>
+    <th width="100px"><p>Student ID</p></th>
+	<th width="250px"><p>Email</p></th>
+    <th width="80px"><p>Year</p></th>
+    <th width="80px"><p>Alt PIN</p></th>
+    </tr>';
+	
+	$username = $_SESSION['username'];
+	
+	$query1 = "SELECT firstName, lastName, studentID, studentEmail, classStanding, alternatePIN FROM student WHERE advisorID = '$username'";
+	mysqli_multi_query($connect, $query1);
+	
+	do {
+		if ($result = mysqli_store_result($connect)) {
+			while ($student = mysqli_fetch_row($result)) {
+				echo '<tr><td><p>'; echo $student[0]; echo ' '; echo $student[1];
+				echo '</p></td><td><p>';
+				echo $student[2];
+				echo '</p></td><td><p>';
+				echo $student[3];
+				echo '</p></td><td><p>';
+				echo $student[4];
+				echo '</p></td><td><p>';
+				echo $student[5];
+				echo '</p></td></tr>';
+			}
+		}
+	}
+	while (mysqli_next_result($connect));
+	echo '
+	</table>
 	<br>
 	<h2>Detailed Advisee Information</h2>
 	<p>TODO: query more detailed info for a chosen student</p>

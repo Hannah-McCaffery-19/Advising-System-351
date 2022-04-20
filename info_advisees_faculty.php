@@ -76,10 +76,10 @@ echo '
 	<table class="credit_table">
 	<tr>
     <th width="180px"><p>Name</p></th>
-    <th width="100px"><p>Student ID</p></th>
+    <th width="80px"><p>Student ID</p></th>
 	<th width="250px"><p>Email</p></th>
     <th width="80px"><p>Year</p></th>
-    <th width="80px"><p>Alt PIN</p></th>
+    <th width="85px"><p>Alt PIN</p></th>
     </tr>';
 	
 	$username = $_SESSION['username'];
@@ -89,16 +89,19 @@ echo '
 	
 	do {
 		if ($result = mysqli_store_result($connect)) {
-			while ($student = mysqli_fetch_row($result)) {
-				echo '<tr><td><p>'; echo $student[0]; echo ' '; echo $student[1];
+			while ($advisee = mysqli_fetch_row($result)) {
+				echo '<tr><td><p>'; echo $advisee[0]; echo ' '; echo $advisee[1];
 				echo '</p></td><td><p>';
-				echo $student[2];
+				echo $advisee[2];
 				echo '</p></td><td><p>';
-				echo $student[3];
+				echo $advisee[3];
 				echo '</p></td><td><p>';
-				echo $student[4];
+				echo $advisee[4];
 				echo '</p></td><td><p>';
-				echo $student[5];
+				if (is_null($advisee[5]))
+					echo 'Not received';
+				else
+					echo $advisee[5];
 				echo '</p></td></tr>';
 			}
 		}
@@ -108,8 +111,65 @@ echo '
 	</table>
 	<br>
 	<h2>Detailed Advisee Information</h2>
-	<p>TODO: query more detailed info for a chosen student</p>
-	<br>
+	<form id="advisee" action="" method="post" class="">
+		<label for="adviseeID" style="font-size:14px;">Enter Student ID: </label>
+		<input type="text" name="adviseeID" placeholder=" 00000000 " id="adviseeID" length="8" size="7" required>
+		<input style="margin-left:10px;" type="submit" value="Search" name="Search">
+	</form>
+	<br><br>';
+	
+	if(isset($_POST['Search'])) {
+		$adviseeID = $_POST['adviseeID'];
+		$query2 = "SELECT * FROM student WHERE studentID = '$adviseeID'";
+		$result2 = mysqli_query($connect, $query2);
+		$student = mysqli_fetch_assoc($result2);
+		echo '
+		<table align="center" class="info_table">
+		<tr>
+			<th min-width="120px"><p>First Name:</p></th>
+			<td><p>'; echo $student['firstName']; echo '</p></td>
+		</tr>
+		<tr>
+			<th><p>Last Name:</p></th>
+			<td><p>'; echo $student['lastName']; echo '</p></td>
+		</tr>
+		<tr>
+			<th><p>Student ID:</p></th>
+			<td><p>'; echo $student['studentID']; echo '</p></td>
+		</tr>
+		<tr>
+			<th><p>Alternate PIN:</p></th>
+			<td><p>';
+				if (is_null($student['alternatePIN']))
+						echo 'Not received';
+					else
+						echo $student['alternatePIN'];
+				echo '</p></td>
+		</tr>
+		<tr>
+			<th><p>Email Address:</p></th>
+			<td><p>'; echo $student['studentEmail']; echo '</p></td>
+		</tr>
+		<tr>
+			<th><p>Class Standing:</p></th>
+			<td><p>'; echo $student['classStanding']; echo '</p></td>
+		</tr>
+		<tr>
+			<th><p>Year Enrolled:</p></th>
+			<td><p>'; echo $student['yearEnrolled']; echo '</p></td>
+		</tr>
+		<tr>
+			<th><p>Year Graduating:</p></th>
+			<td><p>'; echo $student['yearGraduating']; echo '</p></td>
+		</tr>
+		
+		</table>';
+	}
+	
+
+	
+echo '	
+<br><br>
 </div>
 
 </div>

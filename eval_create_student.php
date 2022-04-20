@@ -66,7 +66,91 @@ echo '
 <div class="content">
 	<h1 class="page_name">Generate Evaluation</h1>
 	<h2>Create A New Evaluation</h2>
-	<p>TODO: Confirmation button that will query relevant tables to create evaluation. NOTE: a lot of this querying is already done in the student info profile</p>
+	'; echo '<action="eval_view_student.php" method="POST"> Major 1:
+	<select id="Major1" name="Major1">
+    <option value="_"></option>';
+	if (($open = fopen("MajorReqs.csv", "r")) !== FALSE) {
+  
+    while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {        
+		echo "<option value= ". $data[0].">".$data[0]."</option>"; 
+	}
+	
+    fclose($open);
+  }
+  echo '</select><br> Major 2:
+  
+  <select id="Major2" name="Major2">
+    <option value="_"></option>';
+	if (($open = fopen("MajorReqs.csv", "r")) !== FALSE) {
+  
+    while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {        
+		echo "<option value= ". $data[0].">".$data[0]."</option>"; 
+	}
+	
+    fclose($open);
+  }
+  echo '</select><br> Major 3:
+  
+  <select id="Major3" name="Major3">
+    <option value="_"></option>';
+	if (($open = fopen("MajorReqs.csv", "r")) !== FALSE) {
+  
+    while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {        
+		echo "<option value= ". $data[0].">".$data[0]."</option>"; 
+	}
+	
+    fclose($open);
+  }
+  echo '</select><br><br> Minor1:
+  <select id="Minor1" name="Minor1">
+    <option value="_"></option>';
+	if (($open = fopen("MinorReqs.csv", "r")) !== FALSE) {
+  
+    while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {        
+		echo "<option value= ". $data[0].">".$data[0]."</option>"; 
+	}
+	
+    fclose($open);
+  }
+  echo '</select><br> Minor 2
+  <select id="Minor2" name="Minor2">
+    <option value="_"></option>';
+	if (($open = fopen("MinorReqs.csv", "r")) !== FALSE) {
+  
+    while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {        
+		echo "<option value= ". $data[0].">".$data[0]."</option>"; 
+	}
+	
+    fclose($open);
+  }
+  echo '</select><br> Minor3:
+  <select id="Minor3" name="Minor3">
+    <option value="_"></option>';
+	if (($open = fopen("MinorReqs.csv", "r")) !== FALSE) {
+  
+    while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {        
+		echo "<option value= ". $data[0].">".$data[0]."</option>"; 
+	}
+	
+    fclose($open);
+  }
+  echo '</select><br> Minor4:
+  <select id="Minor4" name="Minor4">
+    <option value="_"></option>';
+	if (($open = fopen("MajorReqs.csv", "r")) !== FALSE) {
+  
+    while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {        
+		echo "<option value= ". $data[0].">".$data[0]."</option>"; 
+	}
+	
+    fclose($open);
+  }
+  echo '</select>
+  
+  <input type="submit">
+  </form>
+	
+	
 	<br>
 </div>
 

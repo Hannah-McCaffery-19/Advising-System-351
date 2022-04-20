@@ -108,7 +108,54 @@ echo '
 	<tr>
 		<th><p>Year Graduating:</p></th>
 		<td><p>'; echo $student['yearGraduating']; echo '</p></td>
-	</tr>
+	</tr>';
+	
+	$query3 = "SELECT * FROM declared_major WHERE studentID_fk_declmaj = '$username'";
+		mysqli_multi_query($connect, $query3);
+		$count1 = 0;
+		
+		do {
+			if ($result3 = mysqli_store_result($connect)) {
+				while ($major = mysqli_fetch_row($result3)) {
+					$count1 ++;
+					echo '<tr><th><p>Major '; echo $count1; echo':</p></th>';
+					echo '<td><p>';
+					if (is_null($major[1])) {
+						echo 'Not declared';
+					}
+					else {
+						echo $major[1];
+					}
+					echo '</p></td></tr>';
+				}
+			}
+		}
+		while (mysqli_next_result($connect));
+		
+		
+		$query4 = "SELECT * FROM declared_minor WHERE studentID_fk_declmin = '$username'";
+		mysqli_multi_query($connect, $query4);
+		$count2 = 0;
+		
+		do {
+			if ($result4 = mysqli_store_result($connect)) {
+				while ($minor = mysqli_fetch_row($result4)) {
+					$count2 ++;
+					echo '<tr><th><p>Minor '; echo $count2; echo':</p></th>';
+					echo '<td><p>';
+					if (is_null($minor[1])) {
+						echo 'Not declared';
+					}
+					else {
+						echo $minor[1];
+					}
+					echo '</p></td></tr>';
+				}
+			}
+		}
+		while (mysqli_next_result($connect));
+	
+	echo '
 	</table>
 	<br><br>
 	<h2>Enrollment Records</h2>

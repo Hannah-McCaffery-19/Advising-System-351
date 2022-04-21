@@ -88,7 +88,7 @@ if (($open = fopen("LLCClasses.csv", "r")) !== FALSE) {
 	echo'</p>
 	<br>
 	<h2>Major</h2> 
-	<form action="info_required_student_major_form.php" method="POST">';
+	<form action="" method="POST">';
 	echo '
 	<select id="Major" name="Major">
     <option value="_"></option>';
@@ -100,13 +100,124 @@ if (($open = fopen("LLCClasses.csv", "r")) !== FALSE) {
 	
     fclose($open);
   }
+  
   echo '</select>
   <input type="submit">
-  </form>
-	<br>
+  </form>';
+  if(isset($_POST['Major'])){
+    
+	if (($open = fopen("MajorReqs.csv", "r")) !== FALSE) {
+		echo "<h2>".$_POST['Major'].":</h2>";
+  
+		while (($data = fgetcsv($open, 1000, ",")) !== FALSE) { 
+			if($data[0] == $_POST['Major']){
+				$i = 1;
+				echo "<h3>Required Calasses:</h3>";
+				while ($data[$i] != '') {
+					if($i %10 == 0){
+						echo "<br>";
+					}
+					echo $data[$i]."  ";
+					$i+=1;
+				}
+			}
+		}
+		fclose($open);
+	}
+	
+	if (($open = fopen("MajorElectives.csv", "r")) !== FALSE) {
+  
+		while (($data = fgetcsv($open, 1100, ",")) !== FALSE) { 
+			if($data[0] == $_POST['Major']){
+				$i = 1;
+				echo "<h3>Required Elective Classes:</h3><br>";
+				while ($data[$i] != '') {
+					if($i %12 == 0){
+						echo "<br>";
+					}
+					if($data[$i] == "||"){
+						$i += 1;
+						$j = 1;
+						echo "<br><h4>complete one of the following:</h4>";
+						while($data[$i] != "\||"){
+							if($j%12==0){
+								echo "<br>";
+							}
+							echo $data[$i]."  ";
+							$i += 1;
+							$j +=1;
+						}
+						$i += 1;
+					}
+					elseif($data[$i] =="|&") {
+						$i+= 1;
+						$j =1;
+						echo "<br><h4>complete one of the following catagories:</h4>";
+						while($data[$i] != "\&|"){
+							if($j%12==0){
+								echo "<br>";
+							}
+							if($data[$i] == "|"){
+								echo "<h5> or </h5>";
+								$i += 1;
+							}
+							echo $data[$i]." ";
+							$i += 1;
+							$j += 1;
+						}
+						$i += 1;
+					}
+					elseif(substr($data[$i], 0, 1) == 's') {
+						echo "<br><h4>select ".substr($data[$i], 1)." courses from the following list: </h4>";
+						$i += 1;
+						$j = 1;
+						while (substr($data[$i], 0, 2) != "\s") {
+							if($j%12==0){
+								echo "<br>";
+							}
+							echo $data[$i]."  ";
+							$i += 1;
+							$j += 1;
+						}
+						$i += 1;
+					}
+					elseif(substr($data[$i], 0, 1) == "n") {
+						if(substr($data[$i], 4, 1) == "o"){
+							echo "<br><h4>complete ".substr($data[$i], 1, 2)." credit hours from the following list only ".substr($data[$i], 5, 1)."can be ".substr($data[$i], 7)." level: </h4>";
+						}
+						elseif(substr($data[$i], 3, 1) == "o"){
+							echo "<br><h4>complete ".substr($data[$i], 1, 2)." credit hours from the following list only ". substr($data[$i], 4, 1)."can be ".substr($data[$i], 6)+" level: </h4>";
+						}
+						else{
+							echo "<br><h4>complete ".substr($data[$i], 1, 2)." credit hours from the following list :</h4>";
+						}
+						$i += 1;
+						$j =1;
+						while (substr($data[$i], 0, 2) != '\n') {
+							if($j%12==0){
+								echo "<br>";
+							}
+							echo " ".$data[$i];
+							$i += 1;
+							
+							
+						}
+						$i += 1;
+					}
+					else{
+						echo $data[$i]."  ";
+						$i+=1;
+					}
+				}
+			}
+		}
+		fclose($open);
+	}
+}
+	
+	echo '<br>
 	<h2>Minor</h2>
-	<form action="info_required_student_major_form.php" method="POST">';
-	echo '
+	<form action="" method="POST">
 	<select id="Minor" name="Minor">
     <option value="_"></option>';
 	if (($open = fopen("MinorReqs.csv", "r")) !== FALSE) {
@@ -120,8 +231,117 @@ if (($open = fopen("LLCClasses.csv", "r")) !== FALSE) {
   echo '</select>
   <input type="submit">
   </form>';
+  if(isset($_POST['Minor'])){
+    
+	if (($open = fopen("MinorReqs.csv", "r")) !== FALSE) {
+		echo "<h2>".$_POST['Minor'].":</h2>";
+  
+		while (($data = fgetcsv($open, 1000, ",")) !== FALSE) { 
+			if($data[0] == $_POST['Minor']){
+				$i = 1;
+				echo "<h3>Required Calasses:</h3>";
+				while ($data[$i] != '') {
+					if($i %10 == 0){
+						echo "<br>";
+					}
+					echo $data[$i]."  ";
+					$i+=1;
+				}
+			}
+		}
+		fclose($open);
+	}
+	
+	if (($open = fopen("MinorElectives.csv", "r")) !== FALSE) {
+  
+		while (($data = fgetcsv($open, 1000, ",")) !== FALSE) { 
+			if($data[0] == $_POST['Minor']){
+				$i = 1;
+				echo "<h3>Required Elective Calasses:</h3><br>";
+				while ($data[$i] != "") {
+					if($i %12 == 0){
+						echo "<br>";
+					}
+					if($data[$i] == "||"){
+						$i += 1;
+						$j = 1;
+						echo "<br><h4>complete one of the following:</h4>";
+						while($data[$i] != "\||"){
+							if($j%12==0){
+								echo "<br>";
+							}
+							echo $data[$i]."  ";
+							$i += 1;
+							$j +=1;
+						}
+						$i += 1;
+					}
+					elseif($data[$i] =="|&") {
+						$i+= 1;
+						$j =1;
+						echo "<br><h4>complete one of the following catagories:</h4>";
+						while($data[$i] != "\&|"){
+							if($j%12==0){
+								echo "<br>";
+							}
+							if($data[$i] == "|"){
+								echo "<h5> or </h5>";
+								$i += 1;
+							}
+							echo $data[$i]." ";
+							$i += 1;
+							$j += 1;
+						}
+						$i += 1;
+					}
+					elseif(substr($data[$i], 0, 1) == 's') {
+						echo "<br><h4>select ".substr($data[$i], 1)." courses from the following list: </h4>";
+						$i += 1;
+						$j = 1;
+						while (substr($data[$i], 0, 2) != "\s") {
+							if($j%12==0){
+								echo "<br>";
+							}
+							echo $data[$i]."  ";
+							$i += 1;
+							$j += 1;
+						}
+						$i += 1;
+					}
+					elseif(substr($data[$i], 0, 1) == "n") {
+						if(substr($data[$i], 4, 1) == "o"){
+							echo "<br><h4>complete ".substr($data[$i], 1, 2)." credit hours from the following list only ".substr($data[$i], 5, 1)."can be ".substr($data[$i], 7)." level: </h4>";
+						}
+						elseif(substr($data[$i], 3, 1) == "o"){
+							echo "<br><h4>complete ".substr($data[$i], 1, 2)." credit hours from the following list only ". substr($data[$i], 4, 1)."can be ".substr($data[$i], 6)+" level: </h4>";
+						}
+						else{
+							echo "<br><h4>complete ".substr($data[$i], 1, 2)." credit hours from the following list :</h4>";
+						}
+						$i += 1;
+						$j =1;
+						while (substr($data[$i], 0, 2) != '\n') {
+							if($j%12==0){
+								echo "<br>";
+							}
+							echo " ".$data[$i];
+							$i += 1;
+							
+							
+						}
+						$i += 1;
+					}
+					else{
+						echo $data[$i]."  ";
+						$i+=1;
+					}
+				}
+			}
+		}
+		fclose($open);
+	}
+  }
   echo '
-	<br>
 </div>
 
 </div>

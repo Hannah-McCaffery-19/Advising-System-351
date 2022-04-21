@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+$DATABASE_HOST = 'localhost';
+$DATABASE_USER = 'root';
+$DATABASE_PASS = '';
+$DATABASE_NAME = 'mydb';
+
+$connect = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+
 echo '
 <!DOCTYPE html>
 <html lang="en">
@@ -64,13 +71,101 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Schedule A Meeting</h1>
-	<h2>Schedule Meeting</h2>
-	<p>TODO: form that will submit meeting data to the meeting table</p>
-	<br>
-	<h2>Advisor Availability</h2>
-	<p>TODO: query availability table, should be copy/paste from advisor info</p>
-	<br>
+	<h1 class="page_name">Create a Meeting</h1>
+	<h2>My Advisor\'s Availability</h2>
+	
+	<table>
+	<tr>
+	<th>Day</th>
+	<th>Availability Start</th>
+	<th>Availability End</th>
+	</tr>
+	<tr>
+	<td>Monday</td>
+	<td>12:00</td>
+	<td>12:30</td>
+	</tr>
+	<tr>
+	<td>Monday</td>
+	<td>14:00</td>
+	<td>15:00</td>
+	</tr>
+	<tr>
+	<td>Tuesday</td>
+	<td>11:00</td>
+	<td>12:00</td>
+	</tr>
+	<tr>
+	<td>Tuesday</td>
+	<td>12:30</td>
+	<td>13:00</td>
+	</tr>
+	<tr>
+	<td>Tuesday</td>
+	<td>16:00</td>
+	<td>16:30</td>
+	</tr>
+	<tr>
+	<td>Wednesday</td>
+	<td>12:00</td>
+	<td>12:30</td>
+	</tr>
+	<tr>
+	<td>Wednesday</td>
+	<td>14:00</td>
+	<td>15:00</td>
+	</tr>
+	<tr>
+	<td>Thursday</td>
+	<td>11:00</td>
+	<td>12:00</td>
+	</tr>
+	<tr>
+	<td>Thursday</td>
+	<td>12:30</td>
+	<td>13:30</td>
+	</tr>
+	<tr>
+	<td>Thursday</td>
+	<td>16:00</td>
+	<td>16:30</td>
+	</tr>
+	<tr>
+	<td>Friday</td>
+	<td>12:00</td>
+	<td>12:30</td>
+	</tr>
+	</table>
+	<br><br>
+	
+	<h2>Schedule a Meeting</h2>
+	<form id="advisee" action="" method="post" class="req_form">';
+	$meetID = rand(100000, 999999);
+	echo'
+
+	
+	<label for="myDate">Date: </label>
+	<input type="date" name="myDate" id="myDate"  required>
+	<br><br><label for="timeStart">Start Time: </label>
+	<input type="time" name="timeStart" id="timeStart" required>
+	<br><br><label for="timeEnd">End Time: </label>
+	<input type="time" name="timeEnd" id="timeEnd" required>
+	<br><br><label for="myLocation">Location: </label>
+	<input type="select" name="myLocation" id="myLocation" list="location" required>
+	<datalist id="location">
+	<option>Office</option>
+	<option>Virtual</option>
+	</datalist>
+	<br><br><label for="myNotes">Notes: </label><br>
+	<input type="text" name="myNotes" id="myNotes" size="40" style="height:120px;" required>
+	<input type="hidden" name="meetingID" id="meetingID" value="'; echo $meetID; echo '" required>
+	<input type="hidden" name="studentID_fk_meet" id="studentID" value="'; echo $_SESSION['username']; echo '" required>
+	<input type="hidden" name="facultyID_fk_meet" id="facultyID" value="'; echo $_SESSION['advisor']; echo '" required>
+	
+	<br><br><input type="submit" value="Create" name="Create">
+	</form>
+	
+	<br><br><br>
 </div>
 
 </div>

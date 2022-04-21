@@ -1,6 +1,14 @@
 <?php
 
 session_start();
+
+$DATABASE_HOST = 'localhost';
+$DATABASE_USER = 'root';
+$DATABASE_PASS = '';
+$DATABASE_NAME = 'mydb';
+
+$connect = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+
 echo '
 <!DOCTYPE html>
 <html lang="en">
@@ -66,282 +74,145 @@ echo '
 <div class="content">
 	<h1 class="page_name">Required Courses</h1>
 	<h2>Liberal Learning Curriculum</h2>
+	<br>
 	<p>'; 
 if (($open = fopen("LLCClasses.csv", "r")) !== FALSE) {
-  
     while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {        
-	echo '<br><h3>';
+	echo '<h3>';
 	echo $data[0];
 	echo '</h3><br>';
 	
 	  for($j=1; $j<sizeof($data); $j++){
-		  if($j%10 == 0){
-			  echo '<br>';
-		  }
 		  echo $data[$j];
-		  echo '  ';
+		  echo '&emsp;';
 	  }
+	  echo '<br><br>';
     }
   
     fclose($open);
   }
 	echo'</p>
 	<br>
-	<h2>Major</h2> 
-	<form action="" method="POST">';
+	<h2>Degree Requirements</h2> 
+	<form id="degree" action="" method="POST" class="req_form">';
+	
 	echo '
-	<select id="Major" name="Major">
-    <option value="_"></option>';
-	if (($open = fopen("MajorReqs.csv", "r")) !== FALSE) {
-  
-    while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {        
-		echo "<option value= ". $data[0].">".$data[0]."</option>"; 
-	}
+	<label for="Major1">Major 1: </label>
+	<select id="Major1" name="Major1">
+    <option value=""></option>';
+	$query1 = "SELECT majorName FROM majors";
+	mysqli_multi_query($connect, $query1);
 	
-    fclose($open);
-  }
-  
-  echo '</select>
-  <input type="submit">
-  </form>';
-  if(isset($_POST['Major'])){
-    
-	if (($open = fopen("MajorReqs.csv", "r")) !== FALSE) {
-		echo "<h2>".$_POST['Major'].":</h2>";
-  
-		while (($data = fgetcsv($open, 1000, ",")) !== FALSE) { 
-			if($data[0] == $_POST['Major']){
-				$i = 1;
-				echo "<h3>Required Calasses:</h3>";
-				while ($data[$i] != '') {
-					if($i %10 == 0){
-						echo "<br>";
-					}
-					echo $data[$i]."  ";
-					$i+=1;
-				}
+	do {
+		if ($result1 = mysqli_store_result($connect)) {
+			while ($major1 = mysqli_fetch_row($result1)) {
+				echo '<option value= '; echo str_replace(" ", "_", $major1[0]); echo'>'; echo $major1[0]; echo '</option>';
 			}
 		}
-		fclose($open);
 	}
+	while (mysqli_next_result($connect));
 	
-	if (($open = fopen("MajorElectives.csv", "r")) !== FALSE) {
-  
-		while (($data = fgetcsv($open, 1100, ",")) !== FALSE) { 
-			if($data[0] == $_POST['Major']){
-				$i = 1;
-				echo "<h3>Required Elective Classes:</h3><br>";
-				while ($data[$i] != '') {
-					if($i %12 == 0){
-						echo "<br>";
-					}
-					if($data[$i] == "||"){
-						$i += 1;
-						$j = 1;
-						echo "<br><h4>complete one of the following:</h4>";
-						while($data[$i] != "\||"){
-							if($j%12==0){
-								echo "<br>";
-							}
-							echo $data[$i]."  ";
-							$i += 1;
-							$j +=1;
-						}
-						$i += 1;
-					}
-					elseif($data[$i] =="|&") {
-						$i+= 1;
-						$j =1;
-						echo "<br><h4>complete one of the following catagories:</h4>";
-						while($data[$i] != "\&|"){
-							if($j%12==0){
-								echo "<br>";
-							}
-							if($data[$i] == "|"){
-								echo "<h5> or </h5>";
-								$i += 1;
-							}
-							echo $data[$i]." ";
-							$i += 1;
-							$j += 1;
-						}
-						$i += 1;
-					}
-					elseif(substr($data[$i], 0, 1) == 's') {
-						echo "<br><h4>select ".substr($data[$i], 1)." courses from the following list: </h4>";
-						$i += 1;
-						$j = 1;
-						while (substr($data[$i], 0, 2) != "\s") {
-							if($j%12==0){
-								echo "<br>";
-							}
-							echo $data[$i]."  ";
-							$i += 1;
-							$j += 1;
-						}
-						$i += 1;
-					}
-					elseif(substr($data[$i], 0, 1) == "n") {
-						if(substr($data[$i], 4, 1) == "o"){
-							echo "<br><h4>complete ".substr($data[$i], 1, 2)." credit hours from the following list only ".substr($data[$i], 5, 1)."can be ".substr($data[$i], 7)." level: </h4>";
-						}
-						elseif(substr($data[$i], 3, 1) == "o"){
-							echo "<br><h4>complete ".substr($data[$i], 1, 2)." credit hours from the following list only ". substr($data[$i], 4, 1)."can be ".substr($data[$i], 6)+" level: </h4>";
-						}
-						else{
-							echo "<br><h4>complete ".substr($data[$i], 1, 2)." credit hours from the following list :</h4>";
-						}
-						$i += 1;
-						$j =1;
-						while (substr($data[$i], 0, 2) != '\n') {
-							if($j%12==0){
-								echo "<br>";
-							}
-							echo " ".$data[$i];
-							$i += 1;
-							
-							
-						}
-						$i += 1;
-					}
-					else{
-						echo $data[$i]."  ";
-						$i+=1;
-					}
-				}
+	echo '
+	</select><br><br>
+	<label for="Major2">Major 2: </label>
+	<select id="Major2" name="Major2">
+    <option value=""></option>';
+	$query2 = "SELECT majorName FROM majors";
+	mysqli_multi_query($connect, $query2);
+	do {
+		if ($result2 = mysqli_store_result($connect)) {
+			while ($major2 = mysqli_fetch_row($result2)) {
+				echo '<option value= '; echo str_replace(" ", "_", $major2[0]); echo'>'; echo $major2[0]; echo '</option>';
 			}
 		}
-		fclose($open);
 	}
-}
+	while (mysqli_next_result($connect));
 	
-	echo '<br>
-	<h2>Minor</h2>
-	<form action="" method="POST">
-	<select id="Minor" name="Minor">
-    <option value="_"></option>';
-	if (($open = fopen("MinorReqs.csv", "r")) !== FALSE) {
-  
-    while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {        
-		echo "<option value= ". $data[0].">".$data[0]."</option>"; 
-	}
-	
-    fclose($open);
-  }
-  echo '</select>
-  <input type="submit">
-  </form>';
-  if(isset($_POST['Minor'])){
-    
-	if (($open = fopen("MinorReqs.csv", "r")) !== FALSE) {
-		echo "<h2>".$_POST['Minor'].":</h2>";
-  
-		while (($data = fgetcsv($open, 1000, ",")) !== FALSE) { 
-			if($data[0] == $_POST['Minor']){
-				$i = 1;
-				echo "<h3>Required Calasses:</h3>";
-				while ($data[$i] != '') {
-					if($i %10 == 0){
-						echo "<br>";
-					}
-					echo $data[$i]."  ";
-					$i+=1;
-				}
+	echo '
+	</select><br><br>
+	<label for="Minor1">Minor 1: </label>
+	<select id="Minor1" name="Minor1">
+    <option value=""></option>';
+	$query3 = "SELECT minorName FROM minors";
+	mysqli_multi_query($connect, $query3);
+	do {
+		if ($result3 = mysqli_store_result($connect)) {
+			while ($minor1 = mysqli_fetch_row($result3)) {
+				echo '<option value= '; echo str_replace(" ", "_", $minor1[0]); echo'>'; echo $minor1[0]; echo '</option>';
 			}
 		}
-		fclose($open);
 	}
+	while (mysqli_next_result($connect));
 	
-	if (($open = fopen("MinorElectives.csv", "r")) !== FALSE) {
-  
-		while (($data = fgetcsv($open, 1000, ",")) !== FALSE) { 
-			if($data[0] == $_POST['Minor']){
-				$i = 1;
-				echo "<h3>Required Elective Calasses:</h3><br>";
-				while ($data[$i] != "") {
-					if($i %12 == 0){
-						echo "<br>";
-					}
-					if($data[$i] == "||"){
-						$i += 1;
-						$j = 1;
-						echo "<br><h4>complete one of the following:</h4>";
-						while($data[$i] != "\||"){
-							if($j%12==0){
-								echo "<br>";
-							}
-							echo $data[$i]."  ";
-							$i += 1;
-							$j +=1;
-						}
-						$i += 1;
-					}
-					elseif($data[$i] =="|&") {
-						$i+= 1;
-						$j =1;
-						echo "<br><h4>complete one of the following catagories:</h4>";
-						while($data[$i] != "\&|"){
-							if($j%12==0){
-								echo "<br>";
-							}
-							if($data[$i] == "|"){
-								echo "<h5> or </h5>";
-								$i += 1;
-							}
-							echo $data[$i]." ";
-							$i += 1;
-							$j += 1;
-						}
-						$i += 1;
-					}
-					elseif(substr($data[$i], 0, 1) == 's') {
-						echo "<br><h4>select ".substr($data[$i], 1)." courses from the following list: </h4>";
-						$i += 1;
-						$j = 1;
-						while (substr($data[$i], 0, 2) != "\s") {
-							if($j%12==0){
-								echo "<br>";
-							}
-							echo $data[$i]."  ";
-							$i += 1;
-							$j += 1;
-						}
-						$i += 1;
-					}
-					elseif(substr($data[$i], 0, 1) == "n") {
-						if(substr($data[$i], 4, 1) == "o"){
-							echo "<br><h4>complete ".substr($data[$i], 1, 2)." credit hours from the following list only ".substr($data[$i], 5, 1)."can be ".substr($data[$i], 7)." level: </h4>";
-						}
-						elseif(substr($data[$i], 3, 1) == "o"){
-							echo "<br><h4>complete ".substr($data[$i], 1, 2)." credit hours from the following list only ". substr($data[$i], 4, 1)."can be ".substr($data[$i], 6)+" level: </h4>";
-						}
-						else{
-							echo "<br><h4>complete ".substr($data[$i], 1, 2)." credit hours from the following list :</h4>";
-						}
-						$i += 1;
-						$j =1;
-						while (substr($data[$i], 0, 2) != '\n') {
-							if($j%12==0){
-								echo "<br>";
-							}
-							echo " ".$data[$i];
-							$i += 1;
-							
-							
-						}
-						$i += 1;
-					}
-					else{
-						echo $data[$i]."  ";
-						$i+=1;
-					}
-				}
+	echo '
+	</select><br><br>
+	<label for="Minor2">Minor 2: </label>
+	<select id="Minor2" name="Minor2">
+    <option value=""></option>';
+	$query4 = "SELECT minorName FROM minors";
+	mysqli_multi_query($connect, $query4);
+	do {
+		if ($result4 = mysqli_store_result($connect)) {
+			while ($minor2 = mysqli_fetch_row($result4)) {
+				echo '<option value= '; echo str_replace(" ", "_", $minor2[0]); echo'>'; echo $minor2[0]; echo '</option>';
 			}
 		}
-		fclose($open);
 	}
-  }
+	while (mysqli_next_result($connect));
+	
+	echo '</select><br><br><input type="submit" value="Submit" name="Submit">
+	</form><br><br><br>';
+	
+	
+	if(isset($_POST['Submit'])) {
+		$subMajor1 = str_replace("_", " ", $_POST['Major1']);
+		$subMajor2 = str_replace("_", " ", $_POST['Major2']);
+		$subMinor1 = str_replace("_", " ", $_POST['Minor1']);
+		$subMinor2 = str_replace("_", " ", $_POST['Minor2']);
+		
+		if($_POST['Major1'] != '') {
+			$query5 = "SELECT * FROM majors WHERE majorName = '$subMajor1'";
+			$result5 = mysqli_query($connect, $query5);
+			$maj1info = mysqli_fetch_assoc($result5);
+			echo '<h2>'; echo $maj1info['majorName']; echo '</h2>';
+			echo '<h3>Department: '; echo $maj1info['deptName_fk_maj']; echo '</h3><br>';
+			echo '<h3>Required Courses</h3>'; echo $maj1info['requiredClasses'];
+			echo '<h3>Elective Courses</h3>'; echo $maj1info['electiveClasses']; echo '<br><br><br><br>';
+		}
+		
+		if($_POST['Major2'] != '') {
+			$query6 = "SELECT * FROM majors WHERE majorName = '$subMajor2'";
+			$result6 = mysqli_query($connect, $query6);
+			$maj2info = mysqli_fetch_assoc($result6);
+			echo '<h2>'; echo $maj2info['majorName']; echo '</h2>';
+			echo '<h3>Department: '; echo $maj2info['deptName_fk_maj']; echo '</h3><br>';
+			echo '<h3>Required Courses</h3>'; echo $maj2info['requiredClasses'];
+			echo '<h3>Elective Courses</h3>'; echo $maj2info['electiveClasses']; echo '<br><br><br><br>';
+		}
+		
+		if($_POST['Minor1'] != '') {
+			$query7 = "SELECT * FROM minors WHERE minorName = '$subMinor1'";
+			$result7 = mysqli_query($connect, $query7);
+			$min1info = mysqli_fetch_assoc($result7);
+			echo '<h2>'; echo $min1info['minorName']; echo '</h2>';
+			echo '<h3>Department: '; echo $min1info['deptName_fk_min']; echo '</h3><br>';
+			echo '<h3>Required Courses</h3>'; echo $min1info['requiredClasses'];
+			echo '<h3>Elective Courses</h3>'; echo $min1info['electiveClasses']; echo '<br><br><br><br>';
+		}
+		
+		if($_POST['Minor2'] != '') {
+			$query8 = "SELECT * FROM minors WHERE minorName = '$subMinor2'";
+			$result8 = mysqli_query($connect, $query8);
+			$min2info = mysqli_fetch_assoc($result8);
+			echo '<h2>'; echo $min2info['minorName']; echo '</h2>';
+			echo '<h3>Department: '; echo $min2info['deptName_fk_min']; echo '</h3><br>';
+			echo '<h3>Required Courses</h3>'; echo $min2info['requiredClasses'];
+			echo '<h3>Elective Courses</h3>'; echo $min2info['electiveClasses']; echo '<br><br><br><br>';
+		}
+	}
+  
   echo '
+  <br><br>
 </div>
 
 </div>

@@ -173,10 +173,12 @@ echo '
 
 
 	<br>
-</div>
+
 
 </div>
-<div class="footer">
+
+
+<div id="footer">
 	<p>&copy; Copyright Christopher Newport University 2022</p>
 	<a href="mailto:register@cnu.edu">Questions? Contact the Office of the Registrar at register@cnu.edu</a>
 
@@ -186,8 +188,10 @@ echo '
 
 
 
-
+</div>
 </div>
 </body>
+
+
 ';
 ?>

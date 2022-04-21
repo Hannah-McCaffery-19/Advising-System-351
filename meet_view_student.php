@@ -66,8 +66,51 @@ echo '
 <div class="content">
 	<h1 class="page_name">View Meetings</h1>
 	<h2>Created Meetings</h2>
-	<p>TODO: query meeting, format each result in table with an edit and delete button</p>
-	<br>
+	<table class ="meet_table">
+	<tr>
+		<td><h3>Meeting Name</h3></td>
+		<td><h3>Date</h3></td>
+		<td><h3>Location</h3></td>
+		<td><h3>Start Time</h3></td>
+		<td><h3>End Time</h3></td>
+	</tr>
+	<tr>
+		<td>Scheduled Meeting</td>
+		<td>4/25/22</td>
+		<td>Office</td>
+		<td>Start 12:00</td>
+		<td>End 12:30</td>
+	</tr>
+	<tr>
+		<td><h3>Meeting Name</h3></td>
+		<td><h3>Date</h3></td>
+		<td><h3>Location</h3></td>
+		<td><h3>Start Time</h3></td>
+		<td><h3>End Time</h3></td>
+	</tr>
+	<tr>
+		<td>Scheduled Meeting</td>
+		<td>4/27/22</td>
+		<td>Virtual</td>
+		<td>Start 1:30</td>
+		<td>End 2:00</td>
+	</tr>
+	<tr>
+		<td><h3>Meeting Name</h3></td>
+		<td><h3>Date</h3></td>
+		<td><h3>Location</h3></td>
+		<td><h3>Start Time</h3></td>
+		<td><h3>End Time</h3></td>
+	</tr>
+	<tr>
+		<td>Scheduled Meeting</td>
+		<td>4/28/22</td>
+		<td>Virtual</td>
+		<td>Start 3:30</td>
+		<td>End 3:45</td>
+	</tr>
+	
+	</table>
 </div>
 
 </div>

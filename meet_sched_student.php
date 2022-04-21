@@ -72,68 +72,96 @@ echo '
 
 <div class="content">
 	<h1 class="page_name">Create a Meeting</h1>
-	<h2>My Advisor\'s Availability</h2>
+	<h2>My Advisor\'s Availability</h2>';
 	
-	<table>
+	$advisorID = $_SESSION['advisor'];
+	
+	echo '
+	<table class="info_table">
 	<tr>
-	<th>Day</th>
-	<th>Availability Start</th>
-	<th>Availability End</th>
+		<th><p>Monday:</p></th>
+		<td><p>';
+		echo '&emsp;';
+		$query = "SELECT * FROM availability WHERE facultyID_fk_avail = '$advisorID' AND day = 'Monday'";
+		mysqli_multi_query($connect, $query);
+		do {
+			if ($result = mysqli_store_result($connect)) {
+				while ($available = mysqli_fetch_row($result)) {				
+					echo substr($available[2], 0, -3); echo '-'; echo substr($available[3], 0, -3); echo '&emsp;';		
+				}
+			}
+		} 
+		while (mysqli_next_result($connect));
+
+		echo '</p></td>
 	</tr>
 	<tr>
-	<td>Monday</td>
-	<td>12:00</td>
-	<td>12:30</td>
+		<th><p>Tuesday:</p></th>
+		<td><p>';
+		echo '&emsp;';
+		$query = "SELECT * FROM availability WHERE facultyID_fk_avail = '$advisorID' AND day = 'Tuesday'";
+		mysqli_multi_query($connect, $query);
+		do {
+			if ($result = mysqli_store_result($connect)) {
+				while ($available = mysqli_fetch_row($result)) {				
+					echo substr($available[2], 0, -3); echo '-'; echo substr($available[3], 0, -3); echo '&emsp;';		
+				}
+			}
+		} 
+		while (mysqli_next_result($connect));
+
+		echo '</p></td>
 	</tr>
 	<tr>
-	<td>Monday</td>
-	<td>14:00</td>
-	<td>15:00</td>
+		<th><p>Wednesday:</p></th>
+		<td><p>';
+		echo '&emsp;';
+		$query = "SELECT * FROM availability WHERE facultyID_fk_avail = '$advisorID' AND day = 'Wednesday'";
+		mysqli_multi_query($connect, $query);
+		do {
+			if ($result = mysqli_store_result($connect)) {
+				while ($available = mysqli_fetch_row($result)) {				
+					echo substr($available[2], 0, -3); echo '-'; echo substr($available[3], 0, -3); echo '&emsp;';
+				}
+			}
+		} 
+		while (mysqli_next_result($connect));
+
+		echo '</p></td>
 	</tr>
 	<tr>
-	<td>Tuesday</td>
-	<td>11:00</td>
-	<td>12:00</td>
+		<th><p>Thursday:</p></th>
+		<td><p>';
+		echo '&emsp;';
+		$query = "SELECT * FROM availability WHERE facultyID_fk_avail = '$advisorID' AND day = 'Thursday'";
+		mysqli_multi_query($connect, $query);
+		do {
+			if ($result = mysqli_store_result($connect)) {
+				while ($available = mysqli_fetch_row($result)) {				
+					echo substr($available[2], 0, -3); echo '-'; echo substr($available[3], 0, -3); echo '&emsp;';
+				}
+			}
+		} 
+		while (mysqli_next_result($connect));
+
+		echo '</p></td>
 	</tr>
 	<tr>
-	<td>Tuesday</td>
-	<td>12:30</td>
-	<td>13:00</td>
-	</tr>
-	<tr>
-	<td>Tuesday</td>
-	<td>16:00</td>
-	<td>16:30</td>
-	</tr>
-	<tr>
-	<td>Wednesday</td>
-	<td>12:00</td>
-	<td>12:30</td>
-	</tr>
-	<tr>
-	<td>Wednesday</td>
-	<td>14:00</td>
-	<td>15:00</td>
-	</tr>
-	<tr>
-	<td>Thursday</td>
-	<td>11:00</td>
-	<td>12:00</td>
-	</tr>
-	<tr>
-	<td>Thursday</td>
-	<td>12:30</td>
-	<td>13:30</td>
-	</tr>
-	<tr>
-	<td>Thursday</td>
-	<td>16:00</td>
-	<td>16:30</td>
-	</tr>
-	<tr>
-	<td>Friday</td>
-	<td>12:00</td>
-	<td>12:30</td>
+		<th><p>Friday:</p></th>
+		<td><p>';
+		echo '&emsp;';
+		$query = "SELECT * FROM availability WHERE facultyID_fk_avail = '$advisorID' AND day = 'Friday'";
+		mysqli_multi_query($connect, $query);
+		do {
+			if ($result = mysqli_store_result($connect)) {
+				while ($available = mysqli_fetch_row($result)) {				
+					echo substr($available[2], 0, -3); echo '-'; echo substr($available[3], 0, -3); echo '&emsp;';
+				}
+			}
+		} 
+		while (mysqli_next_result($connect));
+
+		echo '</p></td>
 	</tr>
 	</table>
 	<br><br>

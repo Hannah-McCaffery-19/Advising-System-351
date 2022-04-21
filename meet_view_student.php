@@ -73,7 +73,7 @@ echo '
 	</tr>
 	<tr>
 		<td><a href="view_first_meeting.html">Scheduled Meeting</a></td>
-		<td>4/19/22</td>
+		<td>4/25/22</td>
 		<td>In person</td>
 		<td>Start 12:00</td>
 		<td>End 12:30</td>

@@ -108,7 +108,70 @@ echo '
 
 	<br>
 	<h2>Advisor Availability</h2>
-	<p>TODO: query availability table, should be copy/paste from advisor info</p>
+	
+	<table>
+	<tr>
+	<th>Day</th>
+	<th>Avaiability Start</th>
+	<th>Avaiability End</th>
+	</tr>
+	<tr>
+	<td>Monday</td>
+	<td>12:00</td>
+	<td>12:30</td>
+	</tr>
+	<tr>
+	<td>Monday</td>
+	<td>14:00</td>
+	<td>15:00</td>
+	</tr>
+	<tr>
+	<td>Tuesday</td>
+	<td>11:00</td>
+	<td>12:00</td>
+	</tr>
+	<tr>
+	<td>Tuesday</td>
+	<td>12:30</td>
+	<td>13:00</td>
+	</tr>
+	<tr>
+	<td>Tuesday</td>
+	<td>16:00</td>
+	<td>16:30</td>
+	</tr>
+	<tr>
+	<td>Wednesday</td>
+	<td>12:00</td>
+	<td>12:30</td>
+	</tr>
+	<tr>
+	<td>Wednesday</td>
+	<td>14:00</td>
+	<td>15:00</td>
+	</tr>
+	<tr>
+	<td>Thursday</td>
+	<td>11:00</td>
+	<td>12:00</td>
+	</tr>
+	<tr>
+	<td>Thursday</td>
+	<td>12:30</td>
+	<td>13:30</td>
+	</tr>
+	<tr>
+	<td>Thursday</td>
+	<td>16:00</td>
+	<td>16:30</td>
+	</tr>
+	<tr>
+	<td>Friday</td>
+	<td>12:00</td>
+	<td>12:30</td>
+	</tr>
+
+
 	<br>
 </div>
 

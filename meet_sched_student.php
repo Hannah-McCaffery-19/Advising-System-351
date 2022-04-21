@@ -64,9 +64,48 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Schedule A Meeting</h1>
-	<h2>Schedule Meeting</h2>
-	<p>TODO: form that will submit meeting data to the meeting table</p>
+
+
+</table>
+	<br>
+	<h2>Schedule a Meeting</h2>
+	<form id="advisee" action="" method="post" class="">
+
+	<input type="hidden" name="meetingID" id="meetingID" required>
+	<input type="hidden" name="studentID_fk_meet" id="studentID" required>
+	<input type="hidden" name="facultyID_fk_meet" id="facultyID" required>
+
+	<label for="myLocation">Pick a Location: </label>
+	<input type="select" name="myLocation" id="myLocation" list="location" required>
+	<datalist id="location">
+	<option>Office</option>
+	<option>Virtual</option>
+	</datalist>
+
+
+	<label for="myDate">Pick A Day: </label>
+	<input type="date" name="myDate" id="myDate"  required>
+		
+
+	<label for="timeStart">Pick a Starttime: </label>
+	<input type="time" name="timeStart" id="timeStart" required>
+
+	<label for="timeEnd">Pick an Endtime: </label>
+	<input type="time" name="timeEnd" id="timeEnd" required>
+
+	<label for="myNotes">Notes: </label>
+	<input type="text" name="myNotes" id="myNotes" required>
+		
+
+		<input style="margin-left:10px;" type="submit" value="Search" name="Search">
+	</form>
+	<br><br>
+
+
+
+
+
+
 	<br>
 	<h2>Advisor Availability</h2>
 	<p>TODO: query availability table, should be copy/paste from advisor info</p>
@@ -79,6 +118,9 @@ echo '
 	<a href="mailto:register@cnu.edu">Questions? Contact the Office of the Registrar at register@cnu.edu</a>
 
 </div>
+
+
+
 
 
 

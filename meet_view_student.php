@@ -66,7 +66,21 @@ echo '
 <div class="content">
 	<h1 class="page_name">View Meetings</h1>
 	<h2>Created Meetings</h2>
-	<p>TODO: query meeting, format each result in table with an edit and delete button</p>
+	<table class ="meet_table">
+	<tr>
+		<td><h3>Meeting Name</h3></td>
+		<td><h3>Date Created</h3></td>
+	</tr>
+	<tr>
+		<td><a href="view_first_meeting.html">Scheduled Meeting</a></td>
+		<td>4/19/22</td>
+		<td>In person</td>
+		<td>12:00</td>
+		<td>12:30</td>
+	</tr>
+	</table>
+		
+
 	<br>
 </div>
 

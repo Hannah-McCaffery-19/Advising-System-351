@@ -69,7 +69,7 @@ echo '
 </table>
 	<br>
 	<h2>Schedule a Meeting</h2>
-	<form id="advisee" action="" method="post" class="">
+	<form id="advisee" action="" method="post" class="meeting_form">
 
 	<input type="hidden" name="meetingID" id="meetingID" required>
 	<input type="hidden" name="studentID_fk_meet" id="studentID" required>
@@ -109,67 +109,7 @@ echo '
 	<br>
 	<h2>Advisor Availability</h2>
 	
-	<table>
-	<tr>
-	<th>Day</th>
-	<th>Avaiability Start</th>
-	<th>Avaiability End</th>
-	</tr>
-	<tr>
-	<td>Monday</td>
-	<td>12:00</td>
-	<td>12:30</td>
-	</tr>
-	<tr>
-	<td>Monday</td>
-	<td>14:00</td>
-	<td>15:00</td>
-	</tr>
-	<tr>
-	<td>Tuesday</td>
-	<td>11:00</td>
-	<td>12:00</td>
-	</tr>
-	<tr>
-	<td>Tuesday</td>
-	<td>12:30</td>
-	<td>13:00</td>
-	</tr>
-	<tr>
-	<td>Tuesday</td>
-	<td>16:00</td>
-	<td>16:30</td>
-	</tr>
-	<tr>
-	<td>Wednesday</td>
-	<td>12:00</td>
-	<td>12:30</td>
-	</tr>
-	<tr>
-	<td>Wednesday</td>
-	<td>14:00</td>
-	<td>15:00</td>
-	</tr>
-	<tr>
-	<td>Thursday</td>
-	<td>11:00</td>
-	<td>12:00</td>
-	</tr>
-	<tr>
-	<td>Thursday</td>
-	<td>12:30</td>
-	<td>13:30</td>
-	</tr>
-	<tr>
-	<td>Thursday</td>
-	<td>16:00</td>
-	<td>16:30</td>
-	</tr>
-	<tr>
-	<td>Friday</td>
-	<td>12:00</td>
-	<td>12:30</td>
-	</tr>
+	
 
 
 	<br>

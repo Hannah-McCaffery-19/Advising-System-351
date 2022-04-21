@@ -1,0 +1,22 @@
+=== Electives CSV Key ===
+
+
+
+||, _, _, _ , \|| = complete one of these
+
+|&, 151, 151L, 152, 152L, |, 201, 201L, 202, 202L, \&|    =complete 151,151L, 152, 152L or 201, 201L, 202, 202L
+
+n9, _, _, _, _, _, _, _, _, _, _, \n9    =select 9 credits out of these courses
+n15, _, _, _, _,_, _, _,_, \n15    =select 15 credits out of these courses
+
+ENGR212 & ENGR212L   = both meet same req
+
+>=MATH130 = Math 130 or greater
+
+s6, _, _, _, _, \s6 = select 6
+
+n21 o6-200, _, _, _, _, _, _, _, _, _, \n21      = complete 21 credit hours of t
+
+
+
+

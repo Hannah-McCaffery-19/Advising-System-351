@@ -80,4 +80,17 @@ Refer to the Meeting table to make sure everything is properly named and set.
 This form should submit the data to the Meeting table and append it as a new row.
 
 
+--- Form Input Types ---
+
+meetingID		hidden: rand(100000, 999999);
+studentID_fk_meet	hidden: session username
+facultyID_fk_meet	hidden: session advisor
+location		select: (2 options) Office, Virtual
+date			date
+timeStart		time
+timeEnd			time
+notes			text
+
+
+
 

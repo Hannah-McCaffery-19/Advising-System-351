@@ -64,10 +64,28 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Contact</h1>
+	<h1 class="page_name">Contact</h1>';
+	
+	if (isset($_SESSION['sentEmail'])) {
+		echo '<h3>Email successfully sent.</h3><br><br>';
+		unset($_SESSION['sentEmail']);
+	}
+	
+	echo '
 	<h2>Email Form</h2>
-	<p>TODO: create form to email selected recipient</p>
-	<br>
+	<form id="email" action="contact.php" method="post" class="req_form">
+		<label for="to">Address To: </label><br><br>
+		<input type="text" name="to" id="id" size="30" style="height:30px;" placeholder=" EmailAddress@cnu.edu " required>
+		<br><br><br>
+		<label for="subject">Subject: </label><br><br>
+		<input type="text" name="subject" id="subject" size="60" style="height:30px;" required>
+		<br><br><br>
+		<label for="message">Message: </label><br><br>
+		<textarea name="message" id="message" cols="60" rows="15" required></textarea>
+		<br><br><br>
+		<input type="submit" value="Send" name="Send">
+	</form>
+	<br><br><br><br>
 </div>
 
 </div>

@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+$DATABASE_HOST = 'localhost';
+$DATABASE_USER = 'root';
+$DATABASE_PASS = '';
+$DATABASE_NAME = 'mydb';
+
+$connect = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+
 echo '
 <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +73,56 @@ echo '
 <div class="content">
 	<h1 class="page_name">List of Classes</h1>
 	<h2>Selection of Classes in the Upcoming Term</h2>
-	<p>TODO: query class table and spit it out in a formatted table</p>
+	<table class="info_table">
+	<tr>
+	<th>CRN</th>
+	<th>Course</th>
+	<th>Instructor</th>
+	<th>Section</th>
+	<th>Term</th>
+	<th>Year</th>
+	<th>Location</th>
+	</tr>
+	';
+	
+	$query3 = "SELECT * FROM class";
+	mysqli_multi_query($connect, $query3);
+		do {
+			if ($result3 = mysqli_store_result($connect)) {
+				while ($class = mysqli_fetch_row($result3)) {
+					echo '<tr>';
+					
+					echo '<td><p>';
+					echo $class[0];
+					echo '</p></td>';
+					echo '<td><p>';
+					echo $class[1];
+					echo '</p></td>';
+					echo '<td><p>';
+					echo $class[2];
+					echo '</p></td>';
+					echo '<td><p>';
+					echo $class[3];
+					echo '</p></td>';
+					echo '<td><p>';
+					echo $class[4];
+					echo '</p></td>';
+					echo '<td><p>';
+					echo $class[5];
+					echo '</p></td>';
+					echo '<td><p>';
+					echo $class[6];
+					echo '</p></td>';
+					
+					
+					echo '</tr>';
+				}
+			}
+		}
+		while (mysqli_next_result($connect));
+	
+	echo '
+	</table>
 	<br>
 </div>
 

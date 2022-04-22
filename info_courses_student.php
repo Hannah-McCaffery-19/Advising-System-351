@@ -74,11 +74,11 @@ echo '
 	<h1 class="page_name">List of Classes</h1>
 	<h2>Selection of Classes in the Upcoming Term</h2>
 	<table class="info_table">
-	<tr>
+	<tr height="40px" style="font-size:1.3em">
 	<th>CRN</th>
 	<th>Course</th>
-	<th>Instructor</th>
 	<th>Section</th>
+	<th>Instructor</th>
 	<th>Term</th>
 	<th>Year</th>
 	<th>Location</th>
@@ -91,30 +91,13 @@ echo '
 			if ($result3 = mysqli_store_result($connect)) {
 				while ($class = mysqli_fetch_row($result3)) {
 					echo '<tr>';
-					
-					echo '<td><p>';
-					echo $class[0];
-					echo '</p></td>';
-					echo '<td><p>';
-					echo $class[1];
-					echo '</p></td>';
-					echo '<td><p>';
-					echo $class[2];
-					echo '</p></td>';
-					echo '<td><p>';
-					echo $class[3];
-					echo '</p></td>';
-					echo '<td><p>';
-					echo $class[4];
-					echo '</p></td>';
-					echo '<td><p>';
-					echo $class[5];
-					echo '</p></td>';
-					echo '<td><p>';
-					echo $class[6];
-					echo '</p></td>';
-					
-					
+					echo '<td><p>'; echo $class[0]; echo '</p></td>';
+					echo '<td><p>'; echo $class[1]; echo '</p></td>';
+					echo '<td><p>'; echo $class[3]; echo '</p></td>';
+					echo '<td><p>'; echo $class[2]; echo '</p></td>';
+					echo '<td><p>'; echo $class[4]; echo '</p></td>';
+					echo '<td><p>'; echo $class[5]; echo '</p></td>';
+					echo '<td><p>'; echo $class[6]; echo '</p></td>';
 					echo '</tr>';
 				}
 			}

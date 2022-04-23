@@ -1,6 +1,14 @@
 <?php
 session_start();
 
+$DATABASE_HOST = 'localhost';
+$DATABASE_USER = 'root';
+$DATABASE_PASS = '';
+$DATABASE_NAME = 'mydb';
+
+$connect = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+
+
 echo '
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +18,6 @@ echo '
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
 <div class="body_box">
 <table class="hdr_table" cellpadding="0" cellspacing="0" >
@@ -38,9 +45,7 @@ echo '
 		</td>
 	</tr>
 </table>
-
 <div class="main">
-
 <div class="sidenav">
 	<br>
 	<a href="home_student.php"><h3>Home</h3></a>
@@ -62,7 +67,6 @@ echo '
 	<a href="contact_student.php"><h3>Contact</h3></a>
 	<br><br>
 </div>
-
 <div class="content">
 	<h1 class="page_name">Generate Evaluation</h1>
 	<h2>Create A New Evaluation</h2>
@@ -77,7 +81,7 @@ echo '
 	
     fclose($open);
   }
-  echo '</select><br> Major 2:
+  /* echo '</select><br> Major 2:
   
   <select id="Major2" name="Major2">
     <option value="_"></option>';
@@ -110,7 +114,7 @@ echo '
 	}
 	
     fclose($open);
-  }
+  }*/
   echo '</select>
   <br>
   <input type="submit">
@@ -148,22 +152,22 @@ if(isset($_POST['Major'])){
 	}
 	echo '<tr><td>Major Electives</td><td></td></tr>';
 	$i =0;
-	while($i < sizeof(majorElectives)){
-		if($data[$i] == "||"){
+	while($i < sizeof($majorElectives)){
+		if($majorElectives[$i] == "||"){
 			$temp = $i;
 			$i += 1;
 			echo "<tr><td>Complete One of the following: ";
-			while($data[$i] != "\||"){
-				echo data[$i]." ";
+			while($majorElectives[$i] != "\||"){
+				echo $majorElectives[$i]." ";
 				$i += 1;
 			}
 			$i += 1;
 			echo "</td><td>";
 			$found = 0;
-			while($data[$temp] != "\||" && $found == 0){
+			while($majorElectives[$temp] != "\||" && $found == 0){
 				$y = 0;
 				while($y < sizeof($studentCourses) && found == 0){
-					if($y == $data[$temp]){
+					if($y == $majorElectives[$temp]){
 						echo "Y</td></tr>";
 					}
 					$y++;
@@ -174,25 +178,25 @@ if(isset($_POST['Major'])){
 				echo "N</td></tr>";
 			}
 		}
-		elseif($data[$i] =="|&") {
+		elseif($majorElectives[$i] =="|&") {
 			$i+= 1;
 			$temp = $i;
 			echo "<tr><td>Complete One of the following Sections: ";
-			while($data[$i] != "\&|"){
-				if($data[$i] == '|'){
+			while($majorElectives[$i] != "\&|"){
+				if($majorElectives[$i] == '|'){
 					echo ' or ';
 					$i++;
 				}
-				echo data[$i]." ";
+				echo $majorElectives[$i]." ";
 				$i += 1;
 			}
 			$i += 1;
 			echo "</td><td>";
 			$found = 0;
-			while($data[$temp] != "\&|" && $found == 0){
+			while($majorElectives[$temp] != "\&|" && $found == 0){
 				$y = 0;
 				while($y < sizeof($studentCourses) && found == 0){
-					if($y == $data[$temp]){
+					if($y == $majorElectives[$temp]){
 						echo "Y</td></tr>";
 					}
 					$y++;
@@ -206,22 +210,22 @@ if(isset($_POST['Major'])){
 		}
 			
 		
-		elseif(substr($data[$i], 0, 1) == 's') {
+		elseif(substr($majorElectives[$i], 0, 1) == 's') {
 			$i += 1;
-			while (substr($data[$i], 0, 2) != "\s") {
+			while (substr($majorElectives[$i], 0, 2) != "\s") {
 				$i += 1;
 			}
 			$i += 1;
 		}
-		elseif(substr($data[$i], 0, 1) == "n") {
+		elseif(substr($majorElectives[$i], 0, 1) == "n") {
 			$i += 1;
-			while (substr($data[$i], 0, 2) != '\n') {
+			while (substr($majorElectives[$i], 0, 2) != '\n') {
 				$i += 1;					
 			}
 			$i += 1;
 		}
 		else{
-			echo $data[$i]."  ";
+			echo $majorElectives[$i]."  ";
 			$i+=1;
 		}
 	}
@@ -233,8 +237,46 @@ if(isset($_POST['Major'])){
 
 echo '</table>
 </div>
-
+</body>
+';
+function getMajorReqs($major) {
+	$reqs =[];
+	if (($open = fopen("MajorReqs.csv", "r")) !== FALSE) {
+	while (($data = fgetcsv($open, 1000, ",")) !== FALSE) { 
+		if($data[0] == $major){
+			$i = 1;
+			while ($data[$i] != '') {
+				$i+=1;
+				array_push($reqs, $data[$i]);
+			}
+		}
+	}
+	fclose($open);
+	}
+	return $reqs;
+}
+function getMajorElectives($major){
+	$reqs = array();
+	if (($open = fopen("MajorElectives.csv", "r")) !== FALSE) {
+		
+		while (($data = fgetcsv($open, 1100, ",")) !== FALSE) { 
+			if($data[0] == $_POST['Major']){
+				$i = 1;
+				while ($data[$i] != "") {
+					array_push($reqs, $data[$i]);
+					$i++;
+					
+				}
+			}
+		}
+		fclose($open);
+	}
+	return $reqs;
+}
+echo '
 </div>
+
+
 <div class="footer">
 	<p>&copy; Copyright Christopher Newport University 2022</p>
 	<a href="mailto:register@cnu.edu">Questions? Contact the Office of the Registrar at register@cnu.edu</a>

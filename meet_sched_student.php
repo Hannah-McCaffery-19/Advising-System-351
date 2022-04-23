@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+$DATABASE_HOST = 'localhost';
+$DATABASE_USER = 'root';
+$DATABASE_PASS = '';
+$DATABASE_NAME = 'mydb';
+
+$connect = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+
 echo '
 <!DOCTYPE html>
 <html lang="en">
@@ -64,13 +71,128 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Schedule A Meeting</h1>
-	<h2>Schedule Meeting</h2>
-	<p>TODO: form that will submit meeting data to the meeting table</p>
-	<br>
-	<h2>Advisor Availability</h2>
-	<p>TODO: query availability table, should be copy/paste from advisor info</p>
-	<br>
+	<h1 class="page_name">Create a Meeting</h1>
+	<h2>My Advisor\'s Availability</h2>';
+	
+	$advisorID = $_SESSION['advisor'];
+	
+	echo '
+	<table class="info_table">
+	<tr>
+		<th><p>Monday:</p></th>
+		<td><p>';
+		echo '&emsp;';
+		$query = "SELECT * FROM availability WHERE facultyID_fk_avail = '$advisorID' AND day = 'Monday'";
+		mysqli_multi_query($connect, $query);
+		do {
+			if ($result = mysqli_store_result($connect)) {
+				while ($available = mysqli_fetch_row($result)) {				
+					echo substr($available[2], 0, -3); echo '-'; echo substr($available[3], 0, -3); echo '&emsp;';		
+				}
+			}
+		} 
+		while (mysqli_next_result($connect));
+
+		echo '</p></td>
+	</tr>
+	<tr>
+		<th><p>Tuesday:</p></th>
+		<td><p>';
+		echo '&emsp;';
+		$query = "SELECT * FROM availability WHERE facultyID_fk_avail = '$advisorID' AND day = 'Tuesday'";
+		mysqli_multi_query($connect, $query);
+		do {
+			if ($result = mysqli_store_result($connect)) {
+				while ($available = mysqli_fetch_row($result)) {				
+					echo substr($available[2], 0, -3); echo '-'; echo substr($available[3], 0, -3); echo '&emsp;';		
+				}
+			}
+		} 
+		while (mysqli_next_result($connect));
+
+		echo '</p></td>
+	</tr>
+	<tr>
+		<th><p>Wednesday:</p></th>
+		<td><p>';
+		echo '&emsp;';
+		$query = "SELECT * FROM availability WHERE facultyID_fk_avail = '$advisorID' AND day = 'Wednesday'";
+		mysqli_multi_query($connect, $query);
+		do {
+			if ($result = mysqli_store_result($connect)) {
+				while ($available = mysqli_fetch_row($result)) {				
+					echo substr($available[2], 0, -3); echo '-'; echo substr($available[3], 0, -3); echo '&emsp;';
+				}
+			}
+		} 
+		while (mysqli_next_result($connect));
+
+		echo '</p></td>
+	</tr>
+	<tr>
+		<th><p>Thursday:</p></th>
+		<td><p>';
+		echo '&emsp;';
+		$query = "SELECT * FROM availability WHERE facultyID_fk_avail = '$advisorID' AND day = 'Thursday'";
+		mysqli_multi_query($connect, $query);
+		do {
+			if ($result = mysqli_store_result($connect)) {
+				while ($available = mysqli_fetch_row($result)) {				
+					echo substr($available[2], 0, -3); echo '-'; echo substr($available[3], 0, -3); echo '&emsp;';
+				}
+			}
+		} 
+		while (mysqli_next_result($connect));
+
+		echo '</p></td>
+	</tr>
+	<tr>
+		<th><p>Friday:</p></th>
+		<td><p>';
+		echo '&emsp;';
+		$query = "SELECT * FROM availability WHERE facultyID_fk_avail = '$advisorID' AND day = 'Friday'";
+		mysqli_multi_query($connect, $query);
+		do {
+			if ($result = mysqli_store_result($connect)) {
+				while ($available = mysqli_fetch_row($result)) {				
+					echo substr($available[2], 0, -3); echo '-'; echo substr($available[3], 0, -3); echo '&emsp;';
+				}
+			}
+		} 
+		while (mysqli_next_result($connect));
+
+		echo '</p></td>
+	</tr>
+	</table>
+	<br><br>
+	
+	<h2>Schedule a Meeting</h2>
+	<form id="advisee" action="" method="post" class="req_form">';
+	$meetID = rand(100000, 999999);
+	echo'
+
+	
+	<label for="myDate">Date: </label>
+	<input type="date" name="myDate" id="myDate"  required>
+	<br><br><label for="timeStart">Start Time: </label>
+	<input type="time" name="timeStart" id="timeStart" required>
+	<br><br><label for="timeEnd">End Time: </label>
+	<input type="time" name="timeEnd" id="timeEnd" required>
+	<br><br><label for="myLocation">Location: </label>
+	<select name="myLocation" id="myLocation" required>
+	<option value="office">Office</option>
+	<option value="virtual">Virtual</option>
+	</select>
+	<br><br><label for="myNotes">Notes: </label><br>
+	<input type="text" name="myNotes" id="myNotes" size="40" style="height:120px;" required>
+	<input type="hidden" name="meetingID" id="meetingID" value="'; echo $meetID; echo '" required>
+	<input type="hidden" name="studentID_fk_meet" id="studentID" value="'; echo $_SESSION['username']; echo '" required>
+	<input type="hidden" name="facultyID_fk_meet" id="facultyID" value="'; echo $_SESSION['advisor']; echo '" required>
+	
+	<br><br><input type="submit" value="Create" name="Create">
+	</form>
+	
+	<br><br><br>
 </div>
 
 </div>

@@ -63,10 +63,108 @@ echo '
 </div>
 
 <div class="content">
-	<h1 class="page_name">Create Student Accounts</h1>
-	<h2>Generate a New Account</h2>
-	<p>TODO: form to enter student data and submit to add to student table</p>
-	<br>
+	<h1 class="page_name">Create Class</h1>
+	<h2>Generate a New Class</h2>';
+	if(isset($_POST['Create'])) {
+		$firstName = $_POST['firstName'];
+		$lastName = $_POST['lastName'];
+		$studentPhone = $_POST['studentPhone'];
+		$studentAddress = $_POST['studentAddress'];
+		$classStanding = $_POST['classStanding'];
+		$yearEnrolled = $_POST['yearEnrolled'];
+		$advisorEmail = $_POST['advisor'];
+		
+		$yearEnd = substr($yearEnrolled, -2);
+		$change = 'Change';
+		$dot = '.';
+		$domain = '@cnu.edu';
+		
+		//student ID
+		$prefixID = '009';
+		$randID = rand(10000, 99999);
+		$studentID = $prefixID . $randID;
+		
+		//password Change. + year
+		$password = $change . $dot . $yearEnd;
+		
+		//email first name + last name + year @cnu.edu
+		$studentEmail = $firstName . $lastName . $dot . $yearEnd . $domain;
+		
+		//year graduating enrolled + 4
+		$yearGraduating = $yearEnrolled + 4;
+		
+		//advisor query id from email
+		$query2 = "SELECT facultyID FROM faculty WHERE facultyEmail = '$advisorEmail'";
+		$result2 = mysqli_query($connect, $query2);
+		$myadvisor = mysqli_fetch_assoc($result2);
+		$advisorID = $myadvisor['facultyID'];
+		
+		//echo $studentID;
+		//echo $firstName;
+		//echo $lastName;
+		//echo $password;
+		//echo $studentEmail;
+		//echo $studentPhone;
+		//echo $studentAddress;
+		//echo $classStanding;
+		//echo $yearEnrolled;
+		//echo $yearGraduating;
+		//echo $advisorID;			
+		
+		$query1 = "INSERT INTO `student`(`studentID`, `firstName`, `lastName`, `password`, `studentEmail`, `studentPhone`, `studentAddress`, `classStanding`, `yearEnrolled`, `yearGraduating`, `alternatePIN`, `advisorID`) VALUES ('$studentID','$firstName','$lastName','$password','$studentEmail','$studentPhone','$studentAddress','$classStanding','$yearEnrolled','$yearGraduating','NULL','$advisorID')";
+		$result1 = mysqli_query($connect, $query1);
+		
+		echo '<h3>Student Created.</h3><br><br>';
+	}
+
+	
+	
+	echo '
+	<form id="student" action="" method="post" class="req_form">
+	
+	<label for="firstName">First Name: </label>
+	<input type="text" name="firstName" id="firstName" required>
+	
+	<br><br><label for="lastName">Last Name: </label>
+	<input type="text" name="lastName" id="lastName" required>
+	
+	<br><br><label for="studentPhone">Phone #: </label>
+	<input type="text" name="studentPhone" id="studentPhone">
+	
+	<br><br><label for="studentAddress">Address: </label>
+	<input type="text" name="studentAddress" id="studentAddress">
+	
+	<br><br><label for="classStanding">Class Standing: </label>
+	<select name="classStanding" id="classStanding" required>
+	<option value="Freshman">Freshman</option>
+	<option value="Sophomore">Sophomore</option>
+	<option value="Junior">Junior</option>
+	<option value="Senior">Senior</option>
+	</select>
+	
+	<br><br><label for="yearEnrolled">Year Enrolled: </label>
+	<input name="yearEnrolled" id="yearEnrolled" type="number" min="1900" max="2099" step="1" value="2022" required>
+	
+	<br><br><label for="advisor">Advisor: </label>
+	<select id="advisor" name="advisor" required>';
+	$query1 = "SELECT facultyEmail FROM faculty";
+	mysqli_multi_query($connect, $query1);
+	
+	do {
+		if ($result1 = mysqli_store_result($connect)) {
+			while ($advisor = mysqli_fetch_row($result1)) {
+				echo '<option value="'; echo $advisor[0]; echo'">'; echo $advisor[0]; echo '</option>';
+			}
+		}
+	}
+	while (mysqli_next_result($connect));
+	
+	echo '
+	</select>
+	
+	<br><br><input type="submit" value="Create" name="Create">
+	</form>
+	<br><br>
 </div>
 
 </div>

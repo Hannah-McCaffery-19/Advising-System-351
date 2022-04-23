@@ -4,6 +4,7 @@ cnu logo: #004B8D
 cnu edu site: #003466
 */
 
+
 /* ==== GLOBAL STYLES ==== */
 body {
 	background-color: #FBFBFB;
@@ -236,6 +237,18 @@ a:hover {
 	text-align: center;
 	padding: 0 5px 0 5px;
 	border: 1px solid #000000;
+}
+
+.req_form {
+	border: 3px solid #000000;
+	padding: 15px;
+	display: inline-block;
+}
+
+.req_form label {
+	font-size: 1.2em;
+	font-weight: bold;
+	padding-right: 5px;
 }
 
 .eval_table table {

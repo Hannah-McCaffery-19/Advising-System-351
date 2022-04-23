@@ -66,8 +66,8 @@ echo '
 <div class="content">
 	<h1 class="page_name">Generate Evaluation</h1>
 	<h2>Create A New Evaluation</h2>
-	'; echo '<action="eval_view_student.php" method="POST"> Major 1:
-	<select id="Major1" name="Major1">
+	<form action="" method="post"> Major 1:</action>
+	<select id="Major" name="Major" required>
     <option value="_"></option>';
 	if (($open = fopen("MajorReqs.csv", "r")) !== FALSE) {
   
@@ -89,19 +89,7 @@ echo '
 	
     fclose($open);
   }
-  echo '</select><br> Major 3:
-  
-  <select id="Major3" name="Major3">
-    <option value="_"></option>';
-	if (($open = fopen("MajorReqs.csv", "r")) !== FALSE) {
-  
-    while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {        
-		echo "<option value= ". $data[0].">".$data[0]."</option>"; 
-	}
-	
-    fclose($open);
-  }
-  echo '</select><br><br> Minor1:
+  echo '</select><br><br>Minor 1:
   <select id="Minor1" name="Minor1">
     <option value="_"></option>';
 	if (($open = fopen("MinorReqs.csv", "r")) !== FALSE) {
@@ -112,7 +100,7 @@ echo '
 	
     fclose($open);
   }
-  echo '</select><br> Minor 2
+  echo '</select><br>Minor 2:
   <select id="Minor2" name="Minor2">
     <option value="_"></option>';
 	if (($open = fopen("MinorReqs.csv", "r")) !== FALSE) {
@@ -123,35 +111,127 @@ echo '
 	
     fclose($open);
   }
-  echo '</select><br> Minor3:
-  <select id="Minor3" name="Minor3">
-    <option value="_"></option>';
-	if (($open = fopen("MinorReqs.csv", "r")) !== FALSE) {
-  
-    while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {        
-		echo "<option value= ". $data[0].">".$data[0]."</option>"; 
-	}
-	
-    fclose($open);
-  }
-  echo '</select><br> Minor4:
-  <select id="Minor4" name="Minor4">
-    <option value="_"></option>';
-	if (($open = fopen("MajorReqs.csv", "r")) !== FALSE) {
-  
-    while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {        
-		echo "<option value= ". $data[0].">".$data[0]."</option>"; 
-	}
-	
-    fclose($open);
-  }
   echo '</select>
-  
+  <br>
   <input type="submit">
-  </form>
+  </form><br>';
+  
+if(isset($_POST['Major'])){
+	echo '<table>
+	<h3><tr><td>Requirement&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Fullfilled(yes/no)</td></tr></h3>';
+	$studentCourses = [];
+	$username = $_SESSION['username'];
+	$query1 = "SELECT * FROM student WHERE studentID = '$username'";
+	$result = mysqli_query($connect, $query1);
+	$record = mysqli_fetch_row($result);
+	if ($result = mysqli_store_result($connect)) {
+			while ($record = mysqli_fetch_row($result)) {
+				array_push($studentcourses, $record[2]);
+			}
+	}
+	$majorReqs = getMajorReqs($_POST['Major']);
+	$majorElectives = getMajorElectives($_POST['Major']);
+	foreach($majorReqs as $c){
+		echo '<tr><td>'.$c.'</td>';
+		$f =0;
+		$found = 0;
+		while($f < sizeof($studentCourses) && $found == 0){
+			if($studentCourses[$f] == $c){
+				echo "<td>Y</td></tr>";
+				$found = 1;
+			}
+			$f++;
+		}
+		if($found == 0) {
+			echo "<td>N</td></tr>";
+		}
+	}
+	echo '<tr><td>Major Electives</td><td></td></tr>';
+	$i =0;
+	while($i < sizeof(majorElectives)){
+		if($data[$i] == "||"){
+			$temp = $i;
+			$i += 1;
+			echo "<tr><td>Complete One of the following: ";
+			while($data[$i] != "\||"){
+				echo data[$i]." ";
+				$i += 1;
+			}
+			$i += 1;
+			echo "</td><td>";
+			$found = 0;
+			while($data[$temp] != "\||" && $found == 0){
+				$y = 0;
+				while($y < sizeof($studentCourses) && found == 0){
+					if($y == $data[$temp]){
+						echo "Y</td></tr>";
+					}
+					$y++;
+				}
+				$temp++;
+			}
+			if ($found == 0){
+				echo "N</td></tr>";
+			}
+		}
+		elseif($data[$i] =="|&") {
+			$i+= 1;
+			$temp = $i;
+			echo "<tr><td>Complete One of the following Sections: ";
+			while($data[$i] != "\&|"){
+				if($data[$i] == '|'){
+					echo ' or ';
+					$i++;
+				}
+				echo data[$i]." ";
+				$i += 1;
+			}
+			$i += 1;
+			echo "</td><td>";
+			$found = 0;
+			while($data[$temp] != "\&|" && $found == 0){
+				$y = 0;
+				while($y < sizeof($studentCourses) && found == 0){
+					if($y == $data[$temp]){
+						echo "Y</td></tr>";
+					}
+					$y++;
+				}
+				$temp++;
+			}
+			if ($found == 0){
+				echo "N</td></tr>";
+			}
+			$i += 1;
+		}
+			
+		
+		elseif(substr($data[$i], 0, 1) == 's') {
+			$i += 1;
+			while (substr($data[$i], 0, 2) != "\s") {
+				$i += 1;
+			}
+			$i += 1;
+		}
+		elseif(substr($data[$i], 0, 1) == "n") {
+			$i += 1;
+			while (substr($data[$i], 0, 2) != '\n') {
+				$i += 1;					
+			}
+			$i += 1;
+		}
+		else{
+			echo $data[$i]."  ";
+			$i+=1;
+		}
+	}
+		
+}
 	
-	
-	<br>
+
+
+
+echo '</table>
 </div>
 
 </div>

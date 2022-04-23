@@ -1,0 +1,17 @@
+=== MAMP Localhost Startup Instructions ===
+
+1. Open MAMP
+2. Hit 'Start' in top right corner
+3. Once running, hit 'WebStart' next to 'Stop'
+4. From top left corner drop down menu, hit 'My Website'
+5. the project folder (Advising-System-351) should be listed
+6. Click Advising-System-351
+
+
+=== XAMPP Localhost Startup Instructions ===
+1. Launch XAMPP
+2. Start Apache and MySQL
+3. In project folder, single click folder address bar
+4. Type cmd and hit enter
+5. Type (after file directory) php -S localhost:[port number] EX. php -S localhost:351
+6. In browser address bar, go to localhost:[port number]

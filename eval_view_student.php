@@ -1,5 +1,10 @@
 <?php
 session_start();
+$DATABASE_HOST = 'localhost';
+$DATABASE_USER = 'root';
+$DATABASE_PASS = '';
+$DATABASE_NAME = 'mydb';
+$connect = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 
 echo '
 <!DOCTYPE html>
@@ -81,15 +86,24 @@ echo '
 	</tr>	
 	</table>
 	<br>
-</div>
-
+</div>';
+$studentID = $_SESSION['student'];
+$query1 = "SELECT * FROM faculty WHERE facultyID = '$studentID'";
+$result1 = mysqli_query($connect, $query1);
+$student = mysqli_fetch_assoc($result1);
+echo '
 </div>
 <div class="footer">
 	<p>&copy; Copyright Christopher Newport University 2022</p>
 	<a href="mailto:register@cnu.edu">Questions? Contact the Office of the Registrar at register@cnu.edu</a>
 
 </div>
+<table>
+<tr>
 
+</tr>
+
+</table>
 
 
 </div>

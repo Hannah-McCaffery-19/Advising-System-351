@@ -1,6 +1,14 @@
 <?php
 session_start();
 
+$DATABASE_HOST = 'localhost';
+$DATABASE_USER = 'root';
+$DATABASE_PASS = '';
+$DATABASE_NAME = 'mydb';
+
+$connect = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+
+
 echo '
 <!DOCTYPE html>
 <html lang="en">
@@ -66,8 +74,8 @@ echo '
 <div class="content">
 	<h1 class="page_name">Generate Evaluation</h1>
 	<h2>Create A New Evaluation</h2>
-	'; echo '<action="eval_view_student.php" method="POST"> Major 1:
-	<select id="Major1" name="Major1">
+	<action="" method="post"> Major 1:</action>
+	<select id="Major" name="Major" required>
     <option value="_"></option>';
 	if (($open = fopen("MajorReqs.csv", "r")) !== FALSE) {
   
@@ -77,7 +85,7 @@ echo '
 	
     fclose($open);
   }
-  echo '</select><br> Major 2:
+ /* echo '</select><br> Major 2:
   
   <select id="Major2" name="Major2">
     <option value="_"></option>';
@@ -89,19 +97,7 @@ echo '
 	
     fclose($open);
   }
-  echo '</select><br> Major 3:
-  
-  <select id="Major3" name="Major3">
-    <option value="_"></option>';
-	if (($open = fopen("MajorReqs.csv", "r")) !== FALSE) {
-  
-    while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {        
-		echo "<option value= ". $data[0].">".$data[0]."</option>"; 
-	}
-	
-    fclose($open);
-  }
-  echo '</select><br><br> Minor1:
+  echo '</select><br><br>Minor 1:
   <select id="Minor1" name="Minor1">
     <option value="_"></option>';
 	if (($open = fopen("MinorReqs.csv", "r")) !== FALSE) {
@@ -112,7 +108,7 @@ echo '
 	
     fclose($open);
   }
-  echo '</select><br> Minor 2
+  echo '</select><br>Minor 2:
   <select id="Minor2" name="Minor2">
     <option value="_"></option>';
 	if (($open = fopen("MinorReqs.csv", "r")) !== FALSE) {
@@ -123,38 +119,42 @@ echo '
 	
     fclose($open);
   }
-  echo '</select><br> Minor3:
-  <select id="Minor3" name="Minor3">
-    <option value="_"></option>';
-	if (($open = fopen("MinorReqs.csv", "r")) !== FALSE) {
-  
-    while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {        
-		echo "<option value= ". $data[0].">".$data[0]."</option>"; 
-	}
-	
-    fclose($open);
-  }
-  echo '</select><br> Minor4:
-  <select id="Minor4" name="Minor4">
-    <option value="_"></option>';
-	if (($open = fopen("MajorReqs.csv", "r")) !== FALSE) {
-  
-    while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {        
-		echo "<option value= ". $data[0].">".$data[0]."</option>"; 
-	}
-	
-    fclose($open);
-  }
+	*/
   echo '</select>
-  
+  <br>
   <input type="submit">
-  </form>
+  </form><br>';
+  
+if(isset($_POST['Major'])){
+	echo '<table>
+	<h3><tr><td>Requirement&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Fullfilled(yes/no)</td></tr></h3>';
+	$studnetCourses = [];
+	while ($record = mysqli_fetch_row($result)) {
+		array_push($studentCourses, $record[2]);
+	}
+	$majorReqs = getMajorReqs($_POST['Major']);
+	$majorElectives = getMajorElectives($_POST['Major']);
+	foreach($majorReqs as $c){
+		echo '<tr><td>'.$c.'</td>';
+		$f =0;
+		$found = 0;
+		while($f < sizeof($studentCourses) && $found == 0){
+			if($studentCourses[$f] == $c){
+				echo "<td>Y</td></tr>";
+				$found = 1;
+			}
+			$f++;
+		}
+		if($found == 0) {
+			echo "<td>N</td></tr>";
+		}
+	}
+	echo $majorElectives. '</table>';
 	
-	
-	<br>
-</div>
+}
 
-</div>
+
+echo '</table>
 <div class="footer">
 	<p>&copy; Copyright Christopher Newport University 2022</p>
 	<a href="mailto:register@cnu.edu">Questions? Contact the Office of the Registrar at register@cnu.edu</a>
@@ -166,4 +166,90 @@ echo '
 </div>
 </body>
 ';
+function getMajorReqs($major) {
+	$reqs =[];
+	if (($open = fopen("MajorReqs.csv", "r")) !== FALSE) {
+	while (($data = fgetcsv($open, 1000, ",")) !== FALSE) { 
+		if($data[0] == $major){
+			$i = 1;
+			while ($data[$i] != '') {
+				$i+=1;
+				array_push($reqs, $data[$i]);
+			}
+		}
+	}
+	fclose($open);
+	}
+	return $reqs;
+}
+function getMajorElectives($major){
+	$reqs = array();
+	if (($open = fopen("MajorElectives.csv", "r")) !== FALSE) {
+		
+		while (($data = fgetcsv($open, 1100, ",")) !== FALSE) { 
+			if($data[0] == $_POST['Major']){
+				$i = 1;
+				while ($data[$i] != "") {
+
+					if($data[$i] == "||"){
+						$i += 1;
+						$temp =[];
+						
+						while($data[$i] != "\||"){
+							array_push($temp, $data[$i]);
+							$i += 1;
+						}
+						array_push($reqs, $temp);
+						$i += 1;
+					}
+					elseif($data[$i] =="|&") {
+						$i+= 1;
+						while($data[$i] != "\&|"){
+							if($data[$i] == "|"){
+								$i += 1;
+							}
+							$i += 1;
+						}
+						$i += 1;
+					}
+					elseif(substr($data[$i], 0, 1) == 's') {
+						$i += 1;
+						while (substr($data[$i], 0, 2) != "\s") {
+							$i += 1;
+						}
+						$i += 1;
+					}
+					elseif(substr($data[$i], 0, 1) == "n") {
+						$i += 1;
+						while (substr($data[$i], 0, 2) != '\n') {
+							$i += 1;					
+						}
+						$i += 1;
+					}
+					else{
+						echo $data[$i]."  ";
+						$i+=1;
+					}
+				}
+			}
+		}
+		fclose($open);
+	}
+	return $reqs;
+}
+echo '
+</div>
+</div>
+<br><br>
+<div class="footer">
+	<p>&copy; Copyright Christopher Newport University 2022</p>
+	<a href="mailto:register@cnu.edu">Questions? Contact the Office of the Registrar at register@cnu.edu</a>
+
+</div>
+
+
+
+</div>
+</body>'
+	
 ?>

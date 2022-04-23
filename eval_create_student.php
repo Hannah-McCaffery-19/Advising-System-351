@@ -74,7 +74,7 @@ echo '
 <div class="content">
 	<h1 class="page_name">Generate Evaluation</h1>
 	<h2>Create A New Evaluation</h2>
-	<action="" method="post"> Major 1:</action>
+	<form action="" method="post"> Major 1:</action>
 	<select id="Major" name="Major" required>
     <option value="_"></option>';
 	if (($open = fopen("MajorReqs.csv", "r")) !== FALSE) {
@@ -85,7 +85,7 @@ echo '
 	
     fclose($open);
   }
- /* echo '</select><br> Major 2:
+  echo '</select><br> Major 2:
   
   <select id="Major2" name="Major2">
     <option value="_"></option>';
@@ -119,7 +119,6 @@ echo '
 	
     fclose($open);
   }
-	*/
   echo '</select>
   <br>
   <input type="submit">
@@ -128,9 +127,15 @@ echo '
 if(isset($_POST['Major'])){
 	echo '<table>
 	<h3><tr><td>Requirement&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Fullfilled(yes/no)</td></tr></h3>';
-	$studnetCourses = [];
-	while ($record = mysqli_fetch_row($result)) {
-		array_push($studentCourses, $record[2]);
+	$studentCourses = [];
+	$username = $_SESSION['username'];
+	$query1 = "SELECT * FROM student WHERE studentID = '$username'";
+	$result = mysqli_query($connect, $query1);
+	$record = mysqli_fetch_row($result);
+	if ($result = mysqli_store_result($connect)) {
+			while ($record = mysqli_fetch_row($result)) {
+				array_push($studentcourses, $record[2]);
+			}
 	}
 	$majorReqs = getMajorReqs($_POST['Major']);
 	$majorElectives = getMajorElectives($_POST['Major']);
@@ -149,9 +154,89 @@ if(isset($_POST['Major'])){
 			echo "<td>N</td></tr>";
 		}
 	}
-	echo $majorElectives. '</table>';
-	
+	echo '<tr><td>Major Electives</td><td></td></tr>';
+	$i =0;
+	while($i < sizeof(majorElectives)){
+		if($data[$i] == "||"){
+			$temp = $i;
+			$i += 1;
+			echo "<tr><td>Complete One of the following: ";
+			while($data[$i] != "\||"){
+				echo data[$i]." ";
+				$i += 1;
+			}
+			$i += 1;
+			echo "</td><td>";
+			$found = 0;
+			while($data[$temp] != "\||" && $found == 0){
+				$y = 0;
+				while($y < sizeof($studentCourses) && found == 0){
+					if($y == $data[$temp]){
+						echo "Y</td></tr>";
+					}
+					$y++;
+				}
+				$temp++;
+			}
+			if ($found == 0){
+				echo "N</td></tr>";
+			}
+		}
+		elseif($data[$i] =="|&") {
+			$i+= 1;
+			$temp = $i;
+			echo "<tr><td>Complete One of the following Sections: ";
+			while($data[$i] != "\&|"){
+				if($data[$i] == '|'){
+					echo ' or ';
+					$i++;
+				}
+				echo data[$i]." ";
+				$i += 1;
+			}
+			$i += 1;
+			echo "</td><td>";
+			$found = 0;
+			while($data[$temp] != "\&|" && $found == 0){
+				$y = 0;
+				while($y < sizeof($studentCourses) && found == 0){
+					if($y == $data[$temp]){
+						echo "Y</td></tr>";
+					}
+					$y++;
+				}
+				$temp++;
+			}
+			if ($found == 0){
+				echo "N</td></tr>";
+			}
+			$i += 1;
+		}
+			
+		
+		elseif(substr($data[$i], 0, 1) == 's') {
+			$i += 1;
+			while (substr($data[$i], 0, 2) != "\s") {
+				$i += 1;
+			}
+			$i += 1;
+		}
+		elseif(substr($data[$i], 0, 1) == "n") {
+			$i += 1;
+			while (substr($data[$i], 0, 2) != '\n') {
+				$i += 1;					
+			}
+			$i += 1;
+		}
+		else{
+			echo $data[$i]."  ";
+			$i+=1;
+		}
+	}
+		
 }
+	
+
 
 
 echo '</table>
@@ -190,46 +275,9 @@ function getMajorElectives($major){
 			if($data[0] == $_POST['Major']){
 				$i = 1;
 				while ($data[$i] != "") {
-
-					if($data[$i] == "||"){
-						$i += 1;
-						$temp =[];
-						
-						while($data[$i] != "\||"){
-							array_push($temp, $data[$i]);
-							$i += 1;
-						}
-						array_push($reqs, $temp);
-						$i += 1;
-					}
-					elseif($data[$i] =="|&") {
-						$i+= 1;
-						while($data[$i] != "\&|"){
-							if($data[$i] == "|"){
-								$i += 1;
-							}
-							$i += 1;
-						}
-						$i += 1;
-					}
-					elseif(substr($data[$i], 0, 1) == 's') {
-						$i += 1;
-						while (substr($data[$i], 0, 2) != "\s") {
-							$i += 1;
-						}
-						$i += 1;
-					}
-					elseif(substr($data[$i], 0, 1) == "n") {
-						$i += 1;
-						while (substr($data[$i], 0, 2) != '\n') {
-							$i += 1;					
-						}
-						$i += 1;
-					}
-					else{
-						echo $data[$i]."  ";
-						$i+=1;
-					}
+					array_push($reqs, $data[$i]);
+					$i++;
+					
 				}
 			}
 		}
@@ -250,6 +298,6 @@ echo '
 
 
 </div>
-</body>'
+</body>';
 	
 ?>

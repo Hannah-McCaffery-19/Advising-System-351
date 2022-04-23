@@ -85,7 +85,7 @@ echo '
 	
     fclose($open);
   }
-  echo '</select><br> Major 2:
+  /* echo '</select><br> Major 2:
   
   <select id="Major2" name="Major2">
     <option value="_"></option>';
@@ -118,7 +118,7 @@ echo '
 	}
 	
     fclose($open);
-  }
+  }*/
   echo '</select>
   <br>
   <input type="submit">

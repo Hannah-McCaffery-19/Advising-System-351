@@ -179,11 +179,10 @@ echo '
 	<br><br><label for="timeEnd">End Time: </label>
 	<input type="time" name="timeEnd" id="timeEnd" required>
 	<br><br><label for="myLocation">Location: </label>
-	<input type="select" name="myLocation" id="myLocation" list="location" required>
-	<datalist id="location">
-	<option>Office</option>
-	<option>Virtual</option>
-	</datalist>
+	<select name="myLocation" id="myLocation" required>
+	<option value="office">Office</option>
+	<option value="virtual">Virtual</option>
+	</select>
 	<br><br><label for="myNotes">Notes: </label><br>
 	<input type="text" name="myNotes" id="myNotes" size="40" style="height:120px;" required>
 	<input type="hidden" name="meetingID" id="meetingID" value="'; echo $meetID; echo '" required>

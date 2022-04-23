@@ -391,6 +391,17 @@ VALUES ('Communication', NULL), ('Economics', NULL),
   'Physics laboratory activities to accompany the lecture part of the course. The laboratories introduce fundamental physical principles, rudimentary data analysis, and computer-aided control and data acquisition. Lab fees apply each term.');
 
 
+INSERT INTO `class` (`classCRN`, `courseID_fk_GCL`, 
+`facultyID_fk_class`, `section`, `term`, `year`, `location`) VALUES 
+('8001', 'CPSC150', '00912116', '1', 'Fall', '2019', 'LUTR258'), 
+('8002', 'CPSC150L', '00912116', '1', 'Fall', '2019', 'LUTER 121'), 
+('8075', 'PHYS151', '00918954', '1', 'Fall', '2019', 'MCM114'), 
+('8076', 'PHYS151L', '00918954', '1', 'Fall', '2019', 'MCM218');
+
+
+
+
+
 
 INSERT INTO `records`
 (`recordID`, `studentID_fk_rec`, `courseID_fk_rec`, 

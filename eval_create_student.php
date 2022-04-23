@@ -156,22 +156,22 @@ if(isset($_POST['Major'])){
 	}
 	echo '<tr><td>Major Electives</td><td></td></tr>';
 	$i =0;
-	while($i < sizeof(majorElectives)){
-		if($data[$i] == "||"){
+	while($i < sizeof($majorElectives)){
+		if($majorElectives[$i] == "||"){
 			$temp = $i;
 			$i += 1;
 			echo "<tr><td>Complete One of the following: ";
-			while($data[$i] != "\||"){
-				echo data[$i]." ";
+			while($majorElectives[$i] != "\||"){
+				echo $majorElectives[$i]." ";
 				$i += 1;
 			}
 			$i += 1;
 			echo "</td><td>";
 			$found = 0;
-			while($data[$temp] != "\||" && $found == 0){
+			while($majorElectives[$temp] != "\||" && $found == 0){
 				$y = 0;
 				while($y < sizeof($studentCourses) && found == 0){
-					if($y == $data[$temp]){
+					if($y == $majorElectives[$temp]){
 						echo "Y</td></tr>";
 					}
 					$y++;
@@ -182,25 +182,25 @@ if(isset($_POST['Major'])){
 				echo "N</td></tr>";
 			}
 		}
-		elseif($data[$i] =="|&") {
+		elseif($majorElectives[$i] =="|&") {
 			$i+= 1;
 			$temp = $i;
 			echo "<tr><td>Complete One of the following Sections: ";
-			while($data[$i] != "\&|"){
-				if($data[$i] == '|'){
+			while($majorElectives[$i] != "\&|"){
+				if($majorElectives[$i] == '|'){
 					echo ' or ';
 					$i++;
 				}
-				echo data[$i]." ";
+				echo $majorElectives[$i]." ";
 				$i += 1;
 			}
 			$i += 1;
 			echo "</td><td>";
 			$found = 0;
-			while($data[$temp] != "\&|" && $found == 0){
+			while($majorElectives[$temp] != "\&|" && $found == 0){
 				$y = 0;
 				while($y < sizeof($studentCourses) && found == 0){
-					if($y == $data[$temp]){
+					if($y == $majorElectives[$temp]){
 						echo "Y</td></tr>";
 					}
 					$y++;
@@ -214,22 +214,22 @@ if(isset($_POST['Major'])){
 		}
 			
 		
-		elseif(substr($data[$i], 0, 1) == 's') {
+		elseif(substr($majorElectives[$i], 0, 1) == 's') {
 			$i += 1;
-			while (substr($data[$i], 0, 2) != "\s") {
+			while (substr($majorElectives[$i], 0, 2) != "\s") {
 				$i += 1;
 			}
 			$i += 1;
 		}
-		elseif(substr($data[$i], 0, 1) == "n") {
+		elseif(substr($majorElectives[$i], 0, 1) == "n") {
 			$i += 1;
-			while (substr($data[$i], 0, 2) != '\n') {
+			while (substr($majorElectives[$i], 0, 2) != '\n') {
 				$i += 1;					
 			}
 			$i += 1;
 		}
 		else{
-			echo $data[$i]."  ";
+			echo $majorElectives[$i]."  ";
 			$i+=1;
 		}
 	}
@@ -240,14 +240,6 @@ if(isset($_POST['Major'])){
 
 
 echo '</table>
-<div class="footer">
-	<p>&copy; Copyright Christopher Newport University 2022</p>
-	<a href="mailto:register@cnu.edu">Questions? Contact the Office of the Registrar at register@cnu.edu</a>
-
-</div>
-
-
-
 </div>
 </body>
 ';
